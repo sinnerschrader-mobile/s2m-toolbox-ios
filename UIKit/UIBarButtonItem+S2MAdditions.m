@@ -33,11 +33,18 @@
     
     UIButton* button = [[UIButton alloc] init];
     [button setTitle:title forState:UIControlStateNormal];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0,
-                                0,
-                                image.size.width,
-                                image.size.height)];
+    
+    if (image) {
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        [button setFrame:CGRectMake(0,
+                                    0,
+                                    image.size.width,
+                                    image.size.height)];
+
+    }else{
+        // in case there is no image, avoid having a CGRectZero frame
+        [button sizeToFit];
+    }
     
     [button addTarget:target
                    action:action
