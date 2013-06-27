@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIBarButtonItem (S2MAdditions)
--(id)initWithImageName:(NSString*)imageName target:(id)target action:(SEL)action;
--(id)initWithTitle:(NSString*)title backgroundImage:(UIImage*)image target:(id)target action:(SEL)action;
+-(id)s2m_initWithImageName:(NSString*)imageName target:(id)target action:(SEL)action NS_RETURNS_RETAINED;
+-(id)s2m_initWithTitle:(NSString*)title backgroundImage:(UIImage*)image target:(id)target action:(SEL)action NS_RETURNS_RETAINED;
 
 @end

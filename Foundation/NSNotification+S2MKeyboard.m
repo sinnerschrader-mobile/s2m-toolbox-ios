@@ -10,7 +10,7 @@
 
 @implementation NSNotification (S2MKeyboard)
 
-- (NSTimeInterval)keyboardAnimationDurationForNotification
+- (NSTimeInterval)s2m_keyboardAnimationDurationForNotification
 {
     NSDictionary* info = [self userInfo];
     NSValue* value = [info objectForKey:UIKeyboardAnimationDurationUserInfoKey];

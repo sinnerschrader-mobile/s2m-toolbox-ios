@@ -10,6 +10,6 @@
 
 @interface NSNotification (S2MKeyboard)
 
-- (NSTimeInterval)keyboardAnimationDurationForNotification;
+- (NSTimeInterval)s2m_keyboardAnimationDurationForNotification;
 
 @end

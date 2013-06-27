@@ -10,7 +10,7 @@
 
 @implementation UIBarButtonItem (S2MAdditions)
 
--(id)initWithImageName:(NSString*)imageName target:(id)target action:(SEL)action
+-(id)s2m_initWithImageName:(NSString*)imageName target:(id)target action:(SEL)action
 {
     UIImage* image = [UIImage imageNamed:imageName];
     
@@ -28,7 +28,7 @@
     return [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
--(id)initWithTitle:(NSString*)title backgroundImage:(UIImage*)image target:(id)target action:(SEL)action
+-(id)s2m_initWithTitle:(NSString*)title backgroundImage:(UIImage*)image target:(id)target action:(SEL)action
 {
     
     UIButton* button = [[UIButton alloc] init];
