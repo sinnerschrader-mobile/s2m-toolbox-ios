@@ -10,5 +10,6 @@ Pod::Spec.new do |s|
 
   s.source_files = '**/*.{h,m}'
   s.requires_arc = true
-
+  
+  s.license	 = { :type => 'BSD-new', :file => 'LICENSE.txt' }
 end
