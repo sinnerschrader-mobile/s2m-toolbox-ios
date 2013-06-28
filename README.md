@@ -22,6 +22,6 @@ Here is a collection of useful code that can be used through iOS projects.
 * Add the following line to your podfile (includes every category in project):
 
 ```
-pod 'S2MToolbox'
+pod 'S2MToolbox', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
 ```
 
