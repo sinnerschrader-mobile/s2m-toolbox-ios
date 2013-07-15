@@ -10,19 +10,19 @@
 
 @interface UIView (SYNAdditions)
 
--(id)addView;
+-(id)s2m_addView;
 
--(id)addLabel;
--(id)addTextField;
--(id)addSwitch;
--(id)addButton;
+-(id)s2m_addLabel;
+-(id)s2m_addTextField;
+-(id)s2m_addSwitch;
+-(id)s2m_addButton;
 
--(id)addImage:(UIImage*)image;
--(id)addImageNamed:(NSString*)imageName;
+-(id)s2m_addImage:(UIImage*)image;
+-(id)s2m_addImageNamed:(NSString*)imageName;
 
--(id)addSearchBar;
--(id)addTableView;
--(id)addActivityIndicatorView;
+-(id)s2m_addSearchBar;
+-(id)s2m_addTableView;
+-(id)s2m_addActivityIndicatorView;
 
 
 @end
