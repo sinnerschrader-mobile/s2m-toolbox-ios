@@ -75,4 +75,41 @@
     [self.superview addConstraint:centerYConstraint];
 }
 
+-(void)s2m_addFullWidthWithSuperViewConstraint
+{
+    if (!self.superview) {
+        return;
+    }
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint* fullWithConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.superview
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                           multiplier:1.0
+                                                                             constant:0];
+    
+    [self.superview addConstraint:fullWithConstraint];
+    
+}
+
+-(void)s2m_addFullHeightWithSuperViewConstraint
+{
+    if (!self.superview) {
+        return;
+    }
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint* fullHeightConstraint = [NSLayoutConstraint constraintWithItem:self
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:self.superview
+                                                                            attribute:NSLayoutAttributeHeight
+                                                                           multiplier:1.0
+                                                                             constant:0];
+    
+    [self.superview addConstraint:fullHeightConstraint];
+}
+
 @end

@@ -13,5 +13,7 @@
 -(void)s2m_addCenterInSuperViewConstraint;
 -(void)s2m_addCenterYInSuperViewConstraint;
 -(void)s2m_addCenterXInSuperViewConstraint;
+-(void)s2m_addFullWidthWithSuperViewConstraint;
+-(void)s2m_addFullHeightWithSuperViewConstraint;
 
 @end
