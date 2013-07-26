@@ -5,13 +5,13 @@
 
 ## HOW TO
 
-* clone a copy of the project
-* if you use cocopods in your project, change the declaration to `pod 'S2MToolbox', :path => '<mypathtocodes2m-toolbox-ios>'`
+* Clone this project
+* if you use cocoapods in your project, change the declaration to `pod 'S2MToolbox', :path => '<mypathtocodes2m-toolbox-ios>'`
 * Commit your changes 
 
 ## For S2M Members
 
-* Tag your commit and Update the version in 'S2MToolbox.podspec' accordingly (requires pushing rights
+* Tag your commit and Update the version in 'S2MToolbox.podspec' accordingly
 * Change back your project's podfile
 * `pod update`
 
