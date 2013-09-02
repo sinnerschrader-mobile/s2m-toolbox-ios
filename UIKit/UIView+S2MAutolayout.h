@@ -23,8 +23,16 @@
 
 #pragma mark - Specific Position
 -(NSLayoutConstraint*)s2m_addTopConstraint:(CGFloat)constant;
+/**
+ *@param constant distance between superview right border and view right border.
+ *                Negative value will move view outside superview frame
+ */
 -(NSLayoutConstraint*)s2m_addBottomConstraint:(CGFloat)constant;
 -(NSLayoutConstraint*)s2m_addLeftConstraint:(CGFloat)constant;
+/**
+ *@param constant distance between superview right border and view right border.
+ *                Negative value will move view outside superview frame
+ */
 -(NSLayoutConstraint*)s2m_addRightConstraint:(CGFloat)constant;
 
 #pragma mark - Specific Height

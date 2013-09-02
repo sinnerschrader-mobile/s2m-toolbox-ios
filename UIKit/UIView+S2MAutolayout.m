@@ -158,10 +158,10 @@
     }
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
+    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self.superview
                                                                   attribute:NSLayoutAttributeBottom
                                                                   relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.superview
+                                                                     toItem:self
                                                                   attribute:NSLayoutAttributeBottom
                                                                  multiplier:1.0
                                                                    constant:constant];
@@ -196,10 +196,10 @@
     }
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
-    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
+    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self.superview
                                                                   attribute:NSLayoutAttributeRight
                                                                   relatedBy:NSLayoutRelationEqual
-                                                                     toItem:self.superview
+                                                                     toItem:self
                                                                   attribute:NSLayoutAttributeRight
                                                                  multiplier:1.0
                                                                    constant:constant];
