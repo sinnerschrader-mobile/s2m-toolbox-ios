@@ -10,21 +10,52 @@
 
 @implementation UIView (S2MAutolayout)
 
--(void)s2m_addCenterInSuperViewConstraint
+
+-(NSArray*)s2m_addPositionAndSizeOfSuperViewConstraint
 {
-    if (!self.superview) {
-        return;
+    NSMutableArray* constraints = [[NSMutableArray alloc] init];
+    NSArray* centerConstraints = [self s2m_addCenterInSuperViewConstraint];
+    if (centerConstraints) {
+        [constraints addObjectsFromArray:centerConstraints];
+    }
+    NSLayoutConstraint* constraint = [self s2m_addFullHeightWithSuperViewConstraint];
+    if (constraint) {
+        [constraints addObject:constraint];
     }
 
-    self.translatesAutoresizingMaskIntoConstraints = NO;
+    constraint = [self s2m_addFullWidthWithSuperViewConstraint];
+    if (constraint) {
+        [constraints addObject:constraint];
+    }
+
+    return constraints;
+}
+
+#pragma mark - Position
+
+-(NSArray*)s2m_addCenterInSuperViewConstraint
+{
+    NSMutableArray* constraints = [[NSMutableArray alloc] init];
+
+    NSLayoutConstraint* constraint = [self s2m_addCenterXInSuperViewConstraint];
+    if (constraint) {
+        [constraints addObject:constraint];
+    }
     
-    NSLayoutConstraint* centerXConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.superview
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0];
+    constraint = [self s2m_addCenterYInSuperViewConstraint];
+    if (constraint) {
+        [constraints addObject:constraint];
+    }
+    return constraints;
+}
+
+-(NSLayoutConstraint*)s2m_addCenterYInSuperViewConstraint
+{
+    if (!self.superview) {
+        return nil;
+    }
+    
+    self.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeCenterY
                                                                          relatedBy:NSLayoutRelationEqual
@@ -32,38 +63,20 @@
                                                                          attribute:NSLayoutAttributeCenterY
                                                                         multiplier:1.0
                                                                           constant:0];
-
-    [self.superview addConstraint:centerXConstraint];
-    [self.superview addConstraint:centerYConstraint];
-}
-
--(void)s2m_addCenterYInSuperViewConstraint
-{
-    if (!self.superview) {
-        return;
-    }
-    
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:self
-                                                                         attribute:NSLayoutAttributeCenterY
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:self.superview
-                                                                         attribute:NSLayoutAttributeCenterY
-                                                                        multiplier:1.0
-                                                                          constant:0];
     
 
     [self.superview addConstraint:centerYConstraint];
+    return centerYConstraint;
 }
 
--(void)s2m_addCenterXInSuperViewConstraint
+-(NSLayoutConstraint*)s2m_addCenterXInSuperViewConstraint
 {
     if (!self.superview) {
-        return;
+        return nil;
     }
     
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:self
+    NSLayoutConstraint* centerXconstraint = [NSLayoutConstraint constraintWithItem:self
                                                                          attribute:NSLayoutAttributeCenterX
                                                                          relatedBy:NSLayoutRelationEqual
                                                                             toItem:self.superview
@@ -72,13 +85,17 @@
                                                                           constant:0];
     
     
-    [self.superview addConstraint:centerYConstraint];
+    [self.superview addConstraint:centerXconstraint];
+    return centerXconstraint;
 }
 
--(void)s2m_addFullWidthWithSuperViewConstraint
+
+#pragma mark - Size
+
+-(NSLayoutConstraint*)s2m_addFullWidthWithSuperViewConstraint
 {
     if (!self.superview) {
-        return;
+        return nil;
     }
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -91,13 +108,13 @@
                                                                              constant:0];
     
     [self.superview addConstraint:fullWithConstraint];
-    
+    return fullWithConstraint;
 }
 
--(void)s2m_addFullHeightWithSuperViewConstraint
+-(NSLayoutConstraint*)s2m_addFullHeightWithSuperViewConstraint
 {
     if (!self.superview) {
-        return;
+        return nil;
     }
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -110,6 +127,7 @@
                                                                              constant:0];
     
     [self.superview addConstraint:fullHeightConstraint];
+    return fullHeightConstraint;
 }
 
 @end
