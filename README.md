@@ -19,9 +19,18 @@ Here is a collection of useful code that can be used through iOS projects.
 
 ## via Cocoapods
 
-* Add the following line to your podfile (includes every category in project):
+* Add the following line to your podfile (includes all main categories in project):
 
 ```
-pod 'S2MToolbox', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
+pod 'S2MToolbox/Core', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
 ```
 
+For Categories for your tests, see the two following specs:
+
+```
+pod 'S2MToolbox/UnitTests', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
+```
+
+```
+pod 'S2MToolbox/Kiwi', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
+```
