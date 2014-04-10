@@ -35,8 +35,12 @@
  */
 -(NSLayoutConstraint*)s2m_addRightConstraint:(CGFloat)constant;
 
+-(NSLayoutConstraint*)s2m_addBottomConstraint:(CGFloat)constant;
+
 -(NSArray*)s2m_addLeftRightConstraint:(CGFloat)constant;
 -(NSArray*)s2m_addTopBottomConstraint:(CGFloat)constant;
+
+
 
 #pragma mark - Specific Height
 -(NSLayoutConstraint*)s2m_addHeightConstraint:(CGFloat)height;
@@ -47,4 +51,7 @@
 -(NSLayoutConstraint*)s2m_addWidthConstraint:(CGFloat)width;
 -(NSLayoutConstraint*)s2m_addMinWidthConstraint:(CGFloat)width;
 -(NSLayoutConstraint*)s2m_addMaxWidthConstraint:(CGFloat)width;
+
+
+
 @end
