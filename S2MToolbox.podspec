@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "S2MToolbox"
-  s.version      = "0.0.7"
+  s.version      = "0.0.8"
   s.summary      = "iOS Categories."
   s.homepage     = "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios"
 
