@@ -10,7 +10,7 @@
 
 @implementation NSDate (S2MFormatting)
 
-- (NSString *)toStringWithFormat:(NSString *)aFormat
+- (NSString *)s2m_toStringWithFormat:(NSString *)aFormat
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:aFormat];
