@@ -1,0 +1,19 @@
+PODS:
+  - Kiwi (2.3.0)
+  - S2MToolbox/Core (0.0.7)
+  - S2MToolbox/Kiwi (0.0.7):
+    - Kiwi (~> 2.3.0)
+
+DEPENDENCIES:
+  - S2MToolbox/Core (from `../`)
+  - S2MToolbox/Kiwi (from `../`)
+
+EXTERNAL SOURCES:
+  S2MToolbox:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+  S2MToolbox: 874e37de0a67c15c3b6b9f02a08e02217ac7ee34
+
+COCOAPODS: 0.34.4

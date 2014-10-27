@@ -1,0 +1,14 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, "6.0"
+
+source 'https://github.com/CocoaPods/Specs.git'
+
+target "S2MToolbox" do
+  pod 'S2MToolbox/Core', :path => "../"
+end
+
+target "S2MToolboxTests", :exclusive => true do
+    #pod 'S2MToolbox/UnitTests', :path => "../"
+  pod 'S2MToolbox/Kiwi', :path => "../"
+end
+
