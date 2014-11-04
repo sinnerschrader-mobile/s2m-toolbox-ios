@@ -252,7 +252,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.view.backgroundColor = [UIColor whiteColor];
     self.cameraView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.cameraView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.cameraView.translatesAutoresizingMaskIntoConstraints = YES;
