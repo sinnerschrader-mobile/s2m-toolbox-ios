@@ -219,6 +219,7 @@
     if (!_boundingImageView) {
         _boundingImageView = [[UIImageView alloc] init];
         _boundingImageView.contentMode = UIViewContentModeCenter;
+        _boundingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
         [self.view addSubview:_boundingImageView];
         NSLayoutConstraint *centerYConstraint = [NSLayoutConstraint constraintWithItem:_boundingImageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
