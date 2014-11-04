@@ -45,11 +45,6 @@
 @property (nonatomic, assign) BOOL openURLsAutomatically;
 
 /**
- *  Default is NO. If YES, an alert is shown to the user if the URL should be opened.
- */
-@property (nonatomic, assign) BOOL askBeforeOpeningURL;
-
-/**
  *  Default is YES. iOS8 and up only.
  */
 @property (nonatomic, assign) BOOL willLeadToSettingsIfNotAuthorized;
