@@ -149,7 +149,6 @@
 {
     self.boundingImage = nil;
     self.openURLsAutomatically = YES;
-    self.askBeforeOpeningURL = NO;
     self.willLeadToSettingsIfNotAuthorized = YES;
     
     self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
