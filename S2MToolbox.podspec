@@ -24,4 +24,7 @@ Pod::Spec.new do |s|
     ut.source_files  = 'Testing/Kiwi/*.{h,m}'
   end
 
+  s.subspec 'QRCode' do |ut|
+    ut.source_files  = 'QRCode/*.{h,m}'
+  end
 end
