@@ -1,0 +1,1 @@
+../../../S2MToolbox/QRCode/S2MQRController.h

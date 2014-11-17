@@ -8,11 +8,14 @@
 
 #import "StartViewController.h"
 #import <S2MToolbox/S2MQRController.h>
+#import "TURShopFinderControllerViewController.h"
+#import "S2MShopFinderSearchDelegate.h"
 
 static NSString *cellId = @"cellId2";
 
 @interface StartViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) S2MShopFinderSearchDelegate *searchDelegate;
 
 @end
 
@@ -27,6 +30,8 @@ static NSString *cellId = @"cellId2";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     if (indexPath.row == 0) {
         cell.textLabel.text = @"QR";
+    }else{
+        cell.textLabel.text = @"ShopFinder";
     }
     return cell;
 }
@@ -36,6 +41,13 @@ static NSString *cellId = @"cellId2";
         S2MQRController *vc = [[S2MQRController alloc] initWithDelegate:nil];
         vc.boundingImage = [UIImage imageNamed:@"qr"];
         vc.title = @"QR";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        TURShopFinderControllerViewController *vc = [[TURShopFinderControllerViewController alloc] init];
+        self.searchDelegate = [S2MShopFinderSearchDelegate new];
+        vc.searchDelegate = self.searchDelegate;
+        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

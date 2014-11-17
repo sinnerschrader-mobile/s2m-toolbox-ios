@@ -1,0 +1,14 @@
+PODS:
+  - S2MToolbox/QRCode (0.0.9)
+
+DEPENDENCIES:
+  - S2MToolbox/QRCode (from `../S2MToolbox.podspec`)
+
+EXTERNAL SOURCES:
+  S2MToolbox:
+    :podspec: ../S2MToolbox.podspec
+
+SPEC CHECKSUMS:
+  S2MToolbox: 6c7284a2d43440a1dfdac62fcc8b5fff30493ad3
+
+COCOAPODS: 0.34.4
