@@ -138,8 +138,8 @@
     }
     
     //call delegate
-    if (self.delegate && [self.delegate respondsToSelector:@selector(qrController:didRecognizeCode:)]) {
-        [self.delegate qrController:self didRecognizeCode:scanned];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(qrViewController:didRecognizeCode:)]) {
+        [self.delegate qrViewController:self didRecognizeCode:scanned];
     }
 }
 
@@ -162,8 +162,8 @@
     NSError *error = nil;
     self.deviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.device error:&error];
     if (error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(qrController:didFailWithError:)]) {
-            [self.delegate qrController:self didFailWithError:error];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrViewController:didFailWithError:)]) {
+            [self.delegate qrViewController:self didFailWithError:error];
         }
     }
     self.metadataOutput = [AVCaptureMetadataOutput new];
@@ -260,7 +260,7 @@
 }
 
 
--(instancetype)initWithDelegate:(NSObject<S2MQRControllerDelegate>*)delegate
+-(instancetype)initWithDelegate:(NSObject<S2MQRViewControllerDelegate>*)delegate
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {

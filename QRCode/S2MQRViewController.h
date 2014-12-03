@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 @class S2MQRViewController;
-@protocol S2MQRControllerDelegate <NSObject>
+@protocol S2MQRViewControllerDelegate <NSObject>
 
 @optional
 
--(void)qrController:(S2MQRController*)qrController didRecognizeCode:(NSString*)code;
--(void)qrController:(S2MQRController*)qrController didFailWithError:(NSError*)error;
+-(void)qrViewController:(S2MQRViewController*)qrViewController didRecognizeCode:(NSString*)code;
+-(void)qrViewController:(S2MQRViewController*)qrViewController didFailWithError:(NSError*)error;
 
 @end
 
@@ -23,16 +23,16 @@
 /**
  *  designated Initializer
  *
- *  @param delegate S2MQRControllerDelegate //may be nil if you want automatic handling
+ *  @param delegate S2MQRViewControllerDelegate //may be nil if you want automatic handling
  *
- *  @return instance of S2MQRController
+ *  @return instance of S2MQRViewController
  */
--(instancetype)initWithDelegate:(NSObject<S2MQRControllerDelegate>*)delegate;
+-(instancetype)initWithDelegate:(NSObject<S2MQRViewControllerDelegate>*)delegate;
 
 /**
  *  designated delegate. Is called when QR is detected
  */
-@property (nonatomic, weak) NSObject<S2MQRControllerDelegate> *delegate;
+@property (nonatomic, weak) NSObject<S2MQRViewControllerDelegate> *delegate;
 
 /**
  *  Overlays video capute view with this image. Default is nil. The image is centered in the container and takes the image size as intrinsic size
