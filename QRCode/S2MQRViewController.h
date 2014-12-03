@@ -27,12 +27,12 @@
  *
  *  @return instance of S2MQRViewController
  */
--(instancetype)initWithDelegate:(NSObject<S2MQRViewControllerDelegate>*)delegate;
+-(instancetype)initWithDelegate:(id<S2MQRViewControllerDelegate>)delegate __attribute__((objc_designated_initializer));
 
 /**
  *  designated delegate. Is called when QR is detected
  */
-@property (nonatomic, weak) NSObject<S2MQRViewControllerDelegate> *delegate;
+@property (nonatomic, weak) id<S2MQRViewControllerDelegate> delegate;
 
 /**
  *  Overlays video capute view with this image. Default is nil. The image is centered in the container and takes the image size as intrinsic size
