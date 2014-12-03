@@ -160,10 +160,13 @@
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     
     [self.session addOutput:self.metadataOutput];
-    [self.session addInput:self.deviceInput];
-    
+    if ([self.session canAddInput:self.deviceInput]) {
+        [self.session addInput:self.deviceInput];
+    }
     [self.metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    self.metadataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    if ([[self.metadataOutput availableMetadataObjectTypes] containsObject:AVMetadataObjectTypeQRCode]) {
+        self.metadataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    }
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
     if(self.previewLayer.connection.supportsVideoOrientation) {
