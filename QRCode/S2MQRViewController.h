@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  S2MQRViewController.h
 //  S2MQRCodeReader
 //
 //  Created by Joern Ehmann on 03/11/14.
@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class S2MQRController;
+@class S2MQRViewController;
 @protocol S2MQRControllerDelegate <NSObject>
 
 @optional
@@ -18,7 +18,7 @@
 @end
 
 
-@interface S2MQRController : UIViewController
+@interface S2MQRViewController : UIViewController
 
 /**
  *  designated Initializer

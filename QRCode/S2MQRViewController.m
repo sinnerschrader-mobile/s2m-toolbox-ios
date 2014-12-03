@@ -1,15 +1,15 @@
 //
-//  ViewController.m
-//  S2MQRCodeReader
+//  S2MQRViewController.m
+//  S2MToolbox
 //
 //  Created by Joern Ehmann on 03/11/14.
 //  Copyright (c) 2014 SinnerSchrader Mobile. All rights reserved.
 //
 
-#import "S2MQRController.h"
+#import "S2MQRViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface S2MQRController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface S2MQRViewController () <AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic, strong) AVCaptureDevice *device;
 @property (nonatomic, strong) AVCaptureDeviceInput *deviceInput;
 @property (nonatomic, strong) AVCaptureMetadataOutput *metadataOutput;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation S2MQRController
+@implementation S2MQRViewController
 
 #pragma mark Authorization
 -(void)showSettingsAlert
