@@ -14,12 +14,11 @@
 		CA3DD1711A078BCC0054DB62 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA3DD16F1A078BCC0054DB62 /* LaunchScreen.xib */; };
 		CA3DD17D1A078BCC0054DB62 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA3DD17C1A078BCC0054DB62 /* ExampleTests.m */; };
 		CA3DD18A1A078DD10054DB62 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3DD1891A078DD10054DB62 /* AVFoundation.framework */; };
+		CA42295A1A384BB400FA1344 /* S2MCalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4229591A384BB400FA1344 /* S2MCalloutAnnotation.m */; };
 		CAA932971A08E4C2000832CB /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA932961A08E4C2000832CB /* StartViewController.m */; };
 		CAA9329A1A08E78E000832CB /* S2MShopFinderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA932991A08E78E000832CB /* S2MShopFinderController.m */; };
 		CAA9329C1A08E82D000832CB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA9329B1A08E82D000832CB /* MapKit.framework */; };
 		CAA9329F1A0905C1000832CB /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA9329E1A0905C1000832CB /* S2MShopFinderSearchDelegate.m */; };
-		CACB678B1A0A82DE005AB4A2 /* TURShopFinderControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CACB678A1A0A82DE005AB4A2 /* TURShopFinderControllerViewController.m */; };
-		CACB678E1A0B75B4005AB4A2 /* TURAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CACB678D1A0B75B4005AB4A2 /* TURAnnotationView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +45,8 @@
 		CA3DD17B1A078BCC0054DB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA3DD17C1A078BCC0054DB62 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		CA3DD1891A078DD10054DB62 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CA4229581A384BB400FA1344 /* S2MCalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MCalloutAnnotation.h; sourceTree = "<group>"; };
+		CA4229591A384BB400FA1344 /* S2MCalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MCalloutAnnotation.m; sourceTree = "<group>"; };
 		CAA932951A08E4C2000832CB /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		CAA932961A08E4C2000832CB /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		CAA932981A08E78E000832CB /* S2MShopFinderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MShopFinderController.h; sourceTree = "<group>"; };
@@ -53,10 +54,6 @@
 		CAA9329B1A08E82D000832CB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CAA9329D1A0905C1000832CB /* S2MShopFinderSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MShopFinderSearchDelegate.h; sourceTree = "<group>"; };
 		CAA9329E1A0905C1000832CB /* S2MShopFinderSearchDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MShopFinderSearchDelegate.m; sourceTree = "<group>"; };
-		CACB67891A0A82DE005AB4A2 /* TURShopFinderControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TURShopFinderControllerViewController.h; sourceTree = "<group>"; };
-		CACB678A1A0A82DE005AB4A2 /* TURShopFinderControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TURShopFinderControllerViewController.m; sourceTree = "<group>"; };
-		CACB678C1A0B75B4005AB4A2 /* TURAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TURAnnotationView.h; sourceTree = "<group>"; };
-		CACB678D1A0B75B4005AB4A2 /* TURAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TURAnnotationView.m; sourceTree = "<group>"; };
 		EF0839420D4AB1A7A9A58E03 /* libPods-Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -124,10 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				CAA932941A08E4A1000832CB /* ShopFinder */,
-				CACB67891A0A82DE005AB4A2 /* TURShopFinderControllerViewController.h */,
-				CACB678A1A0A82DE005AB4A2 /* TURShopFinderControllerViewController.m */,
-				CACB678C1A0B75B4005AB4A2 /* TURAnnotationView.h */,
-				CACB678D1A0B75B4005AB4A2 /* TURAnnotationView.m */,
 				CA3DD1641A078BCC0054DB62 /* AppDelegate.h */,
 				CA3DD1651A078BCC0054DB62 /* AppDelegate.m */,
 				CAA932951A08E4C2000832CB /* StartViewController.h */,
@@ -172,6 +165,8 @@
 				CAA932991A08E78E000832CB /* S2MShopFinderController.m */,
 				CAA9329D1A0905C1000832CB /* S2MShopFinderSearchDelegate.h */,
 				CAA9329E1A0905C1000832CB /* S2MShopFinderSearchDelegate.m */,
+				CA4229581A384BB400FA1344 /* S2MCalloutAnnotation.h */,
+				CA4229591A384BB400FA1344 /* S2MCalloutAnnotation.m */,
 			);
 			name = ShopFinder;
 			sourceTree = "<group>";
@@ -227,6 +222,7 @@
 				TargetAttributes = {
 					CA3DD15C1A078BCC0054DB62 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = K23Z6MDG2V;
 					};
 					CA3DD1751A078BCC0054DB62 = {
 						CreatedOnToolsVersion = 6.1;
@@ -312,10 +308,9 @@
 			files = (
 				CAA9329F1A0905C1000832CB /* S2MShopFinderSearchDelegate.m in Sources */,
 				CAA932971A08E4C2000832CB /* StartViewController.m in Sources */,
+				CA42295A1A384BB400FA1344 /* S2MCalloutAnnotation.m in Sources */,
 				CA3DD1661A078BCC0054DB62 /* AppDelegate.m in Sources */,
 				CA3DD1631A078BCC0054DB62 /* main.m in Sources */,
-				CACB678B1A0A82DE005AB4A2 /* TURShopFinderControllerViewController.m in Sources */,
-				CACB678E1A0B75B4005AB4A2 /* TURAnnotationView.m in Sources */,
 				CAA9329A1A08E78E000832CB /* S2MShopFinderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,10 +428,13 @@
 			baseConfigurationReference = 9B5B7803A35484BDCCFFD03A /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -445,10 +443,13 @@
 			baseConfigurationReference = A288008F12DF8820610BC3D5 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

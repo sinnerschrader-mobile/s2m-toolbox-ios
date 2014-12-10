@@ -8,7 +8,7 @@
 
 #import "StartViewController.h"
 #import <S2MToolbox/S2MQRController.h>
-#import "TURShopFinderControllerViewController.h"
+#import "S2MShopFinderController.h"
 #import "S2MShopFinderSearchDelegate.h"
 
 static NSString *cellId = @"cellId2";
@@ -44,7 +44,7 @@ static NSString *cellId = @"cellId2";
         [self.navigationController pushViewController:vc animated:YES];
     }
     else{
-        TURShopFinderControllerViewController *vc = [[TURShopFinderControllerViewController alloc] init];
+        S2MShopFinderController *vc = [[S2MShopFinderController alloc] init];
         self.searchDelegate = [S2MShopFinderSearchDelegate new];
         vc.searchDelegate = self.searchDelegate;
         

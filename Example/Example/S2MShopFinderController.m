@@ -7,42 +7,11 @@
 //
 
 #import "S2MShopFinderController.h"
-
 static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
 static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
+static const CGFloat locateButtonWidth = 44.0f;
 
-const CGFloat locateButtonWidth = 44.0f;
-
-@interface S2MCalloutAnnotation : NSObject <MKAnnotation>
-
--(instancetype)initWithAnnotation:(id<MKAnnotation>)annotation;
-
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *subtitle;
-
-@end
-
-@implementation S2MCalloutAnnotation
-
--(instancetype)initWithAnnotation:(id<MKAnnotation>)annotation{
-    self = [super init];
-    if(self){
-        self.coordinate = annotation.coordinate;
-        
-        if([annotation respondsToSelector:@selector(title)]){
-            self.title = annotation.title;
-        }
-        if([annotation respondsToSelector:@selector(subtitle)]){
-            self.subtitle = annotation.subtitle;
-        }
-    }
-    return self;
-}
-
-@end
-
-@interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIToolbarDelegate>
 
 @property (nonatomic, strong) UITableView *resultsTableView;
 
@@ -53,23 +22,26 @@ const CGFloat locateButtonWidth = 44.0f;
 @property (nonatomic, strong) UIButton *locateButton;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
-
 @property (nonatomic, strong) NSLayoutConstraint *locateButtonWidthConstraint;
-
 
 @property (nonatomic, strong) id<MKAnnotation>searchLocation;
 @property (nonatomic, strong) CLLocation *userLocation;
 @property (nonatomic, strong) CLLocationManager *manager;
 
-
 @property (nonatomic, assign) BOOL isSearching;
-@property (nonatomic, assign) BOOL mapIsRendered;
+@property (nonatomic, assign) BOOL isMapRendered;
+@property (nonatomic, assign) BOOL loadPlacesForRegion;
+
 
 @property (nonatomic, copy) NSString *searchTerm;
 
 //internal Data
-@property (nonatomic, strong) MKAnnotationView *customCallout;
+@property (nonatomic, strong) MKAnnotationView *customCalloutView;
+@property (nonatomic, strong) id <MKAnnotation> selectedAnnotation;
+
 @property (nonatomic, strong) NSArray *autoCompleteResults;
+
+@property (nonatomic, strong) NSMutableArray *addedAnnotations;
 
 @end
 
@@ -79,22 +51,59 @@ const CGFloat locateButtonWidth = 44.0f;
 
 -(void)showResults:(NSArray*)results
 {
-    if (self.searchMode == S2MShopFinderSearchModeUserLocation) {
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        [self.mapView addAnnotations:results];
-        [self.mapView showAnnotations:results animated:YES];
-    }else if (self.searchMode == S2MShopFinderSearchModeDragging){
-        //just add, but not center
-
-        
-        [self.mapView addAnnotations:results];
+    if (results) {
+        if (self.searchMode == S2MShopFinderSearchModeUserLocation) {
+            if(self.addedAnnotations){
+                [self.mapView removeAnnotations:self.addedAnnotations];
+            }
+            if (self.customCalloutView) {
+                [self.mapView removeAnnotation:self.customCalloutView.annotation];
+                self.customCalloutView = nil;
+            }
+            [self.mapView addAnnotations:results];
+            self.addedAnnotations = [NSMutableArray arrayWithArray:results];
+            
+            //show results + user location
+            NSMutableArray *resultsAndUser = [NSMutableArray arrayWithArray:results];
+            [resultsAndUser addObject:self.mapView.userLocation];
+            
+            self.loadPlacesForRegion = YES;
+            [self.mapView showAnnotations:resultsAndUser animated:YES];
+            
+            
+        }else if (self.searchMode == S2MShopFinderSearchModeDragging){
+            //just add
+            [self.mapView addAnnotations:results];
+            [self.addedAnnotations addObjectsFromArray:results];
+        }else{
+            //keyword -> add and search
+            if(self.addedAnnotations){
+                if (self.customCalloutView) {
+                    [self.mapView removeAnnotation:self.customCalloutView.annotation];
+                    self.customCalloutView = nil;
+                }
+                [self.mapView removeAnnotations:self.addedAnnotations];
+            }
+            [self.mapView addAnnotations:results];
+            self.addedAnnotations = [NSMutableArray arrayWithArray:results];
+            self.loadPlacesForRegion = YES;
+            [self.mapView showAnnotations:results animated:NO];
+        }
     }else{
-        //keyword -> add and search
-        [self.mapView removeAnnotations:self.mapView.annotations];
-        [self.mapView addAnnotations:results];
-        [self.mapView showAnnotations:results animated:YES];
+        if(self.addedAnnotations){
+            [self.mapView removeAnnotations:self.addedAnnotations];
+            [self.addedAnnotations removeAllObjects];
+        }
+        if (self.customCalloutView) {
+            [self.mapView removeAnnotation:self.customCalloutView.annotation];
+            self.customCalloutView = nil;
+        }
+        
+        //show Alert
+        [[[UIAlertView alloc] initWithTitle:self.textForNoResults message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        
     }
-
+    
     [self.activityIndicator stopAnimating];
     self.isSearching = NO;
 }
@@ -109,51 +118,49 @@ const CGFloat locateButtonWidth = 44.0f;
     if (self.searchMode == S2MShopFinderSearchModeKeyword) {
         if (self.searchDelegate && [self.searchDelegate respondsToSelector:@selector(shopFinder:searchTerm:withResults:)]) {
             self.isSearching = YES;
-            [self.searchDelegate shopFinder:self searchTerm:self.searchTerm withResults:^(NSArray *results, id<MKAnnotation> center) {
-                
-                self.searchLocation = center;
-                NSMutableArray *combinedResults = [NSMutableArray arrayWithArray:results];
-                [combinedResults addObject:center];
-                [self showResults:combinedResults];
+            [self.searchDelegate shopFinder:self searchTerm:self.searchTerm withResults:^(NSArray *results) {
+                [self showResults:results];
+                if (results) {
+                    [self mapView:self.mapView selectAnnotation:results.firstObject];
+                }
             }];
         }
     }else if(self.searchMode == S2MShopFinderSearchModeUserLocation){
         self.isSearching = YES;
-        if (self.searchDelegate && [self.searchDelegate respondsToSelector:@selector(shopFinder:searchRegion:withResults:)]) {
+        if (self.searchDelegate && [self.searchDelegate respondsToSelector:@selector(shopFinder:searchAtLocation:withResults:)]) {
             
-            //Create Region
-            MKCoordinateSpan span = MKCoordinateSpanMake(0.1, 0.1);
-            MKCoordinateRegion region = MKCoordinateRegionMake(self.userLocation.coordinate, span);
-            [self.searchDelegate shopFinder:self searchRegion:region withResults:^(NSArray *results) {
+            [self.searchDelegate shopFinder:self searchAtLocation:self.mapView.userLocation.location withResults:^(NSArray *results) {
                 [self showResults:results];
             }];
         }
     }else{
-        if (self.userLocation) {
-            self.isSearching = YES;
-            if (self.searchDelegate && [self.searchDelegate respondsToSelector:@selector(shopFinder:searchRegion:withResults:)]) {
-                
-                [self.searchDelegate shopFinder:self searchRegion:self.mapView.region withResults:^(NSArray *results) {
-                    [self showResults:results];
-                }];
-            }
+        self.isSearching = YES;
+        if (self.searchDelegate && [self.searchDelegate respondsToSelector:@selector(shopFinder:searchRegion:withResults:)]) {
+            
+            [self.searchDelegate shopFinder:self searchRegion:self.mapView.region withResults:^(NSArray *results) {
+                [self showResults:results];
+            }];
         }
     }
 }
 
--(void)searchWithTerm:(NSString*)term{
+-(void)searchWithTerm:(NSString*)term
+{
     self.searchTerm = term;
     self.searchMode = S2MShopFinderSearchModeKeyword;
     [self search];
 }
 
--(void)searchWithLocation:(CLLocation *)location{
+-(void)searchWithLocation:(CLLocation *)location
+{
+    self.searchBar.text = nil;
     self.searchMode = S2MShopFinderSearchModeUserLocation;
     self.userLocation = location;
     [self search];
 }
 
 #pragma mark Autocomplete
+
 -(UITableView *)resultsTableView
 {
     if(!_resultsTableView){
@@ -163,52 +170,130 @@ const CGFloat locateButtonWidth = 44.0f;
         _resultsTableView.delegate = self;
         _resultsTableView.dataSource = self;
         [_resultsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCompleteIdentifier];
-        _resultsTableView.rowHeight = 44;
+        _resultsTableView.rowHeight = 45;
+        _resultsTableView.sectionHeaderHeight = 30;
         _resultsTableView.hidden = YES;
+        _resultsTableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         [self.view sendSubviewToBack:_resultsTableView];
         
         //Layout
         NSMutableDictionary *views = [NSDictionaryOfVariableBindings(_resultsTableView, _searchBar) mutableCopy];
+        [views setValue:self.bottomLayoutGuide forKey:@"bottom"];
         for (UIView *view in views.allValues) {
             view.translatesAutoresizingMaskIntoConstraints = NO;
         }
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_searchBar][_resultsTableView]|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_searchBar][_resultsTableView][bottom]" options:0 metrics:nil views:views]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_resultsTableView]|" options:0 metrics:nil views:views]];
     }
     return _resultsTableView;
 }
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (self.showsAutocompleteSections) {
+        return self.autoCompleteResults.count;
+    }else{
+        return 1;
+    }
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(self.searchBar.text.length > 0 && self.showsAutocompleteResults){
-        return self.autoCompleteResults.count;
+    if (!self.showsAutocompleteSections) {
+        NSInteger count  = 0;
+        if(self.searchBar.text.length > 0 && self.showsAutocompleteResults){
+            count = self.autoCompleteResults.count;
+        }
+        
+        //handle empty
+        if(self.emptyTableView && !self.resultsTableView.hidden){
+            [self showEmpty:count == 0];
+        }
+        return count;
+    }else{
+        NSInteger count  = 0;
+        if(self.searchBar.text.length > 0 && self.showsAutocompleteResults){
+            NSArray *sectionElements = [self.autoCompleteResults objectAtIndex:section];
+            count = sectionElements.count;
+        }
+        
+        //handle empty for sections
+        if(self.emptyTableView && !self.resultsTableView.hidden){
+            NSInteger totalcount = 0;
+            for (NSArray *arr in self.autoCompleteResults) {
+                totalcount += arr.count;
+            }
+            [self showEmpty:totalcount == 0];
+        }
+        return count;
     }
-    return 0;
+}
+
+-(void)showEmpty:(BOOL)empty
+{
+    self.emptyTableView.hidden = !empty;
+    
+    if(empty){
+        [self.view bringSubviewToFront:self.emptyTableView];
+    }else{
+        [self.view sendSubviewToBack:self.emptyTableView];
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCompleteIdentifier forIndexPath:indexPath];
-    cell.textLabel.text = [self.autoCompleteResults objectAtIndex:indexPath.row];
+    
+    if (!self.showsAutocompleteSections) {
+        cell.textLabel.text = [self.autoCompleteResults objectAtIndex:indexPath.row];
+    }else{
+        NSArray *strings = [self.autoCompleteResults objectAtIndex:indexPath.section];
+        cell.textLabel.text = [strings objectAtIndex:indexPath.row];
+    }
     return cell;
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.sectionHeaderHeight)];
+    view.backgroundColor = [UIColor blueColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, tableView.bounds.size.width - 20, tableView.sectionHeaderHeight)];
+    label.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    label.translatesAutoresizingMaskIntoConstraints = YES;
+    label.textColor = [UIColor whiteColor];
+    [view addSubview:label];
+    
+    if ([self.autoCompleteDelegate respondsToSelector:@selector(shopFinder:titleInSection:)]) {
+        label.text = [self.autoCompleteDelegate shopFinder:self titleInSection:section];
+    }
+    else{
+        label.text =  [NSString stringWithFormat:@"Section: %li", (long)section];
+    }
+    return view;
+}
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.searchBar resignFirstResponder];
     
-    if([self.autoCompleteDelegate respondsToSelector:@selector(shopFinder:didSelectAutoCompleteTerm:)]){
-        NSString *term = [self.autoCompleteResults objectAtIndex:indexPath.row];
+    if([self.autoCompleteDelegate respondsToSelector:@selector(shopFinder:didSelectAutoCompleteTerm:inSection:)]){
+        NSString *term;
+        if (!self.showsAutocompleteSections) {
+            term = [self.autoCompleteResults objectAtIndex:indexPath.row];
+        }else{
+            NSArray *strings = [self.autoCompleteResults objectAtIndex:indexPath.section];
+            term = [strings objectAtIndex:indexPath.row];
+        }
         self.searchBar.text = term;
-        [self.autoCompleteDelegate shopFinder:self didSelectAutoCompleteTerm:term];
+        [self.autoCompleteDelegate shopFinder:self didSelectAutoCompleteTerm:term inSection:indexPath.section];
     }
 }
 
 -(void)showAutoCompleteForTerm:(NSString*)term
-{
-    
-    if([self.autoCompleteDelegate respondsToSelector:@selector(shopFinder:autoCompleteResultsForTerm:)]){
-        self.autoCompleteResults = [self.autoCompleteDelegate shopFinder:self autoCompleteResultsForTerm:term];
+{    
+    if([self.autoCompleteDelegate respondsToSelector:@selector(shopFinder:expectSections:autoCompleteResultsForTerm:)]){
+        self.autoCompleteResults = [self.autoCompleteDelegate shopFinder:self expectSections:self.showsAutocompleteSections autoCompleteResultsForTerm:term];
         self.resultsTableView.hidden = NO;
 
         [self.view bringSubviewToFront:self.resultsTableView];
@@ -216,11 +301,22 @@ const CGFloat locateButtonWidth = 44.0f;
     }
 }
 
--(void)hideAutocomplete{
+-(void)hideAutocomplete
+{
     self.resultsTableView.hidden = YES;
     [self.view sendSubviewToBack:self.resultsTableView];
+    
+    if(self.hidesLocateButtonWhenActive){
+        self.locateButtonWidthConstraint.constant = locateButtonWidth;
+        [self.toolBar setNeedsLayout];
+    }
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+    
+    if(self.emptyTableView){
+        [self showEmpty:NO];
+    }
+    self.searchBar.text = @"";
 }
-
 
 #pragma mark - UISearchBarDelegate
 
@@ -236,6 +332,8 @@ const CGFloat locateButtonWidth = 44.0f;
 
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
+    searchBar.placeholder = @"";
+    
     if (self.hidesNavigationBarWhenActive) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
@@ -256,11 +354,6 @@ const CGFloat locateButtonWidth = 44.0f;
     if (self.hidesNavigationBarWhenActive) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
-    if(self.hidesLocateButtonWhenActive){
-        self.locateButtonWidthConstraint.constant = locateButtonWidth;
-        [self.toolBar setNeedsLayout];
-    }
-    [searchBar setShowsCancelButton:NO animated:YES];
     return YES;
 }
 
@@ -289,7 +382,7 @@ const CGFloat locateButtonWidth = 44.0f;
     }
 }
 
-#pragma marm Map Delegate
+#pragma marm MKMapViewDelegate
 //User Location
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
@@ -298,9 +391,12 @@ const CGFloat locateButtonWidth = 44.0f;
         //only do another search if new location is 1km away
         if (!self.userLocation || [self.userLocation distanceFromLocation:userLocation.location] > 1000) {
             self.searchBar.text = nil;
-            self.searchBar.placeholder = userLocation.title;
             self.userLocation = userLocation.location;
-            [self search];
+            
+            //do not search an recenter if user has selected an annotation
+            if (!self.customCalloutView) {
+                [self search];
+            }
         }
     }
     self.userLocation = userLocation.location;
@@ -308,14 +404,22 @@ const CGFloat locateButtonWidth = 44.0f;
 
 -(void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
 {
-    //TODO
+    //TODO: Error handling needs to be defined
 }
 
--(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
+{
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
         return nil;
     }
+    
+    //Special Callout Annotation
+    if([annotation isKindOfClass:[S2MCalloutAnnotation class]]){
+        MKAnnotationView *callout = [self.mapSpecialsDelegate mapView:mapView calloutViewForAnnotation:annotation];
+        self.customCalloutView = callout;
+        return callout;
+    }
+    
     
     //Special Annotation for keyword search center
     if (annotation == self.searchLocation) {
@@ -330,13 +434,6 @@ const CGFloat locateButtonWidth = 44.0f;
         }
     }
     
-    //Special Callout Annotation
-    if([annotation isKindOfClass:[S2MCalloutAnnotation class]]){
-        MKAnnotationView *callout = [self.mapSpecialsDelegate mapView:mapView calloutViewForAnnotation:annotation];
-        self.customCallout = callout;
-        return callout;
-    }
-    
     
     if (self.resultAnnotationActiveImage) {
         //custom Annotation
@@ -348,8 +445,8 @@ const CGFloat locateButtonWidth = 44.0f;
         }
         
         //active and inactive state
-        if(self.customCallout){
-            if(self.resultAnnotationInactiveImage && (annotation != self.customCallout.annotation)){
+        if(self.customCalloutView){
+            if(self.resultAnnotationInactiveImage && (annotation != self.selectedAnnotation)){
                 view.image = self.resultAnnotationInactiveImage;
             }else{
                 view.image = self.resultAnnotationActiveImage;
@@ -357,6 +454,8 @@ const CGFloat locateButtonWidth = 44.0f;
         }else{
             view.image = self.resultAnnotationActiveImage;
         }
+        view.calloutOffset = CGPointMake(0, -view.image.size.height);
+
         view.canShowCallout = NO;
         return view;
     }
@@ -367,43 +466,68 @@ const CGFloat locateButtonWidth = 44.0f;
         }else{
             pin.annotation = annotation;
         }
-        pin.canShowCallout = NO;
+        pin.canShowCallout = YES;
         return pin;
     }
     return nil;
 }
 
 //Annotations
+
+-(void)mapView:(MKMapView*)mapView selectAnnotation:(id<MKAnnotation>)annotation
+{
+    MKAnnotationView *view = [mapView viewForAnnotation:annotation];
+    if (view) {
+        [self mapView:mapView didSelectAnnotationView:view];
+    }else{
+        //force view
+        view = [self mapView:mapView viewForAnnotation:annotation];
+        if (view) {
+            [self mapView:mapView didSelectAnnotationView:view];
+        }
+    }
+}
+
+
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
+    if ([view.annotation isKindOfClass:[MKUserLocation class]]) {
+        return;
+    }
+    
+    if ([view.annotation isKindOfClass:[S2MCalloutAnnotation class]]) {
+        return;
+    }
+    
     //deactivate all annotations
     if(self.resultAnnotationActiveImage && self.resultAnnotationInactiveImage){
         for (id <MKAnnotation> annotation in self.mapView.annotations){
-            MKAnnotationView *view = [self.mapView viewForAnnotation:annotation];
-            if(view != self.customCallout){
-                view.image = self.resultAnnotationInactiveImage;
+            if(![annotation isKindOfClass:[MKUserLocation class]]){
+                MKAnnotationView *view = [self.mapView viewForAnnotation:annotation];
+                if(view != self.customCalloutView){
+                    view.image = self.resultAnnotationInactiveImage;
+                }
             }
         }
     }
     //activate the selected again
-    view.image = self.resultAnnotationActiveImage;
+    if (self.resultAnnotationActiveImage) {
+        view.image = self.resultAnnotationActiveImage;
+    }
+    self.selectedAnnotation = view.annotation;
     
-    
-    if (self.customCallout) {
-        [self.mapView removeAnnotation:self.customCallout.annotation];
-        self.customCallout = nil;
+    if (self.customCalloutView) {
+        [self.mapView removeAnnotation:self.customCalloutView.annotation];
+        self.customCalloutView = nil;
     }
     
     //add custom annotation if implemented
     if(self.mapSpecialsDelegate && [self.mapSpecialsDelegate respondsToSelector:@selector(mapView:calloutViewForAnnotation:)]){
-    
         S2MCalloutAnnotation *callout = [[S2MCalloutAnnotation alloc] initWithAnnotation:view.annotation];
         [self.mapView addAnnotation:callout];
-        [self.mapView showAnnotations:@[callout] animated:YES];
+        
+        [self.mapView showAnnotations:@[self.selectedAnnotation, callout] animated:YES];
     }
-    
-
-    
 }
 
 -(void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
@@ -415,12 +539,12 @@ const CGFloat locateButtonWidth = 44.0f;
 
 -(void)mapViewDidFinishRenderingMap:(MKMapView *)mapView fullyRendered:(BOOL)fullyRendered{
     //start new search
-    self.mapIsRendered = YES;
+    self.isMapRendered = YES;
 }
 
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    if (!animated && self.mapIsRendered) {
+    if (!animated && self.isMapRendered) {
         self.searchMode = S2MShopFinderSearchModeDragging;
     }
 }
@@ -428,10 +552,26 @@ const CGFloat locateButtonWidth = 44.0f;
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     if (self.searchMode == S2MShopFinderSearchModeDragging && !animated) {
         [self search];
+    }else if(self.loadPlacesForRegion) {
+        
+        [self.searchDelegate shopFinder:self searchRegion:mapView.region withResults:^(NSArray *results) {
+            self.loadPlacesForRegion = NO;
+            [self.mapView addAnnotations:results];
+            [self.addedAnnotations addObjectsFromArray:results];
+        }];
     }
 }
 
-
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    if (self.loadPlacesForRegion) {
+        [self.searchDelegate shopFinder:self searchRegion:mapView.region withResults:^(NSArray *results) {
+            self.loadPlacesForRegion = NO;
+            [self.mapView addAnnotations:results];
+            [self.addedAnnotations addObjectsFromArray:results];
+        }];
+    }
+}
 
 
 #pragma mark Authorization
@@ -445,6 +585,12 @@ const CGFloat locateButtonWidth = 44.0f;
             return YES;
         case kCLAuthorizationStatusAuthorizedAlways:
             return YES;
+        case kCLAuthorizationStatusDenied:
+            [self askForAuthorhization];
+            return NO;
+        case kCLAuthorizationStatusRestricted:
+            [self askForAuthorhization];
+            return NO;
         default:
             return NO;
     }
@@ -474,21 +620,24 @@ const CGFloat locateButtonWidth = 44.0f;
     }
     else{
         self.mapView.showsUserLocation = YES;
-        [self searchWithLocation:self.mapView.userLocation.location];
+        BOOL forceSearch = (sender != nil);
+        if (self.mapView.userLocation.location && (!self.customCalloutView || forceSearch)) {
+            [self searchWithLocation:self.mapView.userLocation.location];
+        }
     }
 }
 
-#pragma mark Defaults
-
--(void)initDefaults
+-(void)startLocatingIgnoreSelection:(BOOL)ignore
 {
-    self.hidesNavigationBarWhenActive = YES;
-    self.showsAutocompleteResults = NO;
-    self.searchMode = S2MShopFinderSearchModeUserLocation;
+    if (ignore) {
+        [self relocate:self];
+    }else{
+        [self relocate:nil];
+    }
 }
 
-
 #pragma mark UI
+
 - (void)addElements
 {
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 280, 44)];
@@ -510,11 +659,19 @@ const CGFloat locateButtonWidth = 44.0f;
     self.toolBar = [[UIToolbar alloc] init];
     [self.toolBar addSubview:self.searchBar];
     [self.toolBar addSubview:self.locateButton];
+    self.toolBar.delegate = self;
     
     
     [self.view addSubview:self.mapView];
     [self.view addSubview:self.toolBar];
     [self.view addSubview:self.activityIndicator];
+    
+    //empty table
+    if(self.emptyTableView){
+        [self.view addSubview:self.emptyTableView];
+        self.emptyTableView.hidden = YES;
+        [self.view sendSubviewToBack:self.emptyTableView];
+    }
 }
 
 - (void)addLayout
@@ -545,30 +702,48 @@ const CGFloat locateButtonWidth = 44.0f;
     self.locateButtonWidthConstraint = [NSLayoutConstraint  constraintWithItem:self.locateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:locateButtonWidth];
     [self.toolBar addConstraint:self.locateButtonWidthConstraint];
     
-    
-    
+    if(self.emptyTableView){
+        [views setObject:self.emptyTableView forKey:@"_empty"];
+        [views setValue:self.bottomLayoutGuide forKey:@"bottom"];
+        for (UIView *view in views.allValues) {
+            view.translatesAutoresizingMaskIntoConstraints = NO;
+        }
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_searchBar][_empty][bottom]" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_empty]|" options:0 metrics:nil views:views]];
+    }
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+#pragma mark Defaults
+-(void)initDefaults
+{
+    self.hidesNavigationBarWhenActive = YES;
+    self.showsAutocompleteResults = NO;
+    self.showsAutocompleteSections = NO;
+    self.searchMode = S2MShopFinderSearchModeUserLocation;
+    self.textForNoResults = @"No results found. Customize text in subclass or property.";
+    self.locateButtonImage = [UIImage imageNamed:@"icn_location_active"];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-}
-
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self askForAuthorhization];
-}
-
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     [self addElements];
     [self addLayout];
-    [self initDefaults];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self startLocatingIgnoreSelection:NO];
+}
+
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self){
+        [self initDefaults];
+    }
+    return self;
 }
 
 

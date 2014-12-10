@@ -14,34 +14,43 @@
 
 @implementation S2MShopFinderSearchDelegate
 
-
-
--(void)shopFinder:(S2MShopFinderController *)shopFinder searchTerm:(NSString *)term withResults:(void (^)(NSArray *, id<MKAnnotation>))resultBlock{
+-(void)shopFinder:(S2MShopFinderController *)shopFinder searchTerm:(NSString *)term withResults:(void (^)(NSArray *))resultBlock
+{
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = term;
 
     MKLocalSearch *search = [[MKLocalSearch alloc]initWithRequest:request];
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
         
-        //secon search
+        //second search
         MKMapItem *firstHit = [response.mapItems firstObject];
         
         MKCoordinateRegion region = MKCoordinateRegionMake(firstHit.placemark.coordinate, MKCoordinateSpanMake(0.1, 0.1));
         
         [self shopFinder:shopFinder searchRegion:region withResults:^(NSArray *results) {
             if (resultBlock) {
-                resultBlock(results, firstHit.placemark);
+                resultBlock(results);
             }
         }];
     }];
 }
 
+-(void)shopFinder:(S2MShopFinderController *)shopFinder searchAtLocation:(CLLocation*)location withResults:(void (^)(NSArray *))resultBlock
+{
+    MKCoordinateRegion region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(0.1, 0.1));
+    [self shopFinder:shopFinder searchRegion:region withResults:resultBlock];
+}
 
 
-//Search with region like scrolling or user location
+/**
+ *  Search with region like scrolling or user location
+ *
+ *  @param shopFinder
+ *  @param region
+ *  @param resultBlock
+ */
 -(void)shopFinder:(S2MShopFinderController *)shopFinder searchRegion:(MKCoordinateRegion)region withResults:(void (^)(NSArray *))resultBlock
 {
-
     //let's say we search for tankstelle
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = @"Tankstelle";
@@ -59,6 +68,5 @@
         }
     }];
 }
-
 
 @end

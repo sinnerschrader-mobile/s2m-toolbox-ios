@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "S2MShopFinderController.h"
 
-
+//Meant for toolbox later on as Example Implementation
 @interface S2MShopFinderSearchDelegate : NSObject <S2MShopFinderSearchDelegate>
 
 
