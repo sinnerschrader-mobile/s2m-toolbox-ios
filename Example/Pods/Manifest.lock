@@ -1,7 +1,7 @@
 PODS:
-  - Kiwi (2.3.0)
-  - S2MToolbox/Core (0.0.7)
-  - S2MToolbox/Kiwi (0.0.7):
+  - Kiwi (2.3.1)
+  - S2MToolbox/Core (0.0.9)
+  - S2MToolbox/Kiwi (0.0.9):
     - Kiwi (~> 2.3.0)
 
 DEPENDENCIES:
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
-  S2MToolbox: 874e37de0a67c15c3b6b9f02a08e02217ac7ee34
+  Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
+  S2MToolbox: 0dd5b467d7c96fa12a56ee52497e25c8c2e0b28c
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0
