@@ -22,7 +22,14 @@
 		01C12EB219FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
 		01C12EBA19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EB819FE5C65004B7999 /* InfoPlist.strings */; };
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
-		22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
+		01F061AA1A3A0E54000EE282 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F061A91A3A0E54000EE282 /* main.m */; };
+		01F061AD1A3A0E54000EE282 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F061AC1A3A0E54000EE282 /* AppDelegate.m */; };
+		01F061B31A3A0E54000EE282 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01F061B11A3A0E54000EE282 /* Main.storyboard */; };
+		01F061B51A3A0E54000EE282 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F061B41A3A0E54000EE282 /* Images.xcassets */; };
+		01F061B81A3A0E54000EE282 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F061B61A3A0E54000EE282 /* LaunchScreen.xib */; };
+		01F061CD1A3A0FEA000EE282 /* S2MCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F061CC1A3A0FEA000EE282 /* S2MCollectionViewController.m */; };
+		01F061CF1A3A127A000EE282 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01F061CE1A3A127A000EE282 /* libPods.a */; };
+		34FB7B747D3BC903C458B45A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9AF81FC94A90E8F53FD5E9 /* libPods.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
 /* End PBXBuildFile section */
 
@@ -57,8 +64,25 @@
 		01C12EB719FE5C65004B7999 /* S2MToolboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "S2MToolboxTests-Info.plist"; sourceTree = "<group>"; };
 		01C12EB919FE5C65004B7999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_S2MAdditionsSpec.m; sourceTree = "<group>"; };
+		01F061A51A3A0E54000EE282 /* RefreshControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RefreshControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01F061A81A3A0E54000EE282 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01F061A91A3A0E54000EE282 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		01F061AB1A3A0E54000EE282 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		01F061AC1A3A0E54000EE282 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		01F061B21A3A0E54000EE282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01F061B41A3A0E54000EE282 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		01F061B71A3A0E54000EE282 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		01F061CB1A3A0FEA000EE282 /* S2MCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MCollectionViewController.h; sourceTree = "<group>"; };
+		01F061CC1A3A0FEA000EE282 /* S2MCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MCollectionViewController.m; sourceTree = "<group>"; };
+		01F061CE1A3A127A000EE282 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolbox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23032E5B2B9FF2D4DBAAF93E /* Pods-RefreshControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RefreshControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-RefreshControl/Pods-RefreshControl.release.xcconfig"; sourceTree = "<group>"; };
+		290C74C3040ADBE62B471CA3 /* Pods-RefreshControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RefreshControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RefreshControl/Pods-RefreshControl.debug.xcconfig"; sourceTree = "<group>"; };
+		379B16138C54DA63B3D555BA /* libPods-RefreshControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RefreshControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9D9AF81FC94A90E8F53FD5E9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.release.xcconfig"; sourceTree = "<group>"; };
 		B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.release.xcconfig"; sourceTree = "<group>"; };
 		BE33BA9C04E7C88AFCB3C73A /* Pods-S2MToolbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,7 +97,7 @@
 				01C12E9319FE5C65004B7999 /* CoreGraphics.framework in Frameworks */,
 				01C12E9519FE5C65004B7999 /* UIKit.framework in Frameworks */,
 				01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */,
-				22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */,
+				34FB7B747D3BC903C458B45A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +109,14 @@
 				01C12EB219FE5C65004B7999 /* UIKit.framework in Frameworks */,
 				01C12EB119FE5C65004B7999 /* Foundation.framework in Frameworks */,
 				630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01F061A21A3A0E54000EE282 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01F061CF1A3A127A000EE282 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +138,7 @@
 			children = (
 				01C12E9619FE5C65004B7999 /* S2MToolbox */,
 				01C12EB519FE5C65004B7999 /* S2MToolboxTests */,
+				01F061A61A3A0E54000EE282 /* RefreshControl */,
 				01C12E8F19FE5C65004B7999 /* Frameworks */,
 				01C12E8E19FE5C65004B7999 /* Products */,
 				20237AA9C1E1C7130A061C3C /* Pods */,
@@ -117,6 +150,7 @@
 			children = (
 				01C12E8D19FE5C65004B7999 /* S2MToolbox.app */,
 				01C12EAE19FE5C65004B7999 /* S2MToolboxTests.xctest */,
+				01F061A51A3A0E54000EE282 /* RefreshControl.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,12 +158,15 @@
 		01C12E8F19FE5C65004B7999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01F061CE1A3A127A000EE282 /* libPods.a */,
 				01C12E9019FE5C65004B7999 /* Foundation.framework */,
 				01C12E9219FE5C65004B7999 /* CoreGraphics.framework */,
 				01C12E9419FE5C65004B7999 /* UIKit.framework */,
 				01C12EAF19FE5C65004B7999 /* XCTest.framework */,
 				214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */,
 				D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */,
+				379B16138C54DA63B3D555BA /* libPods-RefreshControl.a */,
+				9D9AF81FC94A90E8F53FD5E9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,6 +213,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		01F061A61A3A0E54000EE282 /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				01F061AB1A3A0E54000EE282 /* AppDelegate.h */,
+				01F061AC1A3A0E54000EE282 /* AppDelegate.m */,
+				01F061B11A3A0E54000EE282 /* Main.storyboard */,
+				01F061B41A3A0E54000EE282 /* Images.xcassets */,
+				01F061B61A3A0E54000EE282 /* LaunchScreen.xib */,
+				01F061A71A3A0E54000EE282 /* Supporting Files */,
+				01F061CB1A3A0FEA000EE282 /* S2MCollectionViewController.h */,
+				01F061CC1A3A0FEA000EE282 /* S2MCollectionViewController.m */,
+			);
+			path = RefreshControl;
+			sourceTree = "<group>";
+		};
+		01F061A71A3A0E54000EE282 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01F061A81A3A0E54000EE282 /* Info.plist */,
+				01F061A91A3A0E54000EE282 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		20237AA9C1E1C7130A061C3C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +244,10 @@
 				B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */,
 				420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */,
 				B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */,
+				290C74C3040ADBE62B471CA3 /* Pods-RefreshControl.debug.xcconfig */,
+				23032E5B2B9FF2D4DBAAF93E /* Pods-RefreshControl.release.xcconfig */,
+				3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */,
+				020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -229,6 +294,25 @@
 			productReference = 01C12EAE19FE5C65004B7999 /* S2MToolboxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		01F061A41A3A0E54000EE282 /* RefreshControl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01F061C91A3A0E54000EE282 /* Build configuration list for PBXNativeTarget "RefreshControl" */;
+			buildPhases = (
+				FF3FCCAFC23A061FFB0133A5 /* Check Pods Manifest.lock */,
+				01F061A11A3A0E54000EE282 /* Sources */,
+				01F061A21A3A0E54000EE282 /* Frameworks */,
+				01F061A31A3A0E54000EE282 /* Resources */,
+				3DFD350FA82F1442CBCF7502 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RefreshControl;
+			productName = RefreshControl;
+			productReference = 01F061A51A3A0E54000EE282 /* RefreshControl.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,6 +325,9 @@
 				TargetAttributes = {
 					01C12EAD19FE5C65004B7999 = {
 						TestTargetID = 01C12E8C19FE5C65004B7999;
+					};
+					01F061A41A3A0E54000EE282 = {
+						CreatedOnToolsVersion = 6.1.1;
 					};
 				};
 			};
@@ -259,6 +346,7 @@
 			targets = (
 				01C12E8C19FE5C65004B7999 /* S2MToolbox */,
 				01C12EAD19FE5C65004B7999 /* S2MToolboxTests */,
+				01F061A41A3A0E54000EE282 /* RefreshControl */,
 			);
 		};
 /* End PBXProject section */
@@ -281,6 +369,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01F061A31A3A0E54000EE282 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01F061B31A3A0E54000EE282 /* Main.storyboard in Resources */,
+				01F061B81A3A0E54000EE282 /* LaunchScreen.xib in Resources */,
+				01F061B51A3A0E54000EE282 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -296,7 +394,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2765BF3A44443DB5E7E340F3 /* Check Pods Manifest.lock */ = {
@@ -329,6 +427,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3DFD350FA82F1442CBCF7502 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		91EC98B580B7F1666F538E29 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -342,6 +455,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF3FCCAFC23A061FFB0133A5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -364,6 +492,16 @@
 				0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */,
 				0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */,
 				01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01F061A11A3A0E54000EE282 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01F061AD1A3A0E54000EE282 /* AppDelegate.m in Sources */,
+				01F061CD1A3A0FEA000EE282 /* S2MCollectionViewController.m in Sources */,
+				01F061AA1A3A0E54000EE282 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +530,22 @@
 				01C12EB919FE5C65004B7999 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		01F061B11A3A0E54000EE282 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01F061B21A3A0E54000EE282 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		01F061B61A3A0E54000EE282 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01F061B71A3A0E54000EE282 /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -469,7 +623,7 @@
 		};
 		01C12EC019FE5C65004B7999 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE33BA9C04E7C88AFCB3C73A /* Pods-S2MToolbox.debug.xcconfig */;
+			baseConfigurationReference = 3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -483,7 +637,7 @@
 		};
 		01C12EC119FE5C65004B7999 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */;
+			baseConfigurationReference = 020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -537,6 +691,48 @@
 			};
 			name = Release;
 		};
+		01F061C51A3A0E54000EE282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		01F061C61A3A0E54000EE282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = RefreshControl/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -563,6 +759,15 @@
 			buildConfigurations = (
 				01C12EC319FE5C65004B7999 /* Debug */,
 				01C12EC419FE5C65004B7999 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01F061C91A3A0E54000EE282 /* Build configuration list for PBXNativeTarget "RefreshControl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01F061C51A3A0E54000EE282 /* Debug */,
+				01F061C61A3A0E54000EE282 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

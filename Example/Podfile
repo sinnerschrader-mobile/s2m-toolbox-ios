@@ -3,9 +3,7 @@ platform :ios, "7.0"
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-target "S2MToolbox" do
-  pod 'S2MToolbox/Core', :path => "../"
-end
+pod 'S2MToolbox/Core', :path => "../"
 
 target "S2MToolboxTests", :exclusive => true do
   pod 'S2MToolbox/Kiwi', :path => "../"

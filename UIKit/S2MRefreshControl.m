@@ -11,13 +11,11 @@
 #import "UIView+S2MAdditions.h"
 #import "UIView+S2MAutolayout.h"
 
-CGFloat const S2MRefreshControlHeight = 40;
-
 @interface S2MRefreshControl ()<UIScrollViewDelegate>
 @property(nonatomic, strong)UIScrollView* scrollView;
 @property(nonatomic, weak)id<UIScrollViewDelegate>originalScrollViewDelegate;
 @property(nonatomic, assign)BOOL isRefreshing;
-@property(nonatomic, assign)CGFloat startLoadingThreshold;
+
 @property(nonatomic, assign)UIEdgeInsets scrollViewInitialInsets;
 @property(nonatomic, strong, readwrite)UIImageView* loadingImage;
 @property(nonatomic, strong, readwrite)UIActivityIndicatorView* indicatorView;
@@ -30,8 +28,8 @@ CGFloat const S2MRefreshControlHeight = 40;
 {
     self = [super init];
     if (self) {
-        self.startLoadingThreshold = S2MRefreshControlHeight + 25;
-
+        self.refreshControlHeight = 40;
+        self.startLoadingThreshold = self.refreshControlHeight + 25;
         if (!image) {
             self.indicatorView = [self s2m_addActivityIndicatorView];
         }else{
@@ -44,18 +42,17 @@ CGFloat const S2MRefreshControlHeight = 40;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.frame = CGRectMake(0, 0, self.superview.bounds.size.width, S2MRefreshControlHeight);
-    self.center = CGPointMake(self.superview.center.x, self.superview.bounds.origin.y - S2MRefreshControlHeight / 2);
-    self.loadingView.center = CGPointMake(self.center.x, S2MRefreshControlHeight / 2);
+    self.frame = CGRectMake(0, 0, self.superview.bounds.size.width, self.refreshControlHeight);
+    self.center = CGPointMake(self.superview.center.x, self.superview.bounds.origin.y - self.refreshControlHeight / 2);
 }
 
 - (void)didMoveToSuperview
 {
-    [self.loadingView s2m_addHeightConstraint:24];
-    [self.loadingView s2m_addWidthConstraint:24];
+    [self.loadingView s2m_addCenterInSuperViewConstraint];
     if ([self.superview isKindOfClass:[UIScrollView class]]) {
         self.scrollView = (UIScrollView*)self.superview;
     }
+    [self layoutIfNeeded];
 }
 
 - (void)setScrollView:(UIScrollView *)scrollView
@@ -71,12 +68,34 @@ CGFloat const S2MRefreshControlHeight = 40;
     [_scrollView addObserver:self forKeyPath:NSStringFromSelector(@selector(delegate)) options:NSKeyValueObservingOptionNew context:NULL];
 }
 
+#pragma mark - Animation
+
+
 - (UIView*)loadingView
 {
     return self.indicatorView ? self.indicatorView : self.loadingImage;
 }
 
-#pragma mark - Animation
+- (void)startAnimating
+{
+    if (self.indicatorView) {
+        [self.indicatorView startAnimating];
+    }else{
+        self.loadingImage.alpha = 1.0;
+        [self.loadingImage s2m_removeRotationAnimation];
+        [self.loadingImage s2m_rotateWithDuration:0.5 repeat:INFINITY];
+    }
+}
+
+- (void)stopAnimating
+{
+    if (self.indicatorView) {
+        [self.indicatorView stopAnimating];
+    }else{
+        self.loadingImage.alpha = 0.0;
+        [self.loadingView s2m_removeRotationAnimation];
+    }
+}
 
 - (void)beginRefreshing
 {
@@ -86,24 +105,20 @@ CGFloat const S2MRefreshControlHeight = 40;
 
     self.scrollViewInitialInsets = self.scrollView.contentInset;
     self.isRefreshing = YES;
-    self.loadingView.alpha = 1.0;
+
     self.scrollView.contentInset = UIEdgeInsetsMake(self.startLoadingThreshold, 0, 0, 0);
     self.scrollView.scrollEnabled = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self sendActionsForControlEvents:UIControlEventValueChanged];
-        [self.loadingView s2m_removeRotationAnimation];
-        [self.loadingView s2m_rotateWithDuration:0.5 repeat:INFINITY];
+        [self startAnimating];
         self.scrollView.scrollEnabled = YES;
     });
-    
-    
-    
 }
 
 - (void)endRefreshing
 {
     if (!self.isRefreshing) {
-        [self.loadingView s2m_removeRotationAnimation];
+        [self stopAnimating];
         return;
     }
 
@@ -114,7 +129,7 @@ CGFloat const S2MRefreshControlHeight = 40;
             [self.scrollView setContentOffset:CGPointZero];
             self.scrollView.contentInset = self.scrollViewInitialInsets;
         } completion:^(BOOL finished2) {
-            [self.loadingView s2m_removeRotationAnimation];
+            [self stopAnimating];
             self.isRefreshing = NO;
         }];
     }];

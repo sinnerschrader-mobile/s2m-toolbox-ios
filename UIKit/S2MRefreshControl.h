@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-extern CGFloat const S2MRefreshControlHeight;
 /**
  *  Custom Refresh Control that can be added on a UIScrollview based class. i.e. UICollectionView
  */
 @interface S2MRefreshControl : UIControl
 @property(nonatomic, strong, readonly)UIImageView* loadingImage;
 @property(nonatomic, strong, readonly)UIActivityIndicatorView* indicatorView;
+@property(nonatomic, assign)CGFloat refreshControlHeight;
+@property(nonatomic, assign)CGFloat startLoadingThreshold;
 - (void)endRefreshing;
 - (void)beginRefreshing;
 - (BOOL)isRefreshing;
