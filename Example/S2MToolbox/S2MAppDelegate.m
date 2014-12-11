@@ -8,12 +8,17 @@
 
 #import "S2MAppDelegate.h"
 
+#import "S2MViewController.h"
+
 @implementation S2MAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     NSLog(@"appDelegate didFinishLaunchingWithOptions!");
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[S2MViewController alloc] init]];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 							

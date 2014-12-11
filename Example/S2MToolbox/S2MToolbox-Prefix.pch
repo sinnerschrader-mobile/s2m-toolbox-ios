@@ -13,4 +13,11 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    // Core
+    #import <S2MToolbox/UIView+S2MAdditions.h>
+    #import <S2MToolbox/UIView+S2MAutolayout.h>
+    #import <S2MToolbox/UIBarButtonItem+S2MAdditions.h>
+    #import <NSNotification+S2MKeyboard.h>
+    #import <NSString+S2MMD5.h>
+    #import <NSString+S2MRegExValidation.h>
 #endif
