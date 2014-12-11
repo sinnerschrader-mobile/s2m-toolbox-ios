@@ -1,5 +1,5 @@
 //
-//  NSNotification+Keyboard.m
+//  NSNotification+S2MKeyboard.m
 //  S2MToolbox
 //
 //  Created by Falko Richter on 10.12.12.
