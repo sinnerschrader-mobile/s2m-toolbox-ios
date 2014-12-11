@@ -27,11 +27,7 @@ Here is a collection of useful code that can be used through iOS projects.
 pod 'S2MToolbox/Core', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
 ```
 
-For Categories for your tests, see the two following specs:
-
-```
-pod 'S2MToolbox/UnitTests', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
-```
+For Categories for your tests:
 
 ```
 pod 'S2MToolbox/Kiwi', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'

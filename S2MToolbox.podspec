@@ -16,10 +16,6 @@ Pod::Spec.new do |s|
     core.source_files = 'Foundation/*.{h,m}', 'UIKit/*.{h,m}'
   end
 
-  s.subspec 'UnitTests' do |ut|
-    # ut.source_files  = 'Testing/UnitTests/*.{h,m}'
-  end
-
   s.subspec 'Kiwi' do |kiwi|
     kiwi.dependency 'Kiwi', '~>2.3.0'
     kiwi.frameworks = 'XCTest'

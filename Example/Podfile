@@ -8,7 +8,6 @@ target "S2MToolbox" do
 end
 
 target "S2MToolboxTests", :exclusive => true do
-    #pod 'S2MToolbox/UnitTests', :path => "../"
   pod 'S2MToolbox/Kiwi', :path => "../"
 end
 
