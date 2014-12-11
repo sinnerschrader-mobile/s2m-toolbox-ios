@@ -1,6 +1,6 @@
 //
 //  UIView+S2MAdditions.h
-//
+//  S2MToolbox
 //
 //  Created by François Benaiteau on 5/28/13.
 //  Copyright (c) 2013 SinnerSchrader Mobile. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (SYNAdditions)
+@interface UIView (S2MAdditions)
 
 -(id)s2m_addView;
 

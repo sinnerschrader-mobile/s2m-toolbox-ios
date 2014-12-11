@@ -1,6 +1,6 @@
 //
 //  KWSpec+S2MWaitFor.h
-//
+//  S2MToolbox
 //
 //  Created by François Benaiteau on 4/25/13.
 //  Copyright (c) 2013 SinnerSchrader Mobile. All rights reserved.

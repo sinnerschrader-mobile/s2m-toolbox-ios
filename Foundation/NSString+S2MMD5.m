@@ -1,11 +1,13 @@
 //
 //  NSString+S2MMD5.m
+//  S2MToolbox
 //
-
+//
+//  Copyright (c) 2012 SinnerSchrader Mobile. All rights reserved.
+//
 
 #import "NSString+S2MMD5.h"
 #import <CommonCrypto/CommonDigest.h>
-
 
 @implementation NSString (MD5)
 

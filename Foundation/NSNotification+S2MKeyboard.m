@@ -1,6 +1,6 @@
 //
 //  NSNotification+Keyboard.m
-//  
+//  S2MToolbox
 //
 //  Created by Falko Richter on 10.12.12.
 //  Copyright (c) 2012 SinnerSchrader Mobile. All rights reserved.
