@@ -8,6 +8,10 @@
 
 #import "UIView+S2MAdditions.h"
 
+#import <QuartzCore/QuartzCore.h>
+
+static NSString *const S2MRotationAnimationKey = @"com.s2m.rotationAnimation";
+
 @implementation UIView (S2MAdditions)
 
 -(id)s2m_addView
@@ -84,6 +88,24 @@
     [self addSubview:imageView];
     return imageView;
     
+}
+
+#pragma mark - Animation
+
+- (void)s2m_rotateWithDuration:(CGFloat)duration repeat:(float)repeat
+{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0];
+    rotationAnimation.duration = duration;
+    rotationAnimation.repeatCount = repeat;
+    rotationAnimation.removedOnCompletion = NO;
+    [self.layer addAnimation:rotationAnimation forKey:S2MRotationAnimationKey];
+}
+
+- (void)s2m_removeRotationAnimation
+{
+    [self.layer removeAnimationForKey:S2MRotationAnimationKey];
 }
 
 
