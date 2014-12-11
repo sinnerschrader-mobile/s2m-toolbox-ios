@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "S2MToolbox"
-  s.version      = "0.0.7"
+  s.version      = "0.0.9"
   s.summary      = "iOS Categories."
   s.homepage     = "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios"
 
@@ -26,4 +26,7 @@ Pod::Spec.new do |s|
     kiwi.source_files  = 'Testing/Kiwi/*.{h,m}'
   end
 
+  s.subspec 'QRCode' do |ut|
+    ut.source_files  = 'QRCode/*.{h,m}'
+  end
 end
