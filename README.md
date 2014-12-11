@@ -32,3 +32,14 @@ For Categories for your tests:
 ```
 pod 'S2MToolbox/Kiwi', :podspec => 'https://raw.github.com/sinnerschrader-mobile/s2m-toolbox-ios/master/S2MToolbox.podspec'
 ```
+
+# Publishing
+
+1. Update `S2MToolbox.podspec`
+2. Run `pod lib lint` to check for errors and 
+3. Tag the version
+4. `pod trunk push`
+
+More infos :
+* http://guides.cocoapods.org/making/using-pod-lib-create.html
+* http://guides.cocoapods.org/making/getting-setup-with-trunk

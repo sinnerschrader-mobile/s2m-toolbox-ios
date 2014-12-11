@@ -6,8 +6,8 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => 'https://github.com/sinnerschrader-mobile/s2m-toolbox-ios.git', :tag => s.version.to_s }
   s.authors      = { "François Benaiteau" => "francois.benaiteau@sinnerschrader-mobile.com" }
-  s.platform     = :ios
 
+  s.ios.deployment_target = '6.0'
   s.requires_arc = true
 
   s.license	 = { :type => 'BSD-new', :file => 'LICENSE.txt' }
