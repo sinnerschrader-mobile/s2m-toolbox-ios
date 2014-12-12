@@ -112,6 +112,7 @@
             [[UIApplication sharedApplication] openURL:url];
         }else{
             if (![self.knownCodes containsObject:scanned]) {
+                // REVIEW: how to custom "OK"  localized strings or property
                 [[[UIAlertView alloc] initWithTitle:scanned message:self.noValidURLText delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
             }
             //do not show alert for this code again
@@ -244,6 +245,7 @@
 
 -(void)viewWillLayoutSubviews
 {
+    // REVIEW: Call super?
     self.previewLayer.frame = self.view.bounds;
 }
 

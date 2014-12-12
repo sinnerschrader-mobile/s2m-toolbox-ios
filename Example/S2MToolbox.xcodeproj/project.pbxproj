@@ -107,6 +107,24 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
+		0180AF941A3B1A70008204EA /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CA4363E71A3AF960000CD51C /* S2MViewController.h */,
+				CA4363E81A3AF960000CD51C /* S2MViewController.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		0180AF951A3B1A7D008204EA /* ShopFinder */ = {
+			isa = PBXGroup;
+			children = (
+				CA4363DC1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.h */,
+				CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */,
+			);
+			name = ShopFinder;
+			sourceTree = "<group>";
+		};
 		01C12E8419FE5C64004B7999 = {
 			isa = PBXGroup;
 			children = (
@@ -197,10 +215,8 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				CA4363E71A3AF960000CD51C /* S2MViewController.h */,
-				CA4363E81A3AF960000CD51C /* S2MViewController.m */,
-				CA4363DC1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.h */,
-				CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */,
+				0180AF941A3B1A70008204EA /* Core */,
+				0180AF951A3B1A7D008204EA /* ShopFinder */,
 			);
 			path = Example;
 			sourceTree = "<group>";

@@ -7,9 +7,12 @@
 //
 
 #import "S2MShopFinderController.h"
+
+#import "S2MCalloutAnnotation.h"
+
 static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
 static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
-static const CGFloat locateButtonWidth = 44.0f;
+static const CGFloat locateButtonWidth = 44.0f;// REVIEW: constant naming
 
 @interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIToolbarDelegate>
 
@@ -722,6 +725,7 @@ static const CGFloat locateButtonWidth = 44.0f;
     self.searchMode = S2MShopFinderSearchModeUserLocation;
     self.textForNoResults = @"No results found. Customize text in subclass or property.";
     self.locateButtonImage = [UIImage imageNamed:@"icn_location_active"];
+    // REVIEW: include assets in pod
 }
 
 - (void)viewDidLoad
