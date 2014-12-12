@@ -10,8 +10,8 @@
 
 #import "S2MCalloutAnnotation.h"
 
-static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
-static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
+static NSString* const kAnnotIdentifier = @"kAnnotIdentifier";
+static NSString* const kCompleteIdentifier = @"kCompleteIdentifier";
 static const CGFloat kWidthLocateButton = 44.0f;
 
 @interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIToolbarDelegate>
