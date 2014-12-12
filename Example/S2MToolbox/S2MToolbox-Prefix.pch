@@ -1,0 +1,24 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    // Core
+    #import <S2MToolbox/UIView+S2MAdditions.h>
+    #import <S2MToolbox/UIView+S2MAutolayout.h>
+    #import <S2MToolbox/UIBarButtonItem+S2MAdditions.h>
+    #import <NSNotification+S2MKeyboard.h>
+    #import <NSString+S2MMD5.h>
+    #import <NSString+S2MRegExValidation.h>
+    #import <S2MToolbox/S2MQRViewController.h>
+#endif

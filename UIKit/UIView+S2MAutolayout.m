@@ -1,6 +1,6 @@
 //
 //  UIView+S2MAutolayout.m
-//
+//  S2MToolbox
 //
 //  Created by François Benaiteau on 5/28/13.
 //  Copyright (c) 2013 SinnerSchrader Mobile. All rights reserved.

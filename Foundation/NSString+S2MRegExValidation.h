@@ -1,8 +1,10 @@
 //
 //  NSString+S2MRegExValidation.h
+//  S2MToolbox
 //
 //  Created by MetaJSONParser.
 //  Copyright (c) 2013 SinnerSchrader Mobile. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 

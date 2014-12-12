@@ -1,11 +1,13 @@
 //
 //  NSString+S2MMD5.m
+//  S2MToolbox
 //
-
+//
+//  Copyright (c) 2012 SinnerSchrader Mobile. All rights reserved.
+//
 
 #import "NSString+S2MMD5.h"
 #import <CommonCrypto/CommonDigest.h>
-
 
 @implementation NSString (MD5)
 
@@ -18,7 +20,7 @@
     unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
     
     // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(ptr, strlen(ptr), md5Buffer);
+    CC_MD5(ptr, (unsigned int)strlen(ptr), md5Buffer);
     
     // Convert MD5 value in the buffer to NSString of hex values
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
