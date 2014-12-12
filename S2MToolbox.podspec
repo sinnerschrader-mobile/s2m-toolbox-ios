@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "S2MToolbox"
-  s.version      = "0.0.9"
+  s.version      = "0.1.0"
   s.summary      = "iOS Categories."
   s.homepage     = "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios"
 
@@ -8,14 +8,19 @@ Pod::Spec.new do |s|
   s.authors      = { "François Benaiteau" => "francois.benaiteau@sinnerschrader-mobile.com" }
 
   s.ios.deployment_target = '6.0'
-  s.requires_arc = true
-
+  s.requires_arc = true 
   s.license	 = { :type => 'BSD-new', :file => 'LICENSE.txt' }
 
-  s.subspec 'Core' do |core|
-    core.source_files = 'Foundation/*.{h,m}', 'UIKit/*.{h,m}'
+  s.default_subspecs = 'Foundation', 'UIKit'  
+
+  s.subspec 'Foundation' do |f|
+    f.source_files = 'Foundation/*.{h,m}'
   end
 
+  s.subspec 'UIKit' do |ui|
+    ui.source_files = 'UIKit/*.{h,m}'
+  end
+  
   s.subspec 'Kiwi' do |kiwi|
     kiwi.dependency 'Kiwi', '~>2.3.0'
     kiwi.frameworks = 'XCTest'
@@ -26,7 +31,7 @@ Pod::Spec.new do |s|
     ut.source_files  = 'QRCode/*.{h,m}'
   end
   
-   s.subspec 'ShopFinder' do |ut|
+  s.subspec 'ShopFinder' do |ut|
     ut.source_files  = 'ShopFinder/*.{h,m}'
   end
 end
