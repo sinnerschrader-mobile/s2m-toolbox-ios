@@ -99,7 +99,8 @@
 - (void)animateWithFractionDragged:(CGFloat)fractionDragged
 {
     if ([self.loadingView conformsToProtocol:@protocol(S2MControlLoadingView)]) {
-        [self.loadingView performSelector:@selector(animateWithFractionDragged:) withObject:@(fractionDragged)];
+        id<S2MControlLoadingView> controlLoadingView = (id<S2MControlLoadingView>)self.loadingView;
+        [controlLoadingView animateWithFractionDragged:fractionDragged];
     }else if([self.loadingView isKindOfClass:[UIImageView class]]){
         self.loadingView.alpha = 1;
         self.loadingView.transform = CGAffineTransformMakeRotation(2*M_PI * MAX(0.0, fractionDragged));

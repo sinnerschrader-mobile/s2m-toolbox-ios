@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
+		0180AF981A3B2DE4008204EA /* S2MTextLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180AF971A3B2DE4008204EA /* S2MTextLoadingView.m */; };
 		01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
 		01C12E9319FE5C65004B7999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9219FE5C65004B7999 /* CoreGraphics.framework */; };
 		01C12E9519FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
 		0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MRegExValidationSpec.m; sourceTree = "<group>"; };
+		0180AF961A3B2DE4008204EA /* S2MTextLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MTextLoadingView.h; sourceTree = "<group>"; };
+		0180AF971A3B2DE4008204EA /* S2MTextLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MTextLoadingView.m; sourceTree = "<group>"; };
 		01C12E8D19FE5C65004B7999 /* S2MToolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S2MToolbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C12E9019FE5C65004B7999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01C12E9219FE5C65004B7999 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -224,6 +227,8 @@
 				01F061A71A3A0E54000EE282 /* Supporting Files */,
 				01F061CB1A3A0FEA000EE282 /* S2MCollectionViewController.h */,
 				01F061CC1A3A0FEA000EE282 /* S2MCollectionViewController.m */,
+				0180AF961A3B2DE4008204EA /* S2MTextLoadingView.h */,
+				0180AF971A3B2DE4008204EA /* S2MTextLoadingView.m */,
 			);
 			path = RefreshControl;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				01F061AD1A3A0E54000EE282 /* AppDelegate.m in Sources */,
 				01F061CD1A3A0FEA000EE282 /* S2MCollectionViewController.m in Sources */,
 				01F061AA1A3A0E54000EE282 /* main.m in Sources */,
+				0180AF981A3B2DE4008204EA /* S2MTextLoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

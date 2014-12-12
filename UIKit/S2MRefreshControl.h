@@ -12,7 +12,7 @@
 
 - (void)startAnimating;
 - (void)stopAnimating;
-- (void)applyFractionDragged:(CGFloat)fractionDragged;
+- (void)animateWithFractionDragged:(CGFloat)fractionDragged;
 @end
 /**
  *  Custom Refresh Control that can be added on a UIScrollview based class. i.e. UICollectionView

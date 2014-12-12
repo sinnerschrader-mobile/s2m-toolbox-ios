@@ -9,9 +9,12 @@
 #import "S2MCollectionViewController.h"
 
 #import <S2MToolbox/S2MRefreshControl.h>
+#import "S2MTextLoadingView.h"
 
 @interface S2MCollectionViewController ()
 @property(nonatomic, strong)S2MRefreshControl* refreshControl;
+@property(nonatomic, assign)BOOL customRefreshControl;
+
 @end
 
 @implementation S2MCollectionViewController
@@ -23,18 +26,41 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    UIImage* image = [UIImage imageNamed:@"loading_indicator"];
-    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-    self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:imageView];
-    [self.refreshControl addTarget:self action:@selector(pullToRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.collectionView addSubview:self.refreshControl];
+    
+    self.customRefreshControl = YES;
+
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Toggle" style:UIBarButtonItemStylePlain target:self action:@selector(togglePullToRefresh:)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+//    [self.refreshControl beginRefreshing];
 }
 
 - (void)pullToRefresh:(id)sender
 {
+//    return;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.refreshControl endRefreshing];
     });
+}
+
+- (void)togglePullToRefresh:(id)sender
+{
+    self.customRefreshControl = !self.customRefreshControl;
+}
+
+- (void)setCustomRefreshControl:(BOOL)customRefreshControl
+{
+    _customRefreshControl = customRefreshControl;
+    if (customRefreshControl) {
+        S2MTextLoadingView* loadingView = [[S2MTextLoadingView alloc] init];
+        self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:loadingView];
+    }else{
+        UIImage* image = [UIImage imageNamed:@"loading_indicator"];
+        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+        self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:imageView];
+    }
+    [self.refreshControl addTarget:self action:@selector(pullToRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
 }
 
 #pragma mark <UICollectionViewDataSource>
