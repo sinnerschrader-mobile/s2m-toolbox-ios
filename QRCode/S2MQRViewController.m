@@ -1,15 +1,15 @@
 //
-//  ViewController.m
-//  S2MQRCodeReader
+//  S2MQRViewController.m
+//  S2MToolbox
 //
 //  Created by Joern Ehmann on 03/11/14.
 //  Copyright (c) 2014 SinnerSchrader Mobile. All rights reserved.
 //
 
-#import "S2MQRController.h"
+#import "S2MQRViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface S2MQRController () <AVCaptureMetadataOutputObjectsDelegate>
+@interface S2MQRViewController () <AVCaptureMetadataOutputObjectsDelegate>
 @property (nonatomic, strong) AVCaptureDevice *device;
 @property (nonatomic, strong) AVCaptureDeviceInput *deviceInput;
 @property (nonatomic, strong) AVCaptureMetadataOutput *metadataOutput;
@@ -21,11 +21,9 @@
 
 @property (nonatomic, strong) NSMutableSet *knownCodes;
 
-//private lazy var previewLayer: AVCaptureVideoPreviewLayer = { return AVCaptureVideoPreviewLayer(session: self.session) }()
-
 @end
 
-@implementation S2MQRController
+@implementation S2MQRViewController
 
 #pragma mark Authorization
 -(void)showSettingsAlert
@@ -100,24 +98,8 @@
 
 -(void)stopScanning
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.session.running) {
         [self.session stopRunning];
-    }
-}
-
-//Delegate for scanned objects
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
-{
-    for (AVMetadataObject  *current in metadataObjects) {
-        
-        if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
-            AVMetadataMachineReadableCodeObject *readable = (AVMetadataMachineReadableCodeObject*)current;
-            if (readable.type == AVMetadataObjectTypeQRCode) {
-                NSString *scannedResult = readable.stringValue;
-                [self checkForValidURL:scannedResult];
-            }
-        }
     }
 }
 
@@ -138,22 +120,29 @@
     }
     
     //call delegate
-    if (self.delegate && [self.delegate respondsToSelector:@selector(qrController:didRecognizeCode:)]) {
-        [self.delegate qrController:self didRecognizeCode:scanned];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(qrViewController:didRecognizeCode:)]) {
+        [self.delegate qrViewController:self didRecognizeCode:scanned];
+    }
+}
+
+#pragma mark AVCaptureMetadataOutputObjectsDelegate
+
+//Delegate for scanned objects
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection
+{
+    for (AVMetadataObject  *current in metadataObjects) {
+        
+        if ([current isKindOfClass:[AVMetadataMachineReadableCodeObject class]]) {
+            AVMetadataMachineReadableCodeObject *readable = (AVMetadataMachineReadableCodeObject*)current;
+            if (readable.type == AVMetadataObjectTypeQRCode) {
+                NSString *scannedResult = readable.stringValue;
+                [self checkForValidURL:scannedResult];
+            }
+        }
     }
 }
 
 #pragma mark Default Inits
-
--(void)initDefaultSettings
-{
-    self.boundingImage = nil;
-    self.openURLsAutomatically = YES;
-    self.willLeadToSettingsIfNotAuthorized = YES;
-    
-    self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
-    self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
-}
 
 -(void)initCamera
 {
@@ -162,8 +151,8 @@
     NSError *error = nil;
     self.deviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.device error:&error];
     if (error) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(qrController:didFailWithError:)]) {
-            [self.delegate qrController:self didFailWithError:error];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrViewController:didFailWithError:)]) {
+            [self.delegate qrViewController:self didFailWithError:error];
         }
     }
     self.metadataOutput = [AVCaptureMetadataOutput new];
@@ -171,10 +160,13 @@
     self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     
     [self.session addOutput:self.metadataOutput];
-    [self.session addInput:self.deviceInput];
-    
+    if ([self.session canAddInput:self.deviceInput]) {
+        [self.session addInput:self.deviceInput];
+    }
     [self.metadataOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    self.metadataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    if ([[self.metadataOutput availableMetadataObjectTypes] containsObject:AVMetadataObjectTypeQRCode]) {
+        self.metadataOutput.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    }
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     
     if(self.previewLayer.connection.supportsVideoOrientation) {
@@ -186,6 +178,7 @@
     self.previewLayer.frame = self.view.bounds;
 }
 #pragma mark UI
+
 -(void)orientationDidChange:(NSNotification *)note
 {
     AVCaptureVideoOrientation interfaceOrientation = AVCaptureVideoOrientationPortrait;
@@ -207,14 +200,17 @@
     self.previewLayer.connection.videoOrientation = interfaceOrientation;
 }
 
--(void)setBoundingImage:(UIImage *)boundingImage{
+-(void)setBoundingImage:(UIImage *)boundingImage
+{
     _boundingImage = boundingImage;
     
     if (boundingImage) {
         self.boundingImageView.image = boundingImage;
     }
 }
--(UIImageView *)boundingImageView{
+
+-(UIImageView *)boundingImageView
+{
     if (!_boundingImageView) {
         _boundingImageView = [[UIImageView alloc] init];
         _boundingImageView.contentMode = UIViewContentModeCenter;
@@ -239,8 +235,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewDidDisappear:(BOOL)animated
+{
     [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     [self stopScanning];
 }
 
@@ -260,13 +258,18 @@
 }
 
 
--(instancetype)initWithDelegate:(NSObject<S2MQRControllerDelegate>*)delegate
+-(instancetype)initWithDelegate:(id<S2MQRViewControllerDelegate>)delegate
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         self.delegate = delegate;
         self.knownCodes = [NSMutableSet set];
-        [self initDefaultSettings];
+        self.boundingImage = nil;
+        self.openURLsAutomatically = YES;
+        self.willLeadToSettingsIfNotAuthorized = YES;
+        
+        self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
+        self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
     }
     return self;
 }
