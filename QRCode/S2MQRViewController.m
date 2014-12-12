@@ -44,20 +44,40 @@
     }
 }
 
+#pragma mark Spinner
+-(UIActivityIndicatorView*)showSpinner
+{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.center = self.view.center;
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    return spinner;
+
+}
+-(void)removeSpinner:(UIActivityIndicatorView*)spinner
+{
+    [spinner stopAnimating];
+    [spinner removeFromSuperview];
+}
+
+
 -(void)checkAuthorization
 {
-    // REVIEW: show spinner
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized){
-
-        [self initCamera];
-        [self startScanning];
-
+        UIActivityIndicatorView *spinner = [self showSpinner];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self initCamera];
+            [self startScanning];
+            [self removeSpinner:spinner];
+        });
+        
         NSLog(@"%@", @"Camera access granted.");
     }
     else if(authStatus == AVAuthorizationStatusNotDetermined){
         NSLog(@"%@", @"Camera access not determined. Ask for permission.");
         
+        UIActivityIndicatorView *spinner = [self showSpinner];
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted)
          {
              if(granted)
@@ -73,6 +93,7 @@
                      [self showSettingsAlert];
                  }
              }
+             [self removeSpinner:spinner];
          }];
     }
     else if (authStatus == AVAuthorizationStatusRestricted){
@@ -94,7 +115,6 @@
 {
     if (!self.session.running) {
         [self.session startRunning];
-        // spinner
     }
 }
 
