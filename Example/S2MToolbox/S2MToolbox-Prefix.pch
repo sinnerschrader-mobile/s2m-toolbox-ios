@@ -21,4 +21,5 @@
     #import <NSString+S2MMD5.h>
     #import <NSString+S2MRegExValidation.h>
     #import <S2MToolbox/S2MQRViewController.h>
+    #import <S2MToolbox/S2MShopFinderController.h>
 #endif

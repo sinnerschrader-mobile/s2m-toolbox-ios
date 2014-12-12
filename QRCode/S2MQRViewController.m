@@ -31,7 +31,7 @@
     if (&UIApplicationOpenSettingsURLString != NULL) {
         //iOS8 only
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.title message:self.authorizationDeniedText preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:self.okButtonText style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {
                                                                   NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                                   [[UIApplication sharedApplication] openURL:appSettings];
@@ -40,23 +40,44 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //iOS 7, just show Alert
-        [[[UIAlertView alloc] initWithTitle:self.title message:self.authorizationDeniedText delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        [[[UIAlertView alloc] initWithTitle:self.title message:self.authorizationDeniedText delegate:nil cancelButtonTitle:nil otherButtonTitles:self.okButtonText, nil] show];
     }
 }
+
+#pragma mark Spinner
+-(UIActivityIndicatorView*)showSpinner
+{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    spinner.center = self.view.center;
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    return spinner;
+
+}
+-(void)removeSpinner:(UIActivityIndicatorView*)spinner
+{
+    [spinner stopAnimating];
+    [spinner removeFromSuperview];
+}
+
 
 -(void)checkAuthorization
 {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized){
-
-        [self initCamera];
-        [self startScanning];
-
+        UIActivityIndicatorView *spinner = [self showSpinner];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self initCamera];
+            [self startScanning];
+            [self removeSpinner:spinner];
+        });
+        
         NSLog(@"%@", @"Camera access granted.");
     }
     else if(authStatus == AVAuthorizationStatusNotDetermined){
         NSLog(@"%@", @"Camera access not determined. Ask for permission.");
         
+        UIActivityIndicatorView *spinner = [self showSpinner];
         [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted)
          {
              if(granted)
@@ -72,6 +93,7 @@
                      [self showSettingsAlert];
                  }
              }
+             [self removeSpinner:spinner];
          }];
     }
     else if (authStatus == AVAuthorizationStatusRestricted){
@@ -112,7 +134,7 @@
             [[UIApplication sharedApplication] openURL:url];
         }else{
             if (![self.knownCodes containsObject:scanned]) {
-                [[[UIAlertView alloc] initWithTitle:scanned message:self.noValidURLText delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                [[[UIAlertView alloc] initWithTitle:scanned message:self.noValidURLText delegate:nil cancelButtonTitle:nil otherButtonTitles:self.okButtonText, nil] show];
             }
             //do not show alert for this code again
             [self.knownCodes addObject:scanned];
@@ -244,6 +266,7 @@
 
 -(void)viewWillLayoutSubviews
 {
+    [super viewWillLayoutSubviews];
     self.previewLayer.frame = self.view.bounds;
 }
 
@@ -270,6 +293,7 @@
         
         self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
         self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
+        self.okButtonText = @"OK";
     }
     return self;
 }

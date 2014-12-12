@@ -7,9 +7,12 @@
 //
 
 #import "S2MShopFinderController.h"
-static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
-static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
-static const CGFloat locateButtonWidth = 44.0f;
+
+#import "S2MCalloutAnnotation.h"
+
+static NSString* const kAnnotIdentifier = @"kAnnotIdentifier";
+static NSString* const kCompleteIdentifier = @"kCompleteIdentifier";
+static const CGFloat kWidthLocateButton = 44.0f;
 
 @interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIToolbarDelegate>
 
@@ -307,7 +310,7 @@ static const CGFloat locateButtonWidth = 44.0f;
     [self.view sendSubviewToBack:self.resultsTableView];
     
     if(self.hidesLocateButtonWhenActive){
-        self.locateButtonWidthConstraint.constant = locateButtonWidth;
+        self.locateButtonWidthConstraint.constant = kWidthLocateButton;
         [self.toolBar setNeedsLayout];
     }
     [self.searchBar setShowsCancelButton:NO animated:YES];
@@ -651,10 +654,15 @@ static const CGFloat locateButtonWidth = 44.0f;
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator stopAnimating];
     
-    self.locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (self.locateButtonImage) {
+        self.locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.locateButton setImage:self.locateButtonImage forState:UIControlStateNormal];
+    }else{
+        self.locateButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.locateButton setTitle:@"reload" forState:UIControlStateNormal];
+    }
     self.locateButton.clipsToBounds = YES;
     [self.locateButton addTarget:self action:@selector(relocate:) forControlEvents:UIControlEventTouchUpInside];
-    [self.locateButton setImage:self.locateButtonImage forState:UIControlStateNormal];
     
     self.toolBar = [[UIToolbar alloc] init];
     [self.toolBar addSubview:self.searchBar];
@@ -699,7 +707,7 @@ static const CGFloat locateButtonWidth = 44.0f;
     [self.toolBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_locateButton]|" options:0 metrics:nil views:views]];
     
     
-    self.locateButtonWidthConstraint = [NSLayoutConstraint  constraintWithItem:self.locateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:locateButtonWidth];
+    self.locateButtonWidthConstraint = [NSLayoutConstraint  constraintWithItem:self.locateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kWidthLocateButton];
     [self.toolBar addConstraint:self.locateButtonWidthConstraint];
     
     if(self.emptyTableView){
@@ -721,7 +729,6 @@ static const CGFloat locateButtonWidth = 44.0f;
     self.showsAutocompleteSections = NO;
     self.searchMode = S2MShopFinderSearchModeUserLocation;
     self.textForNoResults = @"No results found. Customize text in subclass or property.";
-    self.locateButtonImage = [UIImage imageNamed:@"icn_location_active"];
 }
 
 - (void)viewDidLoad
