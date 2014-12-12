@@ -9,7 +9,7 @@
 #import "S2MShopFinderController.h"
 static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
 static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
-static const CGFloat locateButtonWidth = 44.0f;
+static const CGFloat kWidthLocateButton = 44.0f;
 
 @interface S2MShopFinderController ()<UISearchBarDelegate, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIToolbarDelegate>
 
@@ -307,7 +307,7 @@ static const CGFloat locateButtonWidth = 44.0f;
     [self.view sendSubviewToBack:self.resultsTableView];
     
     if(self.hidesLocateButtonWhenActive){
-        self.locateButtonWidthConstraint.constant = locateButtonWidth;
+        self.locateButtonWidthConstraint.constant = kWidthLocateButton;
         [self.toolBar setNeedsLayout];
     }
     [self.searchBar setShowsCancelButton:NO animated:YES];
@@ -704,7 +704,7 @@ static const CGFloat locateButtonWidth = 44.0f;
     [self.toolBar addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_locateButton]|" options:0 metrics:nil views:views]];
     
     
-    self.locateButtonWidthConstraint = [NSLayoutConstraint  constraintWithItem:self.locateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:locateButtonWidth];
+    self.locateButtonWidthConstraint = [NSLayoutConstraint  constraintWithItem:self.locateButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kWidthLocateButton];
     [self.toolBar addConstraint:self.locateButtonWidthConstraint];
     
     if(self.emptyTableView){
