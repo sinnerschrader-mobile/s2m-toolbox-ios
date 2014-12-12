@@ -7,6 +7,9 @@
 //
 
 #import "S2MShopFinderController.h"
+
+#import "S2MCalloutAnnotation.h"
+
 static NSString* kAnnotIdentifier = @"kAnnotIdentifier";
 static NSString* kCompleteIdentifier = @"kCompleteIdentifier";
 static const CGFloat kWidthLocateButton = 44.0f;

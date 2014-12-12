@@ -244,6 +244,7 @@
 
 -(void)viewWillLayoutSubviews
 {
+    [super viewWillLayoutSubviews];
     self.previewLayer.frame = self.view.bounds;
 }
 

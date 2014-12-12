@@ -7,8 +7,6 @@ target "S2MToolbox" do
   pod 'S2MToolbox/Core', :path => "../"
   pod 'S2MToolbox/QRCode', :path => "../"
   pod 'S2MToolbox/ShopFinder', :path => "../"
-
-
 end
 
 target "S2MToolboxTests", :exclusive => true do

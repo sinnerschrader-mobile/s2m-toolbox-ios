@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "S2MCalloutAnnotation.h"
+
 @class S2MShopFinderController;
 /**
  *  Implement this delegate to have autocomplete functionality for places search
@@ -22,9 +22,9 @@
  *  @param shopFinder S2MShopFinderController instance
  *  @param term       searchTerm that Autocomplete begins with
  *
- *  @return array of NSString if sectioned is false, esle NSArray of NSArray of NSStrings
+ *  @return array of NSString if expectSections is false, NSArray of NSStrings otherwise
  */
--(NSArray*)shopFinder:(S2MShopFinderController*)shopFinder expectSections:(BOOL)sectioned autoCompleteResultsForTerm:(NSString*)term;
+-(NSArray*)shopFinder:(S2MShopFinderController*)shopFinder expectSections:(BOOL)expectSections autoCompleteResultsForTerm:(NSString*)term;
 /**
  *  Called when selecting an autocompleted term in the autocomplete section
  *
@@ -179,7 +179,7 @@ typedef NS_ENUM(NSUInteger, S2MShopFinderSearchMode){
  */
 @property (nonatomic, assign) BOOL hidesLocateButtonWhenActive;
 /**
- *  Default is NO, define resultAnnotationActiveImage and resultAnnotationInactiveImage when set to YES
+ *  Default is NO, you should define resultAnnotationActiveImage and resultAnnotationInactiveImage when set to YES
  */
 @property (nonatomic, assign) BOOL mapUsesCustomCallouts;
 
@@ -198,7 +198,7 @@ typedef NS_ENUM(NSUInteger, S2MShopFinderSearchMode){
 @property (nonatomic, strong) UIView *emptyTableView;
 
 /**
- *  displayed in alert when no results where found for search
+ *  displayed in alertView when no results where found for search
  */
 @property (nonatomic, copy) NSString* textForNoResults;
 
