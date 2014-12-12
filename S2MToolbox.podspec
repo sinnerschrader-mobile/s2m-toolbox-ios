@@ -25,4 +25,8 @@ Pod::Spec.new do |s|
   s.subspec 'QRCode' do |ut|
     ut.source_files  = 'QRCode/*.{h,m}'
   end
+  
+   s.subspec 'ShopFinder' do |ut|
+    ut.source_files  = 'ShopFinder/*.{h,m}'
+  end
 end

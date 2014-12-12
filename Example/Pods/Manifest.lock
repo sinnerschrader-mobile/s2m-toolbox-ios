@@ -4,11 +4,13 @@ PODS:
   - S2MToolbox/Kiwi (0.0.9):
     - Kiwi (~> 2.3.0)
   - S2MToolbox/QRCode (0.0.9)
+  - S2MToolbox/ShopFinder (0.0.9)
 
 DEPENDENCIES:
   - S2MToolbox/Core (from `../`)
   - S2MToolbox/Kiwi (from `../`)
   - S2MToolbox/QRCode (from `../`)
+  - S2MToolbox/ShopFinder (from `../`)
 
 EXTERNAL SOURCES:
   S2MToolbox:
@@ -16,6 +18,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
-  S2MToolbox: 4926997975b7acdd4d3a63f015d06ed3a72d3783
+  S2MToolbox: f52aa02edd53fb746335ad49a2c1d358c6e1fd6e
 
 COCOAPODS: 0.35.0

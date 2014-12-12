@@ -18,3 +18,9 @@
 #define COCOAPODS_VERSION_MINOR_S2MToolbox_QRCode 0
 #define COCOAPODS_VERSION_PATCH_S2MToolbox_QRCode 9
 
+// S2MToolbox/ShopFinder
+#define COCOAPODS_POD_AVAILABLE_S2MToolbox_ShopFinder
+#define COCOAPODS_VERSION_MAJOR_S2MToolbox_ShopFinder 0
+#define COCOAPODS_VERSION_MINOR_S2MToolbox_ShopFinder 0
+#define COCOAPODS_VERSION_PATCH_S2MToolbox_ShopFinder 9
+

@@ -7,7 +7,6 @@
 //
 
 #import "StartViewController.h"
-#import "S2MShopFinderController.h"
 #import "S2MShopFinderSearchDelegate.h"
 #import "S2MViewController.h"
 
