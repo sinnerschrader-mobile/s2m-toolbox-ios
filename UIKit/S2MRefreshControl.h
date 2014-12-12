@@ -8,23 +8,30 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol S2MControlLoadingView <NSObject>
+
+- (void)startAnimating;
+- (void)stopAnimating;
+- (void)applyFractionDragged:(CGFloat)fractionDragged;
+@end
 /**
  *  Custom Refresh Control that can be added on a UIScrollview based class. i.e. UICollectionView
  */
 @interface S2MRefreshControl : UIControl
-@property(nonatomic, strong, readonly)UIImageView* loadingImage;
-@property(nonatomic, strong, readonly)UIActivityIndicatorView* indicatorView;
+@property(nonatomic, strong, readonly)UIView* loadingView;
 @property(nonatomic, assign)CGFloat refreshControlHeight;
 @property(nonatomic, assign)CGFloat startLoadingThreshold;
 - (void)endRefreshing;
 - (void)beginRefreshing;
 - (BOOL)isRefreshing;
+
 /**
- *  Initialize refresh control with a custom image to rotate
+ *  Initialize refresh control with a custom view to animate
  *
- *  @param image image to rotate while pulling. If nil, UIActivityIndictator is used
+ *  @param loadingView UIImageView or view conforming to S2MControlLoadingView. The view will be animated while pulling.
+ *                     In case of imageView, image will be rotated.
  *
  *  @return instance of refreshControl
  */
-- (instancetype)initWithImage:(UIImage*)image NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLoadingView:(UIView*)loadingView NS_DESIGNATED_INITIALIZER;
 @end

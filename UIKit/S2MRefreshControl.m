@@ -17,24 +17,21 @@
 @property(nonatomic, assign)BOOL isRefreshing;
 
 @property(nonatomic, assign)UIEdgeInsets scrollViewInitialInsets;
-@property(nonatomic, strong, readwrite)UIImageView* loadingImage;
-@property(nonatomic, strong, readwrite)UIActivityIndicatorView* indicatorView;
+@property(nonatomic, strong, readwrite)UIView* loadingView;
 
 @end
 
 @implementation S2MRefreshControl
 
-- (instancetype)initWithImage:(UIImage *)image
+- (instancetype)initWithLoadingView:(UIView*)loadingView
 {
     self = [super init];
     if (self) {
+        self.clipsToBounds = YES;
         self.refreshControlHeight = 40;
         self.startLoadingThreshold = self.refreshControlHeight + 25;
-        if (!image) {
-            self.indicatorView = [self s2m_addActivityIndicatorView];
-        }else{
-            self.loadingImage = [self s2m_addImage:image];
-        }
+        NSAssert(loadingView, @"loadingView cannot be nil");
+        self.loadingView = loadingView;
     }
     return self;
 }
@@ -43,17 +40,20 @@
 {
     [super layoutSubviews];
     self.frame = CGRectMake(0, 0, self.superview.bounds.size.width, self.refreshControlHeight);
-    self.center = CGPointMake(self.superview.center.x, self.superview.bounds.origin.y - self.refreshControlHeight / 2);
+    self.center = CGPointMake(self.superview.center.x, self.superview.frame.origin.y - self.refreshControlHeight / 2);
+    self.loadingView.center = CGPointMake(self.center.x, self.refreshControlHeight/ 2 );
 }
 
 - (void)didMoveToSuperview
 {
-    [self.loadingView s2m_addCenterInSuperViewConstraint];
+    [self addSubview:self.loadingView];
     if ([self.superview isKindOfClass:[UIScrollView class]]) {
         self.scrollView = (UIScrollView*)self.superview;
     }
     [self layoutIfNeeded];
 }
+
+#pragma mark - Accessors
 
 - (void)setScrollView:(UIScrollView *)scrollView
 {
@@ -70,30 +70,41 @@
 
 #pragma mark - Animation
 
-
-- (UIView*)loadingView
-{
-    return self.indicatorView ? self.indicatorView : self.loadingImage;
-}
-
 - (void)startAnimating
 {
-    if (self.indicatorView) {
-        [self.indicatorView startAnimating];
+    self.loadingView.alpha = 1.0;
+    if ([self.loadingView conformsToProtocol:@protocol(S2MControlLoadingView)]) {
+        [self.loadingView performSelector:@selector(startAnimating) withObject:nil];
+    }else if([self.loadingView isKindOfClass:[UIImageView class]]){
+        [self.loadingView s2m_removeRotationAnimation];
+        [self.loadingView s2m_rotateWithDuration:0.5 repeat:INFINITY];
     }else{
-        self.loadingImage.alpha = 1.0;
-        [self.loadingImage s2m_removeRotationAnimation];
-        [self.loadingImage s2m_rotateWithDuration:0.5 repeat:INFINITY];
+        NSAssert(false, @"Expected loadingView to conforms to S2MControlLoadingView protocol or subclass UIImageView");
     }
 }
 
 - (void)stopAnimating
 {
-    if (self.indicatorView) {
-        [self.indicatorView stopAnimating];
-    }else{
-        self.loadingImage.alpha = 0.0;
+    if ([self.loadingView conformsToProtocol:@protocol(S2MControlLoadingView)]) {
+        [self.loadingView performSelector:@selector(stopAnimating) withObject:nil];
+    }else if([self.loadingView isKindOfClass:[UIImageView class]]){
+        self.loadingView.alpha = 0.0;
         [self.loadingView s2m_removeRotationAnimation];
+    }else{
+        NSAssert(false, @"Expected loadingView to conforms to S2MControlLoadingView protocol or subclass UIImageView");
+    }
+
+}
+
+- (void)animateWithFractionDragged:(CGFloat)fractionDragged
+{
+    if ([self.loadingView conformsToProtocol:@protocol(S2MControlLoadingView)]) {
+        [self.loadingView performSelector:@selector(animateWithFractionDragged:) withObject:@(fractionDragged)];
+    }else if([self.loadingView isKindOfClass:[UIImageView class]]){
+        self.loadingView.alpha = 1;
+        self.loadingView.transform = CGAffineTransformMakeRotation(2*M_PI * MAX(0.0, fractionDragged));
+    }else{
+        NSAssert(false, @"Expected loadingView to conforms to S2MControlLoadingView protocol or subclass UIImageView");
     }
 }
 
@@ -102,10 +113,10 @@
     if (self.isRefreshing) {
         return;
     }
-
+    
     self.scrollViewInitialInsets = self.scrollView.contentInset;
     self.isRefreshing = YES;
-
+    
     self.scrollView.contentInset = UIEdgeInsetsMake(self.startLoadingThreshold, 0, 0, 0);
     self.scrollView.scrollEnabled = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -121,7 +132,7 @@
         [self stopAnimating];
         return;
     }
-
+    
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.loadingView.alpha = 0;
     } completion:^(BOOL finished) {
@@ -147,9 +158,7 @@
     CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
     if (offset <= 0.0 && !self.isRefreshing && !scrollView.isDecelerating) {
         CGFloat fractionDragged = -offset/self.startLoadingThreshold;
-        self.loadingView.alpha = 1;
-        self.loadingView.transform = CGAffineTransformMakeRotation(2*M_PI * MAX(0.0, fractionDragged));
-
+        [self animateWithFractionDragged:fractionDragged];
         if (fractionDragged >= 1.0) {
             [self beginRefreshing];
         }

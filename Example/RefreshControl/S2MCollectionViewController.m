@@ -23,8 +23,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-    self.refreshControl = [[S2MRefreshControl alloc] initWithImage:nil];
+    UIImage* image = [UIImage imageNamed:@"loading_indicator"];
+    UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
+    self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:imageView];
     [self.refreshControl addTarget:self action:@selector(pullToRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
 }
