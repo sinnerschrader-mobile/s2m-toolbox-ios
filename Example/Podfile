@@ -3,7 +3,11 @@ platform :ios, "7.0"
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-pod 'S2MToolbox/Core', :path => "../"
+target "S2MToolbox" do
+  pod 'S2MToolbox', :path => "../"
+  pod 'S2MToolbox/QRCode', :path => "../"
+  pod 'S2MToolbox/ShopFinder', :path => "../"
+end
 
 target "S2MToolboxTests", :exclusive => true do
   pod 'S2MToolbox/Kiwi', :path => "../"

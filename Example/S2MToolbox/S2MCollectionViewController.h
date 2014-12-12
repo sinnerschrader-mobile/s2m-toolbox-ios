@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface S2MCollectionViewController : UICollectionViewController
-
++(instancetype)sampleCollectionViewController;
 @end

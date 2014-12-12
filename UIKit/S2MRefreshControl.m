@@ -36,6 +36,14 @@
     return self;
 }
 
+- (void)dealloc
+{
+    // restore delegate
+    _scrollView.delegate = self.originalScrollViewDelegate;
+    self.scrollView = nil;
+    self.originalScrollViewDelegate = nil;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

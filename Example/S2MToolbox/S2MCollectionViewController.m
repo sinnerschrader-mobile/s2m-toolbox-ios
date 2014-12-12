@@ -21,6 +21,13 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
++(instancetype)sampleCollectionViewController
+{
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    S2MCollectionViewController* vc = [[self.class alloc] initWithCollectionViewLayout:flowLayout];
+    return vc;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,13 +38,10 @@ static NSString * const reuseIdentifier = @"Cell";
 
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Toggle" style:UIBarButtonItemStylePlain target:self action:@selector(togglePullToRefresh:)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
-    
-//    [self.refreshControl beginRefreshing];
 }
 
 - (void)pullToRefresh:(id)sender
 {
-//    return;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.refreshControl endRefreshing];
     });
@@ -51,6 +55,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)setCustomRefreshControl:(BOOL)customRefreshControl
 {
     _customRefreshControl = customRefreshControl;
+    if (self.refreshControl) {
+        [self.refreshControl removeFromSuperview];
+    }
     if (customRefreshControl) {
         S2MTextLoadingView* loadingView = [[S2MTextLoadingView alloc] init];
         self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:loadingView];
