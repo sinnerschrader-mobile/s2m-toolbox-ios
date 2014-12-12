@@ -31,7 +31,7 @@
     if (&UIApplicationOpenSettingsURLString != NULL) {
         //iOS8 only
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:self.title message:self.authorizationDeniedText preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:self.okButtonText style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {
                                                                   NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
                                                                   [[UIApplication sharedApplication] openURL:appSettings];
@@ -40,7 +40,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
         //iOS 7, just show Alert
-        [[[UIAlertView alloc] initWithTitle:self.title message:self.authorizationDeniedText delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        [[[UIAlertView alloc] initWithTitle:self.title message:self.authorizationDeniedText delegate:nil cancelButtonTitle:nil otherButtonTitles:self.okButtonText, nil] show];
     }
 }
 
@@ -112,7 +112,7 @@
             [[UIApplication sharedApplication] openURL:url];
         }else{
             if (![self.knownCodes containsObject:scanned]) {
-                [[[UIAlertView alloc] initWithTitle:scanned message:self.noValidURLText delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+                [[[UIAlertView alloc] initWithTitle:scanned message:self.noValidURLText delegate:nil cancelButtonTitle:nil otherButtonTitles:self.okButtonText, nil] show];
             }
             //do not show alert for this code again
             [self.knownCodes addObject:scanned];
@@ -270,6 +270,7 @@
         
         self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
         self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
+        self.okButtonText = @"OK";
     }
     return self;
 }

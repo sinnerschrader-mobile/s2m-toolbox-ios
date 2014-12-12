@@ -57,6 +57,10 @@
  *  Text displayed for no valid URL found text
  */
 @property (nonatomic, copy) NSString *noValidURLText;
+/**
+ *  Text displayed in Ok Button
+ */
+@property (nonatomic, copy) NSString *okButtonText;
 
 @end
 
