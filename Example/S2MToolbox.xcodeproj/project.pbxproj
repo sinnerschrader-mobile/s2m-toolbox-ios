@@ -24,7 +24,6 @@
 		01C12EBA19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EB819FE5C65004B7999 /* InfoPlist.strings */; };
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
 		129A5059D8FA56DE6C24CD68 /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
-		34FB7B747D3BC903C458B45A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D9AF81FC94A90E8F53FD5E9 /* libPods.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
 		CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */; };
 		CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E51A3AF921000CD51C /* StartViewController.m */; };
@@ -93,7 +92,6 @@
 				01C12E9319FE5C65004B7999 /* CoreGraphics.framework in Frameworks */,
 				01C12E9519FE5C65004B7999 /* UIKit.framework in Frameworks */,
 				01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */,
-				34FB7B747D3BC903C458B45A /* libPods.a in Frameworks */,
 				129A5059D8FA56DE6C24CD68 /* libPods-S2MToolbox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
