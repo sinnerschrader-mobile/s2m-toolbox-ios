@@ -1,14 +1,12 @@
 //
 //  NSBundle+S2MAdditions.h
-//  MoreMobile
+//  S2MToolbox
 //
 //  Created by Andreas Buff on 28/05/14.
 //  Copyright (c) 2014 SinnerSchrader Mobile. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
-#import "MMMautkickRulesView.h"
 
 @interface NSBundle (S2MAdditions)
 
