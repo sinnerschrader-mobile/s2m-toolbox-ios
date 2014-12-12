@@ -651,10 +651,15 @@ static const CGFloat locateButtonWidth = 44.0f;
     self.activityIndicator.hidesWhenStopped = YES;
     [self.activityIndicator stopAnimating];
     
-    self.locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (self.locateButtonImage) {
+        self.locateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.locateButton setImage:self.locateButtonImage forState:UIControlStateNormal];
+    }else{
+        self.locateButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.locateButton setTitle:@"reload" forState:UIControlStateNormal];
+    }
     self.locateButton.clipsToBounds = YES;
     [self.locateButton addTarget:self action:@selector(relocate:) forControlEvents:UIControlEventTouchUpInside];
-    [self.locateButton setImage:self.locateButtonImage forState:UIControlStateNormal];
     
     self.toolBar = [[UIToolbar alloc] init];
     [self.toolBar addSubview:self.searchBar];
@@ -721,7 +726,6 @@ static const CGFloat locateButtonWidth = 44.0f;
     self.showsAutocompleteSections = NO;
     self.searchMode = S2MShopFinderSearchModeUserLocation;
     self.textForNoResults = @"No results found. Customize text in subclass or property.";
-    self.locateButtonImage = [UIImage imageNamed:@"icn_location_active"];
 }
 
 - (void)viewDidLoad

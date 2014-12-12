@@ -49,6 +49,7 @@ static NSString *cellId = @"cellId2";
         S2MShopFinderController *vc = [[S2MShopFinderController alloc] init];
         self.searchDelegate = [S2MShopFinderSearchDelegate new];
         vc.searchDelegate = self.searchDelegate;
+        vc.locateButtonImage = [UIImage imageNamed:@"icn_location_active"];
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if(indexPath.row == 2){
