@@ -46,6 +46,7 @@
 
 -(void)checkAuthorization
 {
+    // REVIEW: show spinner
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized){
 
@@ -93,6 +94,7 @@
 {
     if (!self.session.running) {
         [self.session startRunning];
+        // spinner
     }
 }
 
