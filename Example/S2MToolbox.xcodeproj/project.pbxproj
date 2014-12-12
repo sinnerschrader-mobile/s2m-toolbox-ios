@@ -15,7 +15,6 @@
 		01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12E9919FE5C65004B7999 /* InfoPlist.strings */; };
 		01C12E9D19FE5C65004B7999 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C12E9C19FE5C65004B7999 /* main.m */; };
 		01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C12EA019FE5C65004B7999 /* S2MAppDelegate.m */; };
-		01C12EA719FE5C65004B7999 /* S2MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C12EA619FE5C65004B7999 /* S2MViewController.m */; };
 		01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EA819FE5C65004B7999 /* Images.xcassets */; };
 		01C12EB019FE5C65004B7999 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12EAF19FE5C65004B7999 /* XCTest.framework */; };
 		01C12EB119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
@@ -24,6 +23,11 @@
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
 		22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
+		CA4363E01A3AF8EF000CD51C /* S2MCalloutAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363D91A3AF8EF000CD51C /* S2MCalloutAnnotation.m */; };
+		CA4363E11A3AF8EF000CD51C /* S2MShopFinderController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DB1A3AF8EF000CD51C /* S2MShopFinderController.m */; };
+		CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */; };
+		CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E51A3AF921000CD51C /* StartViewController.m */; };
+		CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E81A3AF960000CD51C /* S2MViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,8 +53,6 @@
 		01C12E9E19FE5C65004B7999 /* S2MToolbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "S2MToolbox-Prefix.pch"; sourceTree = "<group>"; };
 		01C12E9F19FE5C65004B7999 /* S2MAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = S2MAppDelegate.h; sourceTree = "<group>"; };
 		01C12EA019FE5C65004B7999 /* S2MAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = S2MAppDelegate.m; sourceTree = "<group>"; };
-		01C12EA519FE5C65004B7999 /* S2MViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = S2MViewController.h; sourceTree = "<group>"; };
-		01C12EA619FE5C65004B7999 /* S2MViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = S2MViewController.m; sourceTree = "<group>"; };
 		01C12EA819FE5C65004B7999 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01C12EAE19FE5C65004B7999 /* S2MToolboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = S2MToolboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C12EAF19FE5C65004B7999 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -62,6 +64,16 @@
 		B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.release.xcconfig"; sourceTree = "<group>"; };
 		B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.release.xcconfig"; sourceTree = "<group>"; };
 		BE33BA9C04E7C88AFCB3C73A /* Pods-S2MToolbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.debug.xcconfig"; sourceTree = "<group>"; };
+		CA4363D81A3AF8EF000CD51C /* S2MCalloutAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MCalloutAnnotation.h; sourceTree = "<group>"; };
+		CA4363D91A3AF8EF000CD51C /* S2MCalloutAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MCalloutAnnotation.m; sourceTree = "<group>"; };
+		CA4363DA1A3AF8EF000CD51C /* S2MShopFinderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MShopFinderController.h; sourceTree = "<group>"; };
+		CA4363DB1A3AF8EF000CD51C /* S2MShopFinderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MShopFinderController.m; sourceTree = "<group>"; };
+		CA4363DC1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MShopFinderSearchDelegate.h; sourceTree = "<group>"; };
+		CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MShopFinderSearchDelegate.m; sourceTree = "<group>"; };
+		CA4363E41A3AF921000CD51C /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		CA4363E51A3AF921000CD51C /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		CA4363E71A3AF960000CD51C /* S2MViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MViewController.h; sourceTree = "<group>"; };
+		CA4363E81A3AF960000CD51C /* S2MViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MViewController.m; sourceTree = "<group>"; };
 		D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolboxTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -137,10 +149,11 @@
 		01C12E9619FE5C65004B7999 /* S2MToolbox */ = {
 			isa = PBXGroup;
 			children = (
+				CA4363D71A3AF8EF000CD51C /* Example */,
 				01C12E9F19FE5C65004B7999 /* S2MAppDelegate.h */,
 				01C12EA019FE5C65004B7999 /* S2MAppDelegate.m */,
-				01C12EA519FE5C65004B7999 /* S2MViewController.h */,
-				01C12EA619FE5C65004B7999 /* S2MViewController.m */,
+				CA4363E41A3AF921000CD51C /* StartViewController.h */,
+				CA4363E51A3AF921000CD51C /* StartViewController.m */,
 				01C12EA819FE5C65004B7999 /* Images.xcassets */,
 				01C12E9719FE5C65004B7999 /* Supporting Files */,
 			);
@@ -185,6 +198,21 @@
 				B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA4363D71A3AF8EF000CD51C /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				CA4363E71A3AF960000CD51C /* S2MViewController.h */,
+				CA4363E81A3AF960000CD51C /* S2MViewController.m */,
+				CA4363D81A3AF8EF000CD51C /* S2MCalloutAnnotation.h */,
+				CA4363D91A3AF8EF000CD51C /* S2MCalloutAnnotation.m */,
+				CA4363DA1A3AF8EF000CD51C /* S2MShopFinderController.h */,
+				CA4363DB1A3AF8EF000CD51C /* S2MShopFinderController.m */,
+				CA4363DC1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.h */,
+				CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */,
+			);
+			path = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,8 +380,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
+				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
-				01C12EA719FE5C65004B7999 /* S2MViewController.m in Sources */,
+				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
+				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
+				CA4363E01A3AF8EF000CD51C /* S2MCalloutAnnotation.m in Sources */,
+				CA4363E11A3AF8EF000CD51C /* S2MShopFinderController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

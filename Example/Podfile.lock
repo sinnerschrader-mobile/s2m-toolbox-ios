@@ -3,10 +3,12 @@ PODS:
   - S2MToolbox/Core (0.0.9)
   - S2MToolbox/Kiwi (0.0.9):
     - Kiwi (~> 2.3.0)
+  - S2MToolbox/QRCode (0.0.9)
 
 DEPENDENCIES:
   - S2MToolbox/Core (from `../`)
   - S2MToolbox/Kiwi (from `../`)
+  - S2MToolbox/QRCode (from `../`)
 
 EXTERNAL SOURCES:
   S2MToolbox:

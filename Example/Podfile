@@ -5,6 +5,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target "S2MToolbox" do
   pod 'S2MToolbox/Core', :path => "../"
+  pod 'S2MToolbox/QRCode', :path => "../"
+
 end
 
 target "S2MToolboxTests", :exclusive => true do
