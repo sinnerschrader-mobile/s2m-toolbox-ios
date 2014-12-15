@@ -94,7 +94,8 @@ static NSString *cellId = @"cellId2";
 {
     if ([toVC isKindOfClass:[S2MFoldViewController class]] || [fromVC isKindOfClass:[S2MFoldViewController class]]) {
         S2MFoldTransition* transition = [S2MFoldViewController transitionAnimator];
-        transition.foldAnimator.unfolding = [toVC isKindOfClass:[S2MFoldViewController class]];
+        transition.foldAnimator.unfolding = operation == UINavigationControllerOperationPush;
+        transition.foldAnimator.direction = operation == UINavigationControllerOperationPush ? S2MFoldAnimatorDirectionRightToLeft : S2MFoldAnimatorDirectionLeftToRight;
         return transition;
     }
     return nil;
