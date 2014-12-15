@@ -50,7 +50,7 @@
 		01C12E9C19FE5C65004B7999 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		01C12E9E19FE5C65004B7999 /* S2MToolbox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "S2MToolbox-Prefix.pch"; sourceTree = "<group>"; };
 		01C12E9F19FE5C65004B7999 /* S2MAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = S2MAppDelegate.h; sourceTree = "<group>"; };
-		01C12EA019FE5C65004B7999 /* S2MAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = S2MAppDelegate.m; sourceTree = "<group>"; };
+		01C12EA019FE5C65004B7999 /* S2MAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = S2MAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		01C12EA819FE5C65004B7999 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01C12EAE19FE5C65004B7999 /* S2MToolboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = S2MToolboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C12EAF19FE5C65004B7999 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
