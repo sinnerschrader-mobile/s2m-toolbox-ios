@@ -10,10 +10,11 @@
 #import "S2MShopFinderSearchDelegate.h"
 #import "S2MViewController.h"
 
+#import "S2MFoldViewController.h"
 
 static NSString *cellId = @"cellId2";
 
-@interface StartViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface StartViewController ()<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) S2MShopFinderSearchDelegate *searchDelegate;
 
@@ -24,7 +25,7 @@ static NSString *cellId = @"cellId2";
 
 #pragma mark TableView Datatsource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
@@ -34,7 +35,11 @@ static NSString *cellId = @"cellId2";
         cell.textLabel.text = @"ShopFinder";
     }else if (indexPath.row == 2){
         cell.textLabel.text = @"AutoLayout Sample";
+    }else if (indexPath.row == 3){
+        cell.textLabel.text = @"S2M Fold Animator";
     }
+
+
     return cell;
 }
 
@@ -56,7 +61,12 @@ static NSString *cellId = @"cellId2";
     else if(indexPath.row == 2){
         S2MViewController *vc = [[S2MViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == 3){
+        S2MFoldViewController* vc = [[S2MFoldViewController alloc] init];
+        self.navigationController.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
     }
+
 }
 
 
@@ -75,4 +85,18 @@ static NSString *cellId = @"cellId2";
 }
 
 
+#pragma mark - UINavigationControllerDelegate
+
+- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                fromViewController:(UIViewController *)fromVC
+                                                  toViewController:(UIViewController *)toVC
+{
+    if ([toVC isKindOfClass:[S2MFoldViewController class]] || [fromVC isKindOfClass:[S2MFoldViewController class]]) {
+        S2MFoldTransition* transition = [S2MFoldViewController transitionAnimator];
+        transition.foldAnimator.unfolding = [toVC isKindOfClass:[S2MFoldViewController class]];
+        return transition;
+    }
+    return nil;
+}
 @end

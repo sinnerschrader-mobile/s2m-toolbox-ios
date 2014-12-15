@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016530221A3EE962002A95E6 /* S2MFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530211A3EE962002A95E6 /* S2MFoldViewController.m */; };
+		016530251A3EE9E3002A95E6 /* S2MFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */; };
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
 		01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
@@ -39,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016530201A3EE962002A95E6 /* S2MFoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldViewController.h; sourceTree = "<group>"; };
+		016530211A3EE962002A95E6 /* S2MFoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldViewController.m; sourceTree = "<group>"; };
+		016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldTransition.h; sourceTree = "<group>"; };
+		016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldTransition.m; sourceTree = "<group>"; };
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
 		0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MRegExValidationSpec.m; sourceTree = "<group>"; };
 		01C12E8D19FE5C65004B7999 /* S2MToolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S2MToolbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +103,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0165301F1A3EE91F002A95E6 /* FoldAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				016530201A3EE962002A95E6 /* S2MFoldViewController.h */,
+				016530211A3EE962002A95E6 /* S2MFoldViewController.m */,
+				016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */,
+				016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */,
+			);
+			name = FoldAnimator;
+			sourceTree = "<group>";
+		};
 		0169E2951A39DE930036D375 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +232,7 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				0165301F1A3EE91F002A95E6 /* FoldAnimator */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
 			);
@@ -385,11 +403,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016530221A3EE962002A95E6 /* S2MFoldViewController.m in Sources */,
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
+				016530251A3EE9E3002A95E6 /* S2MFoldTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
