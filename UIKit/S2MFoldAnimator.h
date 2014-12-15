@@ -9,13 +9,13 @@
 
 typedef NS_ENUM(NSUInteger, S2MFoldAnimatorDirection) {
     S2MFoldAnimatorDirectionRightToLeft,
-    S2MFoldAnimatorDirectionLeftToRight, // TODO: test it
+    S2MFoldAnimatorDirectionLeftToRight,
     S2MFoldAnimatorDirectionTopToBottom,
-    S2MFoldAnimatorDirectionBottomToTop // TODO: implement
+    S2MFoldAnimatorDirectionBottomToTop
 };
 
 /**
- * Animates two views using a paper-fold style transition.
+ * Animates a view with a paper-fold effect.
  *
  */
 @interface S2MFoldAnimator : NSObject
@@ -28,15 +28,13 @@ typedef NS_ENUM(NSUInteger, S2MFoldAnimatorDirection) {
  *  Fold/Unfold toView. If unfolding is set, unfolding animation is performed.
  *
  *  @param duration      duration of animation
- *  @param initialOffset position offset of toView related to the bounds of container. Offset applied on direction of animator
- *                       Used if animation should start elsewhere than bounds of container.
- *  @param toView        view to be fold. The view will be added to containerView if no superview
- *  @param containerView view containing animation
- *  @param completion    animation completion block
+ *  @param view          view to be fold. The view will be added to containerView if no superview.
+ *                       The view's frame should be set to be the initial position
+ *  @param containerView view containing the animation and the view to be animated
+ *  @param completion    A block object to be executed when the animation sequence ends. This block has no return value and takes a single Boolean argument that indicates whether or not the animations actually finished before the completion handler was called. If the duration of the animation is 0, this block is performed at the beginning of the next run loop cycle. This parameter may be NULL.
  */
 - (void)animateWithDuration:(NSTimeInterval)duration
-              initialOffset:(CGFloat)initialOffset
-                     toView:(UIView *)toView
+                     view:(UIView *)view
               containerView:(UIView*)containerView
                  completion:(void (^)(BOOL finished))completion;
 @end

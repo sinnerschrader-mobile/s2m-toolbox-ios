@@ -30,7 +30,7 @@
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext
 {
-    return 2.0;
+    return 0.3;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext
@@ -48,7 +48,6 @@
     if (slidedView.superview == nil) {
         [containerView addSubview:slidedView];
     }
-
 
     if (self.foldAnimator.unfolding) {
         // safety.
@@ -69,8 +68,7 @@
                          }
                          
                          [self.foldAnimator animateWithDuration:[self transitionDuration:transitionContext]
-                                                  initialOffset:0
-                                                         toView:foldingView
+                                                         view:foldingView
                                                   containerView:containerView
                                                      completion:NULL];
                          

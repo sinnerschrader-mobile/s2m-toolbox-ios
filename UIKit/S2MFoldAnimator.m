@@ -26,160 +26,106 @@
 
 
 - (void)animateWithDuration:(NSTimeInterval)duration
-                          initialOffset:(CGFloat)initialOffset
-                                 toView:(UIView *)toView
-                          containerView:(UIView*)containerView
-                             completion:(void (^)(BOOL finished))completion
+                       view:(UIView *)view
+              containerView:(UIView*)containerView
+                 completion:(void (^)(BOOL finished))completion
 {
-    if (self.direction == S2MFoldAnimatorDirectionTopToBottom ||
-        self.direction == S2MFoldAnimatorDirectionBottomToTop) {
-        [self animateVerticallyWithDuration:duration
-                              initialOffset:initialOffset
-                                     toView:toView
-                              containerView:containerView
-                                 completion:completion];
-    }else{
-        [self animateHorizontallyWithDuration:duration
-                              initialOffset:initialOffset
-                                     toView:toView
-                              containerView:containerView
-                                 completion:completion];
-    }
-}
-
-#pragma mark - Private
-         
-- (void)animateHorizontallyWithDuration:(NSTimeInterval)duration
-                          initialOffset:(CGFloat)initialOffset
-                                 toView:(UIView *)toView
-                          containerView:(UIView*)containerView
-                             completion:(void (^)(BOOL finished))completion
-{
-    __block CGSize toViewSize;
-    __block CGPoint initialPosition;
-    __block CGFloat toViewFoldWidth;
-    __block NSMutableArray* toViewFolds;
-    __block CATransform3D transform;
+    __block CGPoint viewOrigin;
+    __block CGSize viewSize;
+    __block CGFloat viewFoldMeasure;
+    __block NSMutableArray* viewFolds;
     [UIView performWithoutAnimation:^{
-        if (self.unfolding) {
-            // move offscreen
-            [self moveView:toView offScreenSize:containerView.frame.size];
+        if (view.superview == nil) {
+            [containerView addSubview:view];
         }
-        if (toView.superview == nil) {
-            [containerView addSubview:toView];
-        }
-        toViewSize = toView.frame.size;
-        
+        viewSize = view.bounds.size;
+        viewOrigin = view.frame.origin;
         // Add a perspective transform
-        transform = CATransform3DIdentity;
+        CATransform3D transform = CATransform3DIdentity;
         transform.m34 = -0.005;
         containerView.layer.sublayerTransform = transform;
         
-        toViewFoldWidth = toViewSize.width * 0.5 / (CGFloat)self.folds;
+        viewFoldMeasure = [self foldMeasureForView:view];
         
         // arrays that hold the snapshot views
-        toViewFolds = [NSMutableArray new];
-        
-        // create the folds for the form- and to- views
+        viewFolds = [NSMutableArray new];
         for (NSUInteger i = 0 ; i < self.folds; i++){
-            CGFloat toViewOffset = (CGFloat)i * toViewFoldWidth * 2;
+            CGFloat viewOffset = (CGFloat)i * viewFoldMeasure * 2;
             
-            if (self.unfolding) {
-                initialPosition = CGPointMake((self.direction != S2MFoldAnimatorDirectionRightToLeft) ? initialOffset : containerView.bounds.size.width - initialOffset, toViewSize.height/2);
-                // the left and right side of the fold for the to- view, with a 90-degree transform and 1.0 alpha
-                // on the shadow, with each view positioned at the very edge of the screen
-                UIView *leftToViewFold = [self createSnapshotFromView:toView afterUpdates:YES location:toViewOffset left:YES];
-                leftToViewFold.layer.position = initialPosition;
-                leftToViewFold.layer.transform = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 0.0);
-                [toViewFolds addObject:leftToViewFold];
-                
-                UIView *rightToViewFold = [self createSnapshotFromView:toView afterUpdates:YES location:toViewOffset + toViewFoldWidth left:NO];
-                rightToViewFold.layer.position = initialPosition;
-                rightToViewFold.layer.transform = CATransform3DMakeRotation(-M_PI_2, 0.0, 1.0, 0.0);
-                [toViewFolds addObject:rightToViewFold];
-            }else{
-                // the left and right side of the fold for the from- view, with identity transform and 0.0 alpha
-                // on the shadow, with each view at its initial position
-                UIView *leftFromViewFold = [self createSnapshotFromView:toView afterUpdates:NO location:toViewOffset left:YES];
-                leftFromViewFold.layer.position = CGPointMake(initialOffset + toViewOffset, toViewSize.height/2);
-                [toViewFolds addObject:leftFromViewFold];
-                [leftFromViewFold.subviews[1] setAlpha:0.0];
-                
-                UIView *rightFromViewFold = [self createSnapshotFromView:toView afterUpdates:NO location:toViewOffset + toViewFoldWidth left:NO];
-                rightFromViewFold.layer.position = CGPointMake(initialOffset + toViewOffset + toViewFoldWidth * 2, toViewSize.height/2);
-                [toViewFolds addObject:rightFromViewFold];
-                [rightFromViewFold.subviews[1] setAlpha:0.0];
+            UIView *leadingViewFold = [self createSnapshotFromView:view
+                                                      afterUpdates:self.unfolding
+                                                          location:viewOffset
+                                                           leading:YES];
+            leadingViewFold.layer.position = [self initialPositionInView:view
+                                                                 leading:YES
+                                                              foldOffset:viewOffset
+                                                             foldMeasure:viewFoldMeasure];
+            [self applyTransformForView:leadingViewFold leading:YES initial:YES];
+            [viewFolds addObject:leadingViewFold];
+            if (!self.unfolding) {
+                [leadingViewFold.subviews[1] setAlpha:0.0];
+            }
+            
+            UIView *trailingViewFold = [self createSnapshotFromView:view
+                                                       afterUpdates:self.unfolding
+                                                           location:viewOffset + viewFoldMeasure
+                                                            leading:NO];
+            trailingViewFold.layer.position = [self initialPositionInView:view
+                                                                  leading:NO
+                                                               foldOffset:viewOffset
+                                                              foldMeasure:viewFoldMeasure];
+            [self applyTransformForView:trailingViewFold leading:NO initial:YES];
+            [viewFolds addObject:trailingViewFold];
+            if (!self.unfolding) {
+                [trailingViewFold.subviews[1] setAlpha:0.0];
             }
         }
-        toView.hidden = YES;
+        view.hidden = YES;
         
     }];
     
-    // create the animation
-    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionLayoutSubviews
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction|UIViewAnimationOptionLayoutSubviews| UIViewAnimationOptionBeginFromCurrentState
                      animations:^{
                          // set the final state for each fold
-                         for (NSUInteger i=0; i< self.folds; i++){
-                             if (self.unfolding) {
-                                 CGFloat toViewOffset = (CGFloat)i * toViewFoldWidth * 2;
-                                 
-                                 // the left and right side of the fold for the to- view, with identity transform and 0.0 alpha
-                                 // on the shadow, with each view at its final position
-                                 UIView* leftToView = toViewFolds[i*2];
-                                 if (self.direction == S2MFoldAnimatorDirectionRightToLeft) {
-                                     leftToView.layer.position = CGPointMake(initialPosition.x - (toViewOffset + toViewFoldWidth * 2),
-                                                                             toViewSize.height/2);
-                                 }else{
-                                     NSAssert(false, @"not supported");
-                                 }
-                                 
-                                 leftToView.layer.transform = CATransform3DIdentity;
-                                 [leftToView.subviews[1] setAlpha:0.0];
-                                 
-                                 UIView* rightToView = toViewFolds[i*2+1];
-                                 if (self.direction == S2MFoldAnimatorDirectionRightToLeft) {
-                                     rightToView.layer.position = CGPointMake(initialPosition.x - toViewOffset,
-                                                                              toViewSize.height/2);
-                                 }else{
-                                     NSAssert(false, @"not supported");
-                                 }
-                                 // somehow the transform reset the width of layer
-                                 rightToView.layer.transform = CATransform3DIdentity;
-                                 [rightToView.subviews[1] setAlpha:0.0];
-                             }else{
-                                 // the left and right side of the fold for the from- view, with 90 degree transform and 1.0 alpha
-                                 // on the shadow, with each view positioned at the edge of thw screen.
-                                 UIView* leftFromView = toViewFolds[i*2];
-                                 leftFromView.layer.position = CGPointMake( (self.direction == S2MFoldAnimatorDirectionRightToLeft) ? initialOffset + 0.0 : initialOffset + toViewSize.width, toViewSize.height/2);
-                                 leftFromView.layer.transform = CATransform3DRotate(transform, M_PI_2, 0.0, 1.0, 0);
-                                 [leftFromView.subviews[1] setAlpha:1.0];
-                                 
-                                 UIView* rightFromView = toViewFolds[i*2+1];
-                                 rightFromView.layer.position = CGPointMake( (self.direction == S2MFoldAnimatorDirectionRightToLeft) ? initialOffset + 0.0 : initialOffset + toViewSize.width, toViewSize.height/2);
-                                 rightFromView.layer.transform = CATransform3DRotate(transform, -M_PI_2, 0.0, 1.0, 0);
-                                 [rightFromView.subviews[1] setAlpha:1.0];
-                             }
+                         for (NSUInteger i = 0 ; i < self.folds; i++){
+                             CGFloat viewOffset = (CGFloat)i * viewFoldMeasure * 2;
+                             
+                             UIView *leadingViewFold = viewFolds[i*2];
+                             leadingViewFold.layer.position = [self finalPositionInView:view
+                                                                                leading:YES
+                                                                             foldOffset:viewOffset
+                                                                            foldMeasure:viewFoldMeasure];
+                             [self applyTransformForView:leadingViewFold leading:YES initial:NO];
+                             [leadingViewFold.subviews[1] setAlpha:(self.unfolding) ? 0.0 : 1.0];
+                             
+                             UIView *trailingViewFold =  viewFolds[i*2+1];
+                             trailingViewFold.layer.position = [self finalPositionInView:view
+                                                                                 leading:NO
+                                                                              foldOffset:viewOffset
+                                                                             foldMeasure:viewFoldMeasure];
+                             [self applyTransformForView:trailingViewFold leading:NO initial:NO];
+                             [trailingViewFold.subviews[1] setAlpha:(self.unfolding) ? 0.0 : 1.0];
                          }
                      }  completion:^(BOOL finished) {
                          [UIView performWithoutAnimation:^{
                              // restore the to- and from- to the initial location
                              if (self.unfolding) {
                                  // put back toView frame to expected location
-                                 if (self.direction == S2MFoldAnimatorDirectionRightToLeft) {
-                                     toView.frame = CGRectOffset(toView.bounds, initialPosition.x - toView.bounds.size.width, 0);
-                                 }else{
-                                     toView.frame = CGRectOffset(toView.bounds, initialPosition.x, 0);
-                                 }
+                                 view.frame = CGRectMake(viewOrigin.x, viewOrigin.y, viewSize.width, viewSize.height);
                              }else{
                                  if (self.direction == S2MFoldAnimatorDirectionRightToLeft) {
-                                     toView.frame = CGRectOffset(toView.bounds, containerView.bounds.size.width - initialOffset - toView.bounds.size.width, 0);
+                                     view.frame = CGRectMake(viewOrigin.x, viewOrigin.y, 0, viewSize.height);
+                                 }else if (self.direction == S2MFoldAnimatorDirectionLeftToRight) {
+                                     view.frame = CGRectMake(viewOrigin.x + viewSize.width, viewOrigin.y, 0, viewSize.height);
                                  }else{
-                                     toView.frame = CGRectOffset(toView.bounds, initialOffset + toView.bounds.size.width, 0);
+                                     // Disable this in order not to break constraints
                                  }
                              }
-                             toView.hidden = NO;
+                             view.hidden = NO;
                              // remove the snapshot views
-                             for (UIView *view in toViewFolds) {
+                             for (UIView *view in viewFolds) {
                                  [view removeFromSuperview];
                              }
                          }];
@@ -190,156 +136,185 @@
                      }];
 }
 
+#pragma mark - Private
 
-- (void)animateVerticallyWithDuration:(NSTimeInterval)duration
-                        initialOffset:(CGFloat)initialOffset
-                               toView:(UIView *)toView
-                        containerView:(UIView*)containerView
-                           completion:(void (^)(BOOL finished))completion
+-(CGPoint)initialPositionInView:(UIView*)view leading:(BOOL)leading foldOffset:(CGFloat)foldOffset foldMeasure:(CGFloat)foldMeasure
 {
-    __block CGSize toViewSize;
-    __block CGFloat toViewFoldHeight;
-    __block NSMutableArray* toViewFolds;
-    [UIView performWithoutAnimation:^{
-        
-        if(self.unfolding){
-            [self moveView:toView offScreenSize:containerView.bounds.size];
+    CGFloat middleY = view.frame.origin.y + (view.frame.size.height / 2);
+    CGFloat middleX = view.frame.origin.x + (view.frame.size.width / 2);
+    CGPoint point = CGPointZero;
+    if (self.unfolding) {
+        switch (self.direction) {
+            case S2MFoldAnimatorDirectionRightToLeft:
+                point = CGPointMake(CGRectGetMaxX(view.frame), middleY);
+                break;
+            case S2MFoldAnimatorDirectionLeftToRight:
+                point = CGPointMake(CGRectGetMinX(view.frame), middleY);
+                break;
+            case S2MFoldAnimatorDirectionTopToBottom:
+                point = CGPointMake(middleX, CGRectGetMinY(view.frame));
+                break;
+            case S2MFoldAnimatorDirectionBottomToTop:
+                point = CGPointMake(middleX, CGRectGetMaxY(view.frame));
+                break;
+                
+            default:
+                break;
         }
-        if (toView.superview == nil) {
-            [containerView addSubview:toView];
+    }else{
+        switch (self.direction) {
+            case S2MFoldAnimatorDirectionRightToLeft:
+            case S2MFoldAnimatorDirectionLeftToRight:
+                if (leading) {
+                    point = CGPointMake(CGRectGetMinX(view.frame) + foldOffset, middleY);
+                }else{
+                    point = CGPointMake(CGRectGetMinX(view.frame) + foldOffset + foldMeasure*2, middleY);
+                }
+                break;
+            case S2MFoldAnimatorDirectionTopToBottom:
+            case S2MFoldAnimatorDirectionBottomToTop:
+                if (leading) {
+                    point = CGPointMake(middleX, CGRectGetMinY(view.frame) + foldOffset);
+                }else{
+                    point = CGPointMake(middleX, CGRectGetMinY(view.frame) + foldOffset + foldMeasure*2);
+                }
+                break;
+                
+            default:
+                break;
         }
-        [containerView bringSubviewToFront:toView];
-        
-        
-        toViewSize = toView.bounds.size;
-        
-        // Add a perspective transform
-        CATransform3D transform = CATransform3DIdentity;
-        transform.m34 = -0.005;
-        containerView.layer.sublayerTransform = transform;
-        
-        toViewFoldHeight = toViewSize.height * 0.5 / (CGFloat)self.folds;
-        
-        // arrays that hold the snapshot views
-        toViewFolds = [NSMutableArray new];
-        
-        // create the folds for the form- and to- views
-        for (NSUInteger i = 0 ; i < self.folds; i++){
-            CGFloat toViewOffset = (CGFloat)i * toViewFoldHeight * 2;
-            
-            if (self.unfolding) {
-                
-                // the left and right side of the fold for the to- view, with a 90degree transform and 1.0 alpha
-                // on the shadow, with each view positioned at the very edge of the screen
-                UIView *topToViewFold = [self createSnapshotFromView:toView afterUpdates:YES location:toViewOffset top:YES];
-                topToViewFold.layer.position = CGPointMake(toViewSize.width/2, (self.direction != S2MFoldAnimatorDirectionTopToBottom) ?  0.0 : initialOffset);
-                topToViewFold.layer.transform = CATransform3DMakeRotation(-M_PI_2, 1.0, 0.0, 0.0);
-                [toViewFolds addObject:topToViewFold];
-                
-                UIView *bottomToViewFold = [self createSnapshotFromView:toView afterUpdates:YES location:toViewOffset + toViewFoldHeight top:NO];
-                bottomToViewFold.layer.position = CGPointMake(toViewSize.width / 2, (self.direction != S2MFoldAnimatorDirectionTopToBottom) ?  0.0 : initialOffset);
-                bottomToViewFold.layer.transform = CATransform3DMakeRotation(M_PI_2, 1.0, 0.0, 0.0);
-                [toViewFolds addObject:bottomToViewFold];
-            }else{
-                
-                // the left and right side of the fold for the from- view, with identity transform and 0.0 alpha
-                // on the shadow, with each view at its initial position
-                UIView *topToViewFold = [self createSnapshotFromView:toView afterUpdates:NO location:toViewOffset top:YES];
-                topToViewFold.layer.position = CGPointMake(toViewSize.width/2, initialOffset + toViewOffset);
-                topToViewFold.layer.transform = CATransform3DIdentity;
-                [toViewFolds addObject:topToViewFold];
-                [topToViewFold.subviews[1] setAlpha:0.0];
-                
-                UIView *bottomToViewFold = [self createSnapshotFromView:toView afterUpdates:NO location:toViewOffset + toViewFoldHeight top:NO];
-                bottomToViewFold.layer.position = CGPointMake(toViewSize.width/2, initialOffset + toViewOffset + toViewFoldHeight * 2);
-                bottomToViewFold.layer.transform = CATransform3DIdentity;
-                [toViewFolds addObject:bottomToViewFold];
-                [bottomToViewFold.subviews[1] setAlpha:0.0];
-            }
-        }
-        toView.hidden = YES;
-    }];
-    // create the animation
-    [UIView animateWithDuration:duration delay:0 options:0
-                     animations:^{
-                         // set the final state for each fold
-                         for (NSUInteger i=0; i< self.folds; i++){
-                             if (self.unfolding) {
-                                 CGFloat toViewOffset = (CGFloat)i * toViewFoldHeight * 2;
-                                 
-                                 // the left and right side of the fold for the to- view, with identity transform and 0.0 alpha
-                                 // on the shadow, with each view at its final position
-                                 UIView* topToView = toViewFolds[i*2];
-                                 topToView.layer.position = CGPointMake(toViewSize.width/2, initialOffset + toViewOffset);
-                                 topToView.layer.transform = CATransform3DIdentity;
-                                 [topToView.subviews[1] setAlpha:0.0];
-                                 
-                                 UIView* bottomToView = toViewFolds[i*2+1];
-                                 bottomToView.layer.position = CGPointMake(toViewSize.width/2, initialOffset + toViewOffset + toViewFoldHeight * 2);
-                                 bottomToView.layer.transform = CATransform3DIdentity;
-                                 [bottomToView.subviews[1] setAlpha:0.0];
-                             }else{
-                                 // the left and right side of the fold for the from- view, with 90 degree transform and 1.0 alpha
-                                 // on the shadow, with each view positioned at the edge of thw screen.
-                                 UIView* topToView = toViewFolds[i*2];
-                                 topToView.layer.position = CGPointMake( toViewSize.width/2, (self.direction == S2MFoldAnimatorDirectionTopToBottom) ? initialOffset + 0.0 : initialOffset + toViewSize.height);
-                                 topToView.layer.transform = CATransform3DMakeRotation(-M_PI_2, 1.0, 0.0, 0.0);
-                                 [topToView.subviews[1] setAlpha:1.0];
-                                 
-                                 UIView* bottomToView = toViewFolds[i*2+1];
-                                 bottomToView.layer.position = CGPointMake( toViewSize.width/2, (self.direction == S2MFoldAnimatorDirectionTopToBottom) ? initialOffset + 0.0 : initialOffset + toViewSize.height + toViewFoldHeight);
-                                 bottomToView.layer.transform = CATransform3DMakeRotation(M_PI_2, 1.0, 0.0, 0.0);
-                                 [bottomToView.subviews[1] setAlpha:1.0];
-                             }
-                         }
-                         
-                     }  completion:^(BOOL finished) {
-                         // remove the snapshot views
-                         for (UIView *view in toViewFolds) {
-                             [view removeFromSuperview];
-                         }
-                         toView.hidden = NO;
-                         if (self.unfolding) {
-                             toView.frame = CGRectMake(toView.frame.origin.x, initialOffset,  toView.frame.size.width, toView.frame.size.height);
-                         }else{
-                             // Disable this in order not to break constraints
-                             //                             toView.frame = CGRectMake(toView.frame.origin.x, initialOffset,  toView.frame.size.width, 0);
-                         }
-                         if(completion){
-                             completion(finished);
-                         }
-                     }];
+    }
+    return point;
 }
 
 
-#pragma mark Helper
-
-- (void)moveView:(UIView*)view offScreenSize:(CGSize)size
+-(CGPoint)finalPositionInView:(UIView*)view leading:(BOOL)leading foldOffset:(CGFloat)foldOffset foldMeasure:(CGFloat)foldMeasure
 {
-    CGFloat offsetX = 0;
-    CGFloat offsetY = 0;
+    CGFloat middleY = view.frame.origin.y + (view.frame.size.height / 2);
+    CGFloat middleX = view.frame.origin.x + (view.frame.size.width / 2);
+    CGPoint point = CGPointZero;
+    if (self.unfolding) {
+        switch (self.direction) {
+            case S2MFoldAnimatorDirectionRightToLeft:
+            case S2MFoldAnimatorDirectionLeftToRight:
+                if (leading) {
+                    point = CGPointMake(CGRectGetMinX(view.frame) + foldOffset, middleY);
+                }else{
+                    point = CGPointMake(CGRectGetMinX(view.frame) + foldOffset + foldMeasure*2, middleY);
+                }
+                break;
+            case S2MFoldAnimatorDirectionTopToBottom:
+            case S2MFoldAnimatorDirectionBottomToTop:
+                if (leading) {
+                    point = CGPointMake(middleX, CGRectGetMinY(view.frame) + foldOffset);
+                }else{
+                    point = CGPointMake(middleX, CGRectGetMinY(view.frame) + foldOffset + foldMeasure * 2);
+                }
+                break;
+                
+            default:
+                break;
+        }
+    }else{
+        switch (self.direction) {
+            case S2MFoldAnimatorDirectionRightToLeft:
+                point = CGPointMake(CGRectGetMinX(view.frame), middleY);
+                break;
+            case S2MFoldAnimatorDirectionLeftToRight:
+                point = CGPointMake(CGRectGetMaxX(view.frame), middleY);
+                break;
+            case S2MFoldAnimatorDirectionTopToBottom:
+                point = CGPointMake(middleX, CGRectGetMaxY(view.frame));
+                break;
+            case S2MFoldAnimatorDirectionBottomToTop:
+                point = CGPointMake(middleX, CGRectGetMinY(view.frame));
+                break;
+                
+            default:
+                break;
+        }
+    }
+    return point;
+}
+
+- (void)applyTransformForView:(UIView*)view leading:(BOOL)leading initial:(BOOL)initial
+{
     switch (self.direction) {
         case S2MFoldAnimatorDirectionRightToLeft:
-            offsetX = size.width;
+        case S2MFoldAnimatorDirectionLeftToRight:
+            if (self.unfolding && initial) {
+                view.layer.transform = (leading) ? CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 0.0) : CATransform3DMakeRotation(-M_PI_2, 0.0, 1.0, 0.0);
+            }else if (!initial) {
+                if (self.unfolding) {
+                    view.layer.transform = CATransform3DIdentity;
+                }else{
+                    view.layer.transform =  (leading) ? CATransform3DRotate(CATransform3DIdentity, M_PI_2, 0.0, 1.0, 0) : CATransform3DRotate(CATransform3DIdentity, -M_PI_2, 0.0, 1.0, 0);
+                }
+            }
             break;
         case S2MFoldAnimatorDirectionTopToBottom:
-        case S2MFoldAnimatorDirectionLeftToRight:
-            offsetX = - size.width;
+        case S2MFoldAnimatorDirectionBottomToTop:
+            if (self.unfolding && initial) {
+                view.layer.transform = (leading) ? CATransform3DMakeRotation(-M_PI_2, 1.0, 0.0, 0.0) : CATransform3DMakeRotation(M_PI_2, 1.0, 0.0, 0.0);
+            }else if (!self.unfolding && !initial) {
+                view.layer.transform = (leading) ? CATransform3DMakeRotation(-M_PI_2, 1.0, 0.0, 0.0) : CATransform3DMakeRotation(M_PI_2, 1.0, 0.0, 0.0);
+            }else {
+                view.layer.transform = CATransform3DIdentity;
+            }
             break;
+            
         default:
             break;
     }
-    view.frame = CGRectOffset(view.frame, offsetX, offsetY);
 }
 
+- (CGFloat)foldMeasureForView:(UIView*)view
+{
+    switch (self.direction) {
+        case S2MFoldAnimatorDirectionRightToLeft:
+        case S2MFoldAnimatorDirectionLeftToRight:
+            return view.frame.size.width * 0.5 / (CGFloat)self.folds;
+            break;
+        case S2MFoldAnimatorDirectionTopToBottom:
+        case S2MFoldAnimatorDirectionBottomToTop:
+            return view.frame.size.height * 0.5 / (CGFloat)self.folds;
+            break;
+            
+        default:
+            break;
+    }
+    return 0;
+    
+}
 
+#pragma mark Helper
+
+
+
+- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates location:(CGFloat)offset leading:(BOOL)leading
+{
+    switch (self.direction) {
+        case S2MFoldAnimatorDirectionRightToLeft:
+        case S2MFoldAnimatorDirectionLeftToRight:
+            return [self createSnapshotFromView:view afterUpdates:afterUpdates location:offset left:leading];
+            break;
+        case S2MFoldAnimatorDirectionTopToBottom:
+        case S2MFoldAnimatorDirectionBottomToTop:
+            return [self createSnapshotFromView:view afterUpdates:afterUpdates location:offset top:leading];
+            break;
+            
+        default:
+            break;
+    }
+    return nil;
+}
 
 - (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates location:(CGFloat)offset top:(BOOL)top
 {
     
     CGSize size = view.frame.size;
     UIView *containerView = view.superview;
-    float foldHeight = size.height * 0.5 / (float)self.folds;
+    float foldHeight = [self foldMeasureForView:view];
     
     UIView* snapshotView;
     
@@ -378,7 +353,7 @@
     
     CGSize size = view.frame.size;
     UIView *containerView = view.superview;
-    float foldWidth = size.width * 0.5 / (float)self.folds;
+    float foldWidth = [self foldMeasureForView:view];
     
     UIView* snapshotView;
     

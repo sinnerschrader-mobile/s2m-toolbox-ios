@@ -27,7 +27,7 @@
                         <segment title="TopBottom"/>
                         <segment title="BottomTop"/>
                     </segments>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <action selector="didSelectControl:" destination="-1" eventType="valueChanged" id="Phc-Aq-gLC"/>
                     </connections>
@@ -35,8 +35,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQa-5Q-oNM" userLabel="foldingView">
                     <rect key="frame" x="150" y="150" width="300" height="300"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I can fold" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvj-DD-HBQ">
-                            <rect key="frame" x="114" y="140" width="71" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I can fold, tap on a direction above" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvj-DD-HBQ">
+                            <rect key="frame" x="0.0" y="140" width="300" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
@@ -45,10 +45,19 @@
                     <color key="backgroundColor" red="0.079981272579999999" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="gvj-DD-HBQ" secondAttribute="centerX" id="43Q-7g-qMs"/>
+                        <constraint firstAttribute="centerY" secondItem="gvj-DD-HBQ" secondAttribute="centerY" id="F0n-fG-yXd"/>
                         <constraint firstAttribute="height" constant="300" id="Gdy-ED-rUu"/>
+                        <constraint firstAttribute="trailing" secondItem="gvj-DD-HBQ" secondAttribute="trailing" id="Qn5-Zi-6Fu"/>
                         <constraint firstAttribute="width" constant="300" id="VJI-dF-L15"/>
+                        <constraint firstItem="gvj-DD-HBQ" firstAttribute="leading" secondItem="fQa-5Q-oNM" secondAttribute="leading" id="k3Z-HL-UAi"/>
                         <constraint firstAttribute="centerY" secondItem="gvj-DD-HBQ" secondAttribute="centerY" id="pL6-Bm-lIY"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="43Q-7g-qMs"/>
+                            <exclude reference="pL6-Bm-lIY"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>

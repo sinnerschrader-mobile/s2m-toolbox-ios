@@ -32,11 +32,16 @@
     }
     self.animator.unfolding = !self.animator.unfolding;
     self.animator.direction = control.selectedSegmentIndex;
-    [self.animator animateWithDuration:2
-                         initialOffset:0
-                                toView:self.foldingView
-                         containerView:self.view
-                            completion:nil];
+    self.foldingView.hidden = NO;
+    [UIView animateWithDuration:2 animations:^{
+        [self.animator animateWithDuration:2
+                             view:self.foldingView
+                             containerView:self.view
+                                completion:^(BOOL finished) {
+                                    self.foldingView.hidden = !self.animator.unfolding;
+                                }];
+
+    }];
 }
 
 
@@ -45,7 +50,8 @@
     [super viewDidLoad];
     self.title = @"S2M Fold Animator";
     self.animator = [[S2MFoldAnimator alloc] init];
-    self.animator.unfolding = NO;
+    self.animator.folds = 3;
+    self.animator.unfolding = YES;
 }
 
 +(S2MFoldTransition*)transitionAnimator
