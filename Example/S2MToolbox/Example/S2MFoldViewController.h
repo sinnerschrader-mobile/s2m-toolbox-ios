@@ -11,5 +11,7 @@
 #import "S2MFoldTransition.h"
 
 @interface S2MFoldViewController : UIViewController
+- (IBAction)didSelectControl:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *foldingView;
 +(S2MFoldTransition*)transitionAnimator;
 @end

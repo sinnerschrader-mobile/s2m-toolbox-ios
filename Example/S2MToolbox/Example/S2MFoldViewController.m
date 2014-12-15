@@ -9,22 +9,48 @@
 #import "S2MFoldViewController.h"
 
 @interface S2MFoldViewController ()
-
+@property(nonatomic, strong)UIView* foldView;
+@property(nonatomic, strong)S2MFoldAnimator* animator;
 @end
 
 @implementation S2MFoldViewController
 
-+(S2MFoldTransition*)transitionAnimator
+- (IBAction)didSelectControl:(UISegmentedControl*)control
 {
-    return [[S2MFoldTransition alloc] init];
+    switch (control.selectedSegmentIndex) {
+        case S2MFoldAnimatorDirectionRightToLeft:
+            break;
+        case S2MFoldAnimatorDirectionLeftToRight:
+            break;
+        case S2MFoldAnimatorDirectionTopToBottom:
+            break;
+        case S2MFoldAnimatorDirectionBottomToTop:
+            break;
+        default:
+            NSAssert(false, @"unknown direction");
+            break;
+    }
+    self.animator.unfolding = !self.animator.unfolding;
+    self.animator.direction = control.selectedSegmentIndex;
+    [self.animator animateWithDuration:2
+                         initialOffset:0
+                                toView:self.foldingView
+                         containerView:self.view
+                            completion:nil];
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"S2M Fold Animator";
-    self.view.backgroundColor = [UIColor blueColor];
+    self.animator = [[S2MFoldAnimator alloc] init];
+    self.animator.unfolding = NO;
 }
 
++(S2MFoldTransition*)transitionAnimator
+{
+    return [[S2MFoldTransition alloc] init];
+}
 
 @end

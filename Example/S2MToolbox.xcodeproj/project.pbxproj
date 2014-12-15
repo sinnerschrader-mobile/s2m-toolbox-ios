@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		016530221A3EE962002A95E6 /* S2MFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530211A3EE962002A95E6 /* S2MFoldViewController.m */; };
 		016530251A3EE9E3002A95E6 /* S2MFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */; };
+		016530271A3F2CA5002A95E6 /* S2MFoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */; };
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
 		01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
@@ -45,6 +46,7 @@
 		016530211A3EE962002A95E6 /* S2MFoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldViewController.m; sourceTree = "<group>"; };
 		016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldTransition.h; sourceTree = "<group>"; };
 		016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldTransition.m; sourceTree = "<group>"; };
+		016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = S2MFoldViewController.xib; sourceTree = "<group>"; };
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
 		0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MRegExValidationSpec.m; sourceTree = "<group>"; };
 		01C12E8D19FE5C65004B7999 /* S2MToolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S2MToolbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 			children = (
 				016530201A3EE962002A95E6 /* S2MFoldViewController.h */,
 				016530211A3EE962002A95E6 /* S2MFoldViewController.m */,
+				016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */,
 				016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */,
 				016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */,
 			);
@@ -322,6 +325,7 @@
 			files = (
 				01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */,
 				01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */,
+				016530271A3F2CA5002A95E6 /* S2MFoldViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
