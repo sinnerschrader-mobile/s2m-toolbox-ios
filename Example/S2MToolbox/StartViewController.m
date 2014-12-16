@@ -9,7 +9,7 @@
 #import "StartViewController.h"
 #import "S2MShopFinderSearchDelegate.h"
 #import "S2MViewController.h"
-
+#import "S2MHockeyViewController.h"
 
 static NSString *cellId = @"cellId2";
 
@@ -24,7 +24,7 @@ static NSString *cellId = @"cellId2";
 
 #pragma mark TableView Datatsource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
@@ -34,7 +34,10 @@ static NSString *cellId = @"cellId2";
         cell.textLabel.text = @"ShopFinder";
     }else if (indexPath.row == 2){
         cell.textLabel.text = @"AutoLayout Sample";
+    }else if (indexPath.row == 3){
+        cell.textLabel.text = @"Hockey App";
     }
+
     return cell;
 }
 
@@ -56,7 +59,11 @@ static NSString *cellId = @"cellId2";
     else if(indexPath.row == 2){
         S2MViewController *vc = [[S2MViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.row == 3){
+        S2MHockeyViewController *vc = [[S2MHockeyViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
+
 }
 
 
