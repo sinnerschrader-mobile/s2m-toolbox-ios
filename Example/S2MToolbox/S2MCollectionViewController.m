@@ -35,7 +35,9 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.customRefreshControl = YES;
-
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+        
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Toggle" style:UIBarButtonItemStylePlain target:self action:@selector(togglePullToRefresh:)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
 }
