@@ -34,4 +34,9 @@ Pod::Spec.new do |s|
   s.subspec 'ShopFinder' do |ut|
     ut.source_files  = 'ShopFinder/*.{h,m}'
   end
+
+  s.subspec 'HockeyApp' do |h|
+    h.dependency 'HockeySDK'
+    h.source_files = 'HockeyApp/*.{h,m}'
+  end
 end

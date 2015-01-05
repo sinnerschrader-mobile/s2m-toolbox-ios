@@ -6,6 +6,12 @@
 // project.
 
 
+// HockeySDK
+#define COCOAPODS_POD_AVAILABLE_HockeySDK
+#define COCOAPODS_VERSION_MAJOR_HockeySDK 3
+#define COCOAPODS_VERSION_MINOR_HockeySDK 6
+#define COCOAPODS_VERSION_PATCH_HockeySDK 2
+
 // S2MToolbox
 #define COCOAPODS_POD_AVAILABLE_S2MToolbox
 #define COCOAPODS_VERSION_MAJOR_S2MToolbox 0
@@ -17,6 +23,12 @@
 #define COCOAPODS_VERSION_MAJOR_S2MToolbox_Foundation 0
 #define COCOAPODS_VERSION_MINOR_S2MToolbox_Foundation 1
 #define COCOAPODS_VERSION_PATCH_S2MToolbox_Foundation 0
+
+// S2MToolbox/HockeyApp
+#define COCOAPODS_POD_AVAILABLE_S2MToolbox_HockeyApp
+#define COCOAPODS_VERSION_MAJOR_S2MToolbox_HockeyApp 0
+#define COCOAPODS_VERSION_MINOR_S2MToolbox_HockeyApp 1
+#define COCOAPODS_VERSION_PATCH_S2MToolbox_HockeyApp 0
 
 // S2MToolbox/QRCode
 #define COCOAPODS_POD_AVAILABLE_S2MToolbox_QRCode
