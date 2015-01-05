@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		016530221A3EE962002A95E6 /* S2MFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530211A3EE962002A95E6 /* S2MFoldViewController.m */; };
-		016530251A3EE9E3002A95E6 /* S2MFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */; };
-		016530271A3F2CA5002A95E6 /* S2MFoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */; };
+		016530221A3EE962002A95E6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		016530251A3EE9E3002A95E6 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		016530271A3F2CA5002A95E6 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165302A1A407463002A95E6 /* S2MHockeyViewController.m */; };
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
 		01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
@@ -23,6 +24,9 @@
 		01C12EB119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
 		01C12EB219FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
 		01C12EBA19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EB819FE5C65004B7999 /* InfoPlist.strings */; };
+		01CDD7011A5AE74B00409C48 /* S2MFoldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CDD6FC1A5AE74B00409C48 /* S2MFoldViewController.xib */; };
+		01CDD7021A5AE74B00409C48 /* S2MFoldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDD6FD1A5AE74B00409C48 /* S2MFoldViewController.m */; };
+		01CDD7031A5AE74B00409C48 /* S2MFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDD6FF1A5AE74B00409C48 /* S2MFoldTransition.m */; };
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
 		22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
@@ -42,11 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		016530201A3EE962002A95E6 /* S2MFoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldViewController.h; sourceTree = "<group>"; };
-		016530211A3EE962002A95E6 /* S2MFoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldViewController.m; sourceTree = "<group>"; };
-		016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldTransition.h; sourceTree = "<group>"; };
-		016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldTransition.m; sourceTree = "<group>"; };
-		016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = S2MFoldViewController.xib; sourceTree = "<group>"; };
+		016530291A407463002A95E6 /* S2MHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MHockeyViewController.h; sourceTree = "<group>"; };
+		0165302A1A407463002A95E6 /* S2MHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MHockeyViewController.m; sourceTree = "<group>"; };
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
 		0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MRegExValidationSpec.m; sourceTree = "<group>"; };
 		01C12E8D19FE5C65004B7999 /* S2MToolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S2MToolbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +65,11 @@
 		01C12EAF19FE5C65004B7999 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		01C12EB719FE5C65004B7999 /* S2MToolboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "S2MToolboxTests-Info.plist"; sourceTree = "<group>"; };
 		01C12EB919FE5C65004B7999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01CDD6FC1A5AE74B00409C48 /* S2MFoldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = S2MFoldViewController.xib; sourceTree = "<group>"; };
+		01CDD6FD1A5AE74B00409C48 /* S2MFoldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldViewController.m; sourceTree = "<group>"; };
+		01CDD6FE1A5AE74B00409C48 /* S2MFoldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldViewController.h; sourceTree = "<group>"; };
+		01CDD6FF1A5AE74B00409C48 /* S2MFoldTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MFoldTransition.m; sourceTree = "<group>"; };
+		01CDD7001A5AE74B00409C48 /* S2MFoldTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MFoldTransition.h; sourceTree = "<group>"; };
 		01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_S2MAdditionsSpec.m; sourceTree = "<group>"; };
 		214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolbox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -105,16 +111,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0165301F1A3EE91F002A95E6 /* FoldAnimator */ = {
+		016530281A40743B002A95E6 /* Hockey */ = {
 			isa = PBXGroup;
 			children = (
-				016530201A3EE962002A95E6 /* S2MFoldViewController.h */,
-				016530211A3EE962002A95E6 /* S2MFoldViewController.m */,
-				016530261A3F2CA5002A95E6 /* S2MFoldViewController.xib */,
-				016530231A3EE9E3002A95E6 /* S2MFoldTransition.h */,
-				016530241A3EE9E3002A95E6 /* S2MFoldTransition.m */,
+				016530291A407463002A95E6 /* S2MHockeyViewController.h */,
+				0165302A1A407463002A95E6 /* S2MHockeyViewController.m */,
 			);
-			name = FoldAnimator;
+			name = Hockey;
 			sourceTree = "<group>";
 		};
 		0169E2951A39DE930036D375 /* Core */ = {
@@ -221,6 +224,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		01CDD6FB1A5AE73D00409C48 /* FoldAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				01CDD6FC1A5AE74B00409C48 /* S2MFoldViewController.xib */,
+				01CDD6FD1A5AE74B00409C48 /* S2MFoldViewController.m */,
+				01CDD6FE1A5AE74B00409C48 /* S2MFoldViewController.h */,
+				01CDD6FF1A5AE74B00409C48 /* S2MFoldTransition.m */,
+				01CDD7001A5AE74B00409C48 /* S2MFoldTransition.h */,
+			);
+			name = FoldAnimator;
+			sourceTree = "<group>";
+		};
 		20237AA9C1E1C7130A061C3C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,7 +250,8 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				0165301F1A3EE91F002A95E6 /* FoldAnimator */,
+				01CDD6FB1A5AE73D00409C48 /* FoldAnimator */,
+				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
 			);
@@ -323,9 +339,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CDD7011A5AE74B00409C48 /* S2MFoldViewController.xib in Resources */,
 				01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */,
 				01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */,
-				016530271A3F2CA5002A95E6 /* S2MFoldViewController.xib in Resources */,
+				016530271A3F2CA5002A95E6 /* (null) in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,13 +424,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016530221A3EE962002A95E6 /* S2MFoldViewController.m in Sources */,
+				01CDD7021A5AE74B00409C48 /* S2MFoldViewController.m in Sources */,
+				016530221A3EE962002A95E6 /* (null) in Sources */,
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
+				01CDD7031A5AE74B00409C48 /* S2MFoldTransition.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
+				0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
-				016530251A3EE9E3002A95E6 /* S2MFoldTransition.m in Sources */,
+				016530251A3EE9E3002A95E6 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
