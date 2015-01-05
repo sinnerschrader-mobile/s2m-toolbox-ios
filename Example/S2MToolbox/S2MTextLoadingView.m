@@ -20,11 +20,9 @@
     self = [super initWithFrame:CGRectMake(0, 0, 250, 30)];
     if (self) {
         self.label = [[UILabel alloc] init];
-        self.label.text = @"Loading...";
+        self.label.text = @"Pulling...";
         [self addSubview:self.label];
         [self.label sizeToFit];
-        self.label.textColor = [UIColor whiteColor];
-        self.label.alpha = 0;
     }
     return self;
 }
@@ -39,8 +37,11 @@
 
 - (void)startAnimating
 {
+    self.label.text = @"Loading...";
+    [self.label sizeToFit];
+    self.label.textColor = [UIColor whiteColor];
     [UIView animateWithDuration:0.3 animations:^{
-        self.label.alpha = 1;
+        self.superview.backgroundColor = [UIColor clearColor];
     }];
 
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFires:) userInfo:nil repeats:YES];
@@ -49,10 +50,9 @@
 - (void)stopAnimating
 {
     [self.timer invalidate];
+    self.label.text = @"Pulling...";
+    [self.label sizeToFit];
     self.label.textColor = [UIColor whiteColor];
-    [UIView animateWithDuration:0.3 animations:^{
-        self.label.alpha = 0;
-    }];
 }
 
 - (void)animateWithFractionDragged:(CGFloat)fractionDragged
@@ -75,10 +75,6 @@
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
     UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     self.label.textColor = color;
-    [UIView animateWithDuration:0.3 animations:^{
-    self.superview.backgroundColor = [UIColor clearColor];
-    }];
-
 
 }
 

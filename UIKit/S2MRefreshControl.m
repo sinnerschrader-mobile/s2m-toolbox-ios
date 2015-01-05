@@ -29,7 +29,7 @@
     if (self) {
         self.clipsToBounds = YES;
         self.refreshControlHeight = 40;
-        self.startLoadingThreshold = self.refreshControlHeight + 25;
+        self.startLoadingThreshold = self.refreshControlHeight;
         NSAssert(loadingView, @"loadingView cannot be nil");
         NSAssert([loadingView conformsToProtocol:@protocol(S2MControlLoadingView)], @"loadingView must conform to S2MControlLoadingView protocol");
         self.loadingView = loadingView;
@@ -43,7 +43,7 @@
     if (self) {
         self.clipsToBounds = YES;
         self.refreshControlHeight = 40;
-        self.startLoadingThreshold = self.refreshControlHeight + 25;
+        self.startLoadingThreshold = self.refreshControlHeight;
         self.loadingView = [[UIImageView alloc] initWithImage:image];
     }
     return self;
@@ -93,10 +93,10 @@
 
 - (void)startAnimating
 {
-    self.loadingView.alpha = 1.0;
     if ([self.loadingView conformsToProtocol:@protocol(S2MControlLoadingView)]) {
         [self.loadingView performSelector:@selector(startAnimating) withObject:nil];
     }else if([self.loadingView isKindOfClass:[UIImageView class]]){
+        self.loadingView.alpha = 1.0;
         [self.loadingView s2m_removeRotationAnimation];
         [self.loadingView s2m_rotateWithDuration:0.5 repeat:INFINITY];
     }else{
@@ -138,8 +138,7 @@
     
     self.scrollViewInitialInsets = self.scrollView.contentInset;
     self.isRefreshing = YES;
-    
-    self.scrollView.contentInset = UIEdgeInsetsMake(self.startLoadingThreshold, 0, 0, 0);
+    self.scrollView.contentInset = UIEdgeInsetsMake(self.scrollViewInitialInsets.top + self.bounds.size.height, 0, 0, 0);
     self.scrollView.scrollEnabled = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -154,16 +153,16 @@
         [self stopAnimating];
         return;
     }
-    
+
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.loadingView.alpha = 0;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.3 delay:0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-            [self.scrollView setContentOffset:CGPointZero];
             self.scrollView.contentInset = self.scrollViewInitialInsets;
         } completion:^(BOOL finished2) {
             [self stopAnimating];
             self.isRefreshing = NO;
+            self.loadingView.alpha = 1;
         }];
     }];
 }
@@ -178,7 +177,7 @@
 - (void)containingScrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat offset = scrollView.contentOffset.y + scrollView.contentInset.top;
-    if (offset <= 0.0 && !self.isRefreshing && !scrollView.isDecelerating) {
+    if (offset <= 0.0 && !self.isRefreshing && !scrollView.isDecelerating && scrollView.isDragging) {
         CGFloat fractionDragged = -offset/self.startLoadingThreshold;
         [self animateWithFractionDragged:fractionDragged];
         if (fractionDragged >= 1.0) {

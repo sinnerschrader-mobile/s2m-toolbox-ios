@@ -24,6 +24,7 @@ static NSString * const reuseIdentifier = @"Cell";
 +(instancetype)sampleCollectionViewController
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.sectionInset = UIEdgeInsetsMake(20, 0, 0, 0);
     S2MCollectionViewController* vc = [[self.class alloc] initWithCollectionViewLayout:flowLayout];
     return vc;
 }
@@ -65,6 +66,7 @@ static NSString * const reuseIdentifier = @"Cell";
         UIImage* image = [UIImage imageNamed:@"loading_indicator"];
         self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingImage:image];
     }
+    self.refreshControl.startLoadingThreshold += 20;// section inset
     [self.refreshControl addTarget:self action:@selector(pullToRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
 }
