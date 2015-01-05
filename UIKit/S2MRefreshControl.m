@@ -23,7 +23,7 @@
 
 @implementation S2MRefreshControl
 
-- (instancetype)initWithLoadingView:(UIView*)loadingView
+- (instancetype)initWithLoadingView:(UIView<S2MControlLoadingView>*)loadingView
 {
     self = [super init];
     if (self) {
@@ -31,7 +31,20 @@
         self.refreshControlHeight = 40;
         self.startLoadingThreshold = self.refreshControlHeight + 25;
         NSAssert(loadingView, @"loadingView cannot be nil");
+        NSAssert([loadingView conformsToProtocol:@protocol(S2MControlLoadingView)], @"loadingView must conform to S2MControlLoadingView protocol");
         self.loadingView = loadingView;
+    }
+    return self;
+}
+
+- (instancetype)initWithLoadingImage:(UIImage*)image;
+{
+    self = [super init];
+    if (self) {
+        self.clipsToBounds = YES;
+        self.refreshControlHeight = 40;
+        self.startLoadingThreshold = self.refreshControlHeight + 25;
+        self.loadingView = [[UIImageView alloc] initWithImage:image];
     }
     return self;
 }

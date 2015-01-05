@@ -28,10 +28,20 @@
 /**
  *  Initialize refresh control with a custom view to animate
  *
- *  @param loadingView UIImageView or view conforming to S2MControlLoadingView. The view will be animated while pulling.
- *                     In case of imageView, image will be rotated.
+ *  @param loadingView view conforming to S2MControlLoadingView protocol. The view will be animated while pulling.
+ *
  *
  *  @return instance of refreshControl
  */
-- (instancetype)initWithLoadingView:(UIView*)loadingView NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLoadingView:(UIView<S2MControlLoadingView>*)loadingView;
+
+/**
+ *  Initialize refresh control with a image view to animate
+ *
+ *  @param image image to rotate while pulling.
+ *
+ *  @return instance of refreshControl
+ */
+- (instancetype)initWithLoadingImage:(UIImage*)image;
+
 @end

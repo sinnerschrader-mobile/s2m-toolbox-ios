@@ -63,8 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
         self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:loadingView];
     }else{
         UIImage* image = [UIImage imageNamed:@"loading_indicator"];
-        UIImageView* imageView = [[UIImageView alloc] initWithImage:image];
-        self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingView:imageView];
+        self.refreshControl = [[S2MRefreshControl alloc] initWithLoadingImage:image];
     }
     [self.refreshControl addTarget:self action:@selector(pullToRefresh:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
