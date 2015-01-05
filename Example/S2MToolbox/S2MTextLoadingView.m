@@ -9,6 +9,10 @@
 #import "S2MTextLoadingView.h"
 #import <S2MToolbox/UIView+S2MAutolayout.h>
 
+@interface S2MTextLoadingView ()
+@property(nonatomic, strong, readwrite)NSTimer* timer;
+@end
+
 @implementation S2MTextLoadingView
 
 - (instancetype)init

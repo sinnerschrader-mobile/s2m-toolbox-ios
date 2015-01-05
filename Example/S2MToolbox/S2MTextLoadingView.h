@@ -11,5 +11,5 @@
 
 @interface S2MTextLoadingView : UIView<S2MControlLoadingView>
 @property(nonatomic, strong)UILabel* label;
-@property(nonatomic, strong)NSTimer* timer;
+@property(nonatomic, strong, readonly)NSTimer* timer;
 @end
