@@ -65,7 +65,7 @@
             
             UIView *leadingViewFold = [self createSnapshotFromView:view
                                                       afterUpdates:self.unfolding
-                                                          location:viewOffset
+                                                          offset:viewOffset
                                                            leading:YES];
             leadingViewFold.layer.position = [self initialPositionInView:view
                                                                  leading:YES
@@ -79,7 +79,7 @@
             
             UIView *trailingViewFold = [self createSnapshotFromView:view
                                                        afterUpdates:self.unfolding
-                                                           location:viewOffset + viewFoldMeasure
+                                                           offset:viewOffset + viewFoldMeasure
                                                             leading:NO];
             trailingViewFold.layer.position = [self initialPositionInView:view
                                                                   leading:NO
@@ -300,18 +300,16 @@
 
 #pragma mark Helper
 
-
-
-- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates location:(CGFloat)offset leading:(BOOL)leading
+- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates offset:(CGFloat)offset leading:(BOOL)leading
 {
     switch (self.direction) {
         case S2MFoldAnimatorDirectionRightToLeft:
         case S2MFoldAnimatorDirectionLeftToRight:
-            return [self createSnapshotFromView:view afterUpdates:afterUpdates location:offset left:leading];
+            return [self createSnapshotFromView:view afterUpdates:afterUpdates horizontalOffset:offset left:leading];
             break;
         case S2MFoldAnimatorDirectionTopToBottom:
         case S2MFoldAnimatorDirectionBottomToTop:
-            return [self createSnapshotFromView:view afterUpdates:afterUpdates location:offset top:leading];
+            return [self createSnapshotFromView:view afterUpdates:afterUpdates verticalOffset:offset top:leading];
             break;
             
         default:
@@ -320,7 +318,7 @@
     return nil;
 }
 
-- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates location:(CGFloat)offset top:(BOOL)top
+- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates verticalOffset:(CGFloat)verticalOffset top:(BOOL)top
 {
     
     CGSize size = view.frame.size;
@@ -331,7 +329,7 @@
     
     if (!afterUpdates) {
         // create a regular snapshot
-        CGRect snapshotRegion = CGRectMake(0.0, offset, size.width, foldHeight);
+        CGRect snapshotRegion = CGRectMake(0.0, verticalOffset, size.width, foldHeight);
         snapshotView = [view resizableSnapshotViewFromRect:snapshotRegion  afterScreenUpdates:afterUpdates withCapInsets:UIEdgeInsetsZero];
         
     } else {
@@ -339,7 +337,7 @@
         // another view, with the same bckground color, so that it is less noticeable when the snapshot initially renders
         snapshotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, foldHeight)];
         snapshotView.backgroundColor = view.backgroundColor;
-        CGRect snapshotRegion = CGRectMake(0.0, offset, size.width, foldHeight);
+        CGRect snapshotRegion = CGRectMake(0.0, verticalOffset, size.width, foldHeight);
         UIView* snapshotView2 = [view resizableSnapshotViewFromRect:snapshotRegion  afterScreenUpdates:afterUpdates withCapInsets:UIEdgeInsetsZero];
         [snapshotView addSubview:snapshotView2];
         
@@ -359,7 +357,7 @@
 
 
 // creates a snapshot for the gives view
-- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates location:(CGFloat)offset left:(BOOL)left
+- (UIView*)createSnapshotFromView:(UIView *)view afterUpdates:(BOOL)afterUpdates horizontalOffset:(CGFloat)horizontalOffset left:(BOOL)left
 {
     
     CGSize size = view.frame.size;
@@ -370,7 +368,7 @@
     
     if (!afterUpdates) {
         // create a regular snapshot
-        CGRect snapshotRegion = CGRectMake(offset, 0.0, foldWidth, size.height);
+        CGRect snapshotRegion = CGRectMake(horizontalOffset, 0.0, foldWidth, size.height);
         snapshotView = [view resizableSnapshotViewFromRect:snapshotRegion  afterScreenUpdates:afterUpdates withCapInsets:UIEdgeInsetsZero];
         
     } else {
@@ -378,7 +376,7 @@
         // another view, with the same bckground color, so that it is less noticeable when the snapshot initially renders
         snapshotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, foldWidth, size.height)];
         snapshotView.backgroundColor = view.backgroundColor;
-        CGRect snapshotRegion = CGRectMake(offset, 0.0, foldWidth, size.height);
+        CGRect snapshotRegion = CGRectMake(horizontalOffset, 0.0, foldWidth, size.height);
         UIView* snapshotView2 = [view resizableSnapshotViewFromRect:snapshotRegion  afterScreenUpdates:afterUpdates withCapInsets:UIEdgeInsetsZero];
         [snapshotView addSubview:snapshotView2];
         
