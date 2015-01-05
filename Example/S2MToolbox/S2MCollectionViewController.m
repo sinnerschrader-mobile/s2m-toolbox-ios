@@ -13,7 +13,7 @@
 
 @interface S2MCollectionViewController ()
 @property(nonatomic, strong)S2MRefreshControl* refreshControl;
-@property(nonatomic, assign)BOOL customRefreshControl;
+@property(nonatomic, assign)BOOL useCustomRefreshControl;
 
 @end
 
@@ -34,7 +34,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.backgroundColor = [UIColor blackColor];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    self.customRefreshControl = YES;
+    self.useCustomRefreshControl = YES;
 
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Toggle" style:UIBarButtonItemStylePlain target:self action:@selector(togglePullToRefresh:)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
@@ -49,12 +49,12 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)togglePullToRefresh:(id)sender
 {
-    self.customRefreshControl = !self.customRefreshControl;
+    self.useCustomRefreshControl = !self.useCustomRefreshControl;
 }
 
-- (void)setCustomRefreshControl:(BOOL)customRefreshControl
+- (void)setUseCustomRefreshControl:(BOOL)customRefreshControl
 {
-    _customRefreshControl = customRefreshControl;
+    _useCustomRefreshControl = customRefreshControl;
     if (self.refreshControl) {
         [self.refreshControl removeFromSuperview];
     }
