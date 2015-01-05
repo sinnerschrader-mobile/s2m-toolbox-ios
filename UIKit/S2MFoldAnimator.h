@@ -20,9 +20,9 @@ typedef NS_ENUM(NSUInteger, S2MFoldAnimatorDirection) {
  */
 @interface S2MFoldAnimator : NSObject
 
-@property (nonatomic) NSUInteger folds; // Number of folds for the view
-@property (nonatomic, assign) S2MFoldAnimatorDirection direction;
-@property (nonatomic, assign) BOOL unfolding; // If unfolding set to NO. Folding animation is performed
+@property (nonatomic) NSUInteger folds; // Number of folds for the view. default 1
+@property (nonatomic, assign) S2MFoldAnimatorDirection direction; // direction in which view is animated. default from right to left (S2MFoldAnimatorDirectionRightToLeft)
+@property (nonatomic, assign) BOOL unfolding; // If unfolding set to NO. Folding animation is performed. default YES
 
 /**
  *  Fold/Unfold toView. If unfolding is set, unfolding animation is performed.
