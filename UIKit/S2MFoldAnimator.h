@@ -25,6 +25,17 @@ typedef NS_ENUM(NSUInteger, S2MFoldAnimatorDirection) {
 @property (nonatomic, assign) BOOL unfolding; // If unfolding set to NO. Folding animation is performed. default YES
 
 /**
+ *  Initializes and returns a fold animator object having the given folds, direction for un/folding animation.
+ *
+ *  @param folds     number of fold for the view
+ *  @param direction direction in which view is animated
+ *  @param unfolding bool value for folding or unfolding
+ *
+ *  @return S2MFoldAnimator object or nil if unsuccessful
+ */
+-(instancetype)initWithFolds:(NSUInteger)folds direction:(S2MFoldAnimatorDirection)direction unfolding:(BOOL)unfolding;
+
+/**
  *  Fold/Unfold toView. If unfolding is set, unfolding animation is performed.
  *
  *  @param duration      duration of animation

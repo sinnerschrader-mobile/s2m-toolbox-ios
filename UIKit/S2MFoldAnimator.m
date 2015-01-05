@@ -22,6 +22,17 @@
     return self;
 }
 
+-(instancetype)initWithFolds:(NSUInteger)folds direction:(S2MFoldAnimatorDirection)direction unfolding:(BOOL)unfolding
+{
+    self = [super init];
+    if (self) {
+        self.folds = folds;
+        self.unfolding = unfolding;
+        self.direction = direction;
+    }
+    return self;
+}
+
 #pragma mark - Public
 
 
