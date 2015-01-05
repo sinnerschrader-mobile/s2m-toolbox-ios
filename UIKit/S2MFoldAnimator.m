@@ -16,6 +16,7 @@
     self = [super init];
     if (self) {
         self.folds = 1;
+        self.m34Transform = -0.005;
         self.unfolding = YES;
         self.direction = S2MFoldAnimatorDirectionRightToLeft;
     }
@@ -24,7 +25,7 @@
 
 -(instancetype)initWithFolds:(NSUInteger)folds direction:(S2MFoldAnimatorDirection)direction unfolding:(BOOL)unfolding
 {
-    self = [super init];
+    self = [self init];
     if (self) {
         self.folds = folds;
         self.unfolding = unfolding;
@@ -53,7 +54,7 @@
         viewOrigin = view.frame.origin;
         // Add a perspective transform
         CATransform3D transform = CATransform3DIdentity;
-        transform.m34 = -0.005;
+        transform.m34 = self.m34Transform;
         containerView.layer.sublayerTransform = transform;
         
         viewFoldMeasure = [self foldMeasureForView:view];

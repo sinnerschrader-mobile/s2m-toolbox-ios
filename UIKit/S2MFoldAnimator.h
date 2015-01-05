@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, S2MFoldAnimatorDirection) {
 @property (nonatomic) NSUInteger folds; // Number of folds for the view. default 1
 @property (nonatomic, assign) S2MFoldAnimatorDirection direction; // direction in which view is animated. default from right to left (S2MFoldAnimatorDirectionRightToLeft)
 @property (nonatomic, assign) BOOL unfolding; // If unfolding set to NO. Folding animation is performed. default YES
-
+@property (nonatomic, assign) CGFloat m34Transform; //perspective applied when folding.
 /**
  *  Initializes and returns a fold animator object having the given folds, direction for un/folding animation.
  *
