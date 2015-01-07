@@ -1,0 +1,1 @@
+../../../../../CoreData/NSManagedObject+S2MAdditions.h

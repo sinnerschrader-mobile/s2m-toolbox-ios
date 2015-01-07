@@ -39,4 +39,8 @@ Pod::Spec.new do |s|
     h.dependency 'HockeySDK'
     h.source_files = 'HockeyApp/*.{h,m}'
   end
+
+  s.subspec 'CoreData' do |c|
+    c.source_files = 'CoreData/*.{h,m}'
+  end
 end
