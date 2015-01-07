@@ -20,10 +20,16 @@ typedef NS_OPTIONS(NSUInteger, S2MCoreDataStackOptions) {
 @interface S2MCoreDataStack : NSObject
 
 @property (nonatomic, strong) NSManagedObjectContext *mainManagedObjectContext;
+@property (nonatomic, strong) NSManagedObjectContext *writingManagedObjectContext;
 @property (nonatomic, assign, readonly) S2MCoreDataStackOptions options;
+@property (nonatomic, copy, readonly) NSString* sqliteFilename;
 
 - (instancetype)initWithOptions:(S2MCoreDataStackOptions)options;
+- (instancetype)initWithOptions:(S2MCoreDataStackOptions)options sqliteFilename:(NSString*)sqliteFilename;
 - (BOOL)setUpCoreDataStackError:(NSError **)error;
 - (BOOL)saveToDisk:(NSError**)error;
-- (NSManagedObjectContext*)cleanWritingManagedObjectContext;// will give the writingManagedContext rollbacked
+- (NSPersistentStore *)copySqliteStoreToURL:(NSURL *)URL error:(NSError **)error;
+- (BOOL)removeDatabaseWithError:(NSError**)error;
+- (BOOL)removeSQLDatabaseFile:(NSString*)databaseFile atPath:(NSString*)path error:(NSError**)pError;
+
 @end

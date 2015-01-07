@@ -31,6 +31,7 @@
 - (void)tearDown
 {
     [super tearDown];
+    [self.stack removeDatabaseWithError:nil];
     self.stack = nil;
 }
 
@@ -50,7 +51,7 @@
     XCTAssertTrue(success, @"setup Stack should be successful");
     XCTAssertNil(error, @"no error should come up");
     XCTAssertNotNil(self.stack.mainManagedObjectContext, @"should have a mainContext");
-    XCTAssertNotNil(self.stack.cleanWritingManagedObjectContext, @"should have a writingContext");
+    XCTAssertNotNil(self.stack.writingManagedObjectContext, @"should have a writingContext");
     XCTAssertNil(self.stack.backgroundManagedObjectContext, @"should not have a backgroundContext");
 }
 
@@ -65,8 +66,8 @@
     XCTAssertTrue(success, @"setup Stack should be successful");
     XCTAssertNil(error, @"no error should come up");
     XCTAssertNotNil(self.stack.mainManagedObjectContext, @"should have a mainContext");
-    XCTAssertNotNil(self.stack.cleanWritingManagedObjectContext, @"should have a writingContext");
-    XCTAssertNotNil(self.stack.backgroundManagedObjectContext, @"should have a writingContext");
+    XCTAssertNotNil(self.stack.writingManagedObjectContext, @"should have a writingContext");
+    XCTAssertNotNil(self.stack.backgroundManagedObjectContext, @"should have a backgroundContext");
 
     // avoid the "xcode did not finish tests"
 //    [self waitForTimeout:1];
@@ -146,7 +147,7 @@
     [self.stack setUpCoreDataStackError:nil];
     
     // save Object and assert no error
-    [self articleObjectWithContext:self.stack.cleanWritingManagedObjectContext save:YES];
+    [self articleObjectWithContext:self.stack.writingManagedObjectContext save:YES];
 
     // is Object really saved to disk
     [self articleObjectSavedWithContext:self.stack.mainManagedObjectContext];
