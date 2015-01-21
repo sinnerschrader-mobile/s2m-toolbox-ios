@@ -8,6 +8,7 @@ target "S2MToolbox" do
   pod 'S2MToolbox/QRCode', :path => "../"
   pod 'S2MToolbox/ShopFinder', :path => "../"
   pod 'S2MToolbox/HockeyApp', :path => "../"
+  pod 'S2MToolbox/CoreData', :path => "../"
 end
 
 target "S2MToolboxTests", :exclusive => true do

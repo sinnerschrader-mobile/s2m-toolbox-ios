@@ -21,6 +21,8 @@
 		01C12EB119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
 		01C12EB219FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
 		01C12EBA19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EB819FE5C65004B7999 /* InfoPlist.strings */; };
+		01CDD7051A5D4FF400409C48 /* S2MCoreDataStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CDD7041A5D4FF400409C48 /* S2MCoreDataStackTests.m */; };
+		01CDD7091A5D507400409C48 /* S2MModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01CDD7071A5D507400409C48 /* S2MModel.xcdatamodeld */; };
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
 		22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
@@ -59,6 +61,8 @@
 		01C12EAF19FE5C65004B7999 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		01C12EB719FE5C65004B7999 /* S2MToolboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "S2MToolboxTests-Info.plist"; sourceTree = "<group>"; };
 		01C12EB919FE5C65004B7999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		01CDD7041A5D4FF400409C48 /* S2MCoreDataStackTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MCoreDataStackTests.m; sourceTree = "<group>"; };
+		01CDD7081A5D507400409C48 /* S2MModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = S2MModel.xcdatamodel; sourceTree = "<group>"; };
 		01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_S2MAdditionsSpec.m; sourceTree = "<group>"; };
 		214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolbox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 		01C12EB519FE5C65004B7999 /* S2MToolboxTests */ = {
 			isa = PBXGroup;
 			children = (
+				01CDD7061A5D4FFF00409C48 /* CoreData */,
 				0169E2951A39DE930036D375 /* Core */,
 				01C12EB619FE5C65004B7999 /* Supporting Files */,
 			);
@@ -211,6 +216,22 @@
 				01C12EB819FE5C65004B7999 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01CDD7061A5D4FFF00409C48 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				01CDD7041A5D4FF400409C48 /* S2MCoreDataStackTests.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		01CDD70A1A5D50B900409C48 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				01CDD7071A5D507400409C48 /* S2MModel.xcdatamodeld */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		20237AA9C1E1C7130A061C3C /* Pods */ = {
@@ -227,6 +248,7 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				01CDD70A1A5D50B900409C48 /* CoreData */,
 				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
@@ -401,6 +423,7 @@
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
+				01CDD7091A5D507400409C48 /* S2MModel.xcdatamodeld in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
 				0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
@@ -411,6 +434,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01CDD7051A5D4FF400409C48 /* S2MCoreDataStackTests.m in Sources */,
 				0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */,
 				0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */,
 				01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */,
@@ -618,6 +642,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		01CDD7071A5D507400409C48 /* S2MModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				01CDD7081A5D507400409C48 /* S2MModel.xcdatamodel */,
+			);
+			currentVersion = 01CDD7081A5D507400409C48 /* S2MModel.xcdatamodel */;
+			path = S2MModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 01C12E8519FE5C64004B7999 /* Project object */;
 }

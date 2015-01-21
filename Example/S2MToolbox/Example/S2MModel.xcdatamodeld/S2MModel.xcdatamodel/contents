@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Article" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="next" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" inverseName="previous" inverseEntity="Article" syncable="YES"/>
+        <relationship name="others" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="others" inverseEntity="Article" syncable="YES"/>
+        <relationship name="previous" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" inverseName="next" inverseEntity="Article" syncable="YES"/>
+        <userInfo>
+            <entry key="uniqueKey" value="title"/>
+        </userInfo>
+    </entity>
+    <elements>
+        <element name="Article" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
