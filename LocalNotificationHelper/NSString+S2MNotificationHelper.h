@@ -1,6 +1,6 @@
 //
 //  NSString+S2MNotificationHelper.h
-//  S2MLocalNotification
+//  S2MToolbox
 //
 //  Created by ParkSanggeon on 22/01/15.
 //  Copyright (c) 2015 S2M. All rights reserved.

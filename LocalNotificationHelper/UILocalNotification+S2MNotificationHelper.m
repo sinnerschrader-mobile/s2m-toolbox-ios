@@ -1,6 +1,6 @@
 //
 //  UILocalNotification+S2MNotificationHelper.m
-//  S2MLocalNotification
+//  S2MToolbox
 //
 //  Created by ParkSanggeon on 21/01/15.
 //  Copyright (c) 2015 S2M. All rights reserved.

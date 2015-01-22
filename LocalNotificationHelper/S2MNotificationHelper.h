@@ -1,6 +1,6 @@
 //
 //  S2MNotificationHelper.h
-//  S2MLocalNotification
+//  S2MToolbox
 //
 //  Created by ParkSanggeon on 21/01/15.
 //  Copyright (c) 2015 S2M. All rights reserved.
@@ -15,22 +15,34 @@
 
 + (UILocalNotification *)localNotificationForKey:(NSString *)key userInfo:(NSDictionary *)userInfo;
 
-// returns NO if notification is nil or if notification doesn't have key (user setKey: in "UILocalNotification+S2MNotificationHelper.h")
+/*
+ * Present UILocalNotification on Notification Center
+ *
+ * @param notification it must have s2mKey value
+ * (use setKey: in "UILocalNotification+S2MNotificationHelper.h")
+ *
+ * @return NO if notification is nil or if notification doesn't have key
+ */
 + (BOOL)showNotification:(UILocalNotification *)notification;
 
-// returns NO if notification is nil or if key is zero length string (also nil).
+/*
+ * Present UILocalNotification on Notification Center
+ *
+ * @param notification UILocalNotification object
+ * @param key key for given notification to handle internally
+ *
+ * @return NO if notification is nil or if key is zero length string (also nil)
+ */
 + (BOOL)showNotification:(UILocalNotification *)notification withKey:(NSString *)key;
 
-// returns NO if notification is nil or if notification doesn't have key
-+ (BOOL)removeNotification:(UILocalNotification *)notification;
++ (BOOL)removeNotification:(UILocalNotification *)notification; // returns NO if notification is nil or if notification doesn't have key.
 
-// returns NO if key is zero length string or nil).
-+ (BOOL)removeNotificationForKey:(NSString *)key;
++ (BOOL)removeNotificationForKey:(NSString *)key; // returns NO if key is zero length string or nil).
 
-+ (void)removeAllNotifications;
++ (void)removeAllNotifications; // remove all notification from Notification Center and cache.
 
-+ (UILocalNotification *)notificationForKey:(NSString *)key;
++ (UILocalNotification *)notificationForKey:(NSString *)key; // returns UILocalNotification for given key.
 
-+ (NSArray *)allNotifications;
++ (NSArray *)allNotifications; // returns array all cached Notifications
 
 @end
