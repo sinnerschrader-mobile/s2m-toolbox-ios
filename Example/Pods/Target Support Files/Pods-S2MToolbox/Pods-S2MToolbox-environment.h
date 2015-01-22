@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_S2MToolbox_HockeyApp 1
 #define COCOAPODS_VERSION_PATCH_S2MToolbox_HockeyApp 0
 
+// S2MToolbox/LocalNotificationHelper
+#define COCOAPODS_POD_AVAILABLE_S2MToolbox_LocalNotificationHelper
+#define COCOAPODS_VERSION_MAJOR_S2MToolbox_LocalNotificationHelper 0
+#define COCOAPODS_VERSION_MINOR_S2MToolbox_LocalNotificationHelper 1
+#define COCOAPODS_VERSION_PATCH_S2MToolbox_LocalNotificationHelper 0
+
 // S2MToolbox/QRCode
 #define COCOAPODS_POD_AVAILABLE_S2MToolbox_QRCode
 #define COCOAPODS_VERSION_MAJOR_S2MToolbox_QRCode 0
