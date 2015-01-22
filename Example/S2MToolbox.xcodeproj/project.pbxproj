@@ -235,18 +235,19 @@
 				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
-				E80E54AD1A714A2100C9483F /* LocalNotificatinHelper */,
+				E80E54AD1A714A2100C9483F /* LocalNotificationHelper */,
 			);
 			path = Example;
 			sourceTree = "<group>";
 		};
-		E80E54AD1A714A2100C9483F /* LocalNotificatinHelper */ = {
+		E80E54AD1A714A2100C9483F /* LocalNotificationHelper */ = {
 			isa = PBXGroup;
 			children = (
 				E80E54AE1A714A2100C9483F /* S2MNotificationViewController.h */,
 				E80E54AF1A714A2100C9483F /* S2MNotificationViewController.m */,
 				E80E54B01A714A2100C9483F /* S2MNotificationViewController.xib */,
 			);
+			name = LocalNotificationHelper;
 			path = LocalNotificatinHelper;
 			sourceTree = "<group>";
 		};
