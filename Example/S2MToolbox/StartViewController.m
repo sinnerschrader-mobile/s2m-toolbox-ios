@@ -10,6 +10,7 @@
 #import "S2MShopFinderSearchDelegate.h"
 #import "S2MViewController.h"
 #import "S2MHockeyViewController.h"
+#import "S2MNotificationViewController.h"
 
 static NSString *cellId = @"cellId2";
 
@@ -24,7 +25,7 @@ static NSString *cellId = @"cellId2";
 
 #pragma mark TableView Datatsource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
@@ -36,6 +37,8 @@ static NSString *cellId = @"cellId2";
         cell.textLabel.text = @"AutoLayout Sample";
     }else if (indexPath.row == 3){
         cell.textLabel.text = @"Hockey App";
+    } else if (indexPath.row == 4) {
+        cell.textLabel.text = @"Local Notification";
     }
 
     return cell;
@@ -61,6 +64,9 @@ static NSString *cellId = @"cellId2";
         [self.navigationController pushViewController:vc animated:YES];
     }else if(indexPath.row == 3){
         S2MHockeyViewController *vc = [[S2MHockeyViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.row == 4){
+        S2MNotificationViewController*vc = [[S2MNotificationViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 
