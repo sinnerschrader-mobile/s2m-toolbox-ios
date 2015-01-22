@@ -43,4 +43,8 @@ Pod::Spec.new do |s|
   s.subspec 'LocalNotificationHelper' do |ut|
     ut.source_files  = 'LocalNotificationHelper/*.{h,m}'
   end
+  
+  s.subspec 'Webview' do |w|
+    w.source_files = 'Webview/*.{h,m}'
+  end
 end

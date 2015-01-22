@@ -13,6 +13,7 @@
 #import "S2MHockeyViewController.h"
 #import "S2MNotificationViewController.h"
 #import "S2MCollectionViewController.h"
+#import "S2MWebViewController.h"
 
 static NSString *cellId = @"cellId2";
 
@@ -26,10 +27,12 @@ static NSString *cellId = @"cellId2";
 
 
 #pragma mark TableView Datatsource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
     if (indexPath.row == 0) {
@@ -44,7 +47,10 @@ static NSString *cellId = @"cellId2";
         cell.textLabel.text = @"Local Notification";
     }else if (indexPath.row == 5){
         cell.textLabel.text = @"Refresh Control";
+    }else if (indexPath.row == 6){
+        cell.textLabel.text = @"Webview";
     }
+
     return cell;
 }
 
@@ -76,7 +82,13 @@ static NSString *cellId = @"cellId2";
         S2MCollectionViewController *vc = [S2MCollectionViewController sampleCollectionViewController];
         vc.title = @"Refresh Control";
         [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.row == 6){
+        S2MWebViewController *vc = [[S2MWebViewController alloc] initWithBundleFile:@"index.html"];
+        vc.shouldOpenLinks = YES;
+        vc.title = @"Webview";
+        [self.navigationController pushViewController:vc animated:YES];
     }
+
 
 }
 

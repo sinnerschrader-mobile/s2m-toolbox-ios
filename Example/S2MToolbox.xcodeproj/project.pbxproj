@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		015F4E441A768DB300978A98 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 015F4E431A768DB300978A98 /* index.html */; };
 		0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165302A1A407463002A95E6 /* S2MHockeyViewController.m */; };
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		015F4E431A768DB300978A98 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		016530291A407463002A95E6 /* S2MHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MHockeyViewController.h; sourceTree = "<group>"; };
 		0165302A1A407463002A95E6 /* S2MHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MHockeyViewController.m; sourceTree = "<group>"; };
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
@@ -118,6 +120,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		015F4E421A7688E700978A98 /* Webview */ = {
+			isa = PBXGroup;
+			children = (
+				015F4E431A768DB300978A98 /* index.html */,
+			);
+			name = Webview;
+			sourceTree = "<group>";
+		};
 		016530281A40743B002A95E6 /* Hockey */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +273,7 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				015F4E421A7688E700978A98 /* Webview */,
 				018E0E7B1A3B645E00B339C7 /* RefreshControl */,
 				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
@@ -365,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */,
+				015F4E441A768DB300978A98 /* index.html in Resources */,
 				E80E54B21A714A2100C9483F /* S2MNotificationViewController.xib in Resources */,
 				01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */,
 			);

@@ -54,3 +54,9 @@
 #define COCOAPODS_VERSION_MINOR_S2MToolbox_UIKit 2
 #define COCOAPODS_VERSION_PATCH_S2MToolbox_UIKit 0
 
+// S2MToolbox/Webview
+#define COCOAPODS_POD_AVAILABLE_S2MToolbox_Webview
+#define COCOAPODS_VERSION_MAJOR_S2MToolbox_Webview 0
+#define COCOAPODS_VERSION_MINOR_S2MToolbox_Webview 2
+#define COCOAPODS_VERSION_PATCH_S2MToolbox_Webview 0
+

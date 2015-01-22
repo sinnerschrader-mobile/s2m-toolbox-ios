@@ -9,6 +9,7 @@ target "S2MToolbox" do
   pod 'S2MToolbox/ShopFinder', :path => "../"
   pod 'S2MToolbox/HockeyApp', :path => "../"
   pod 'S2MToolbox/LocalNotificationHelper', :path => "../"
+  pod 'S2MToolbox/Webview', :path => "../"
 end
 
 target "S2MToolboxTests", :exclusive => true do
