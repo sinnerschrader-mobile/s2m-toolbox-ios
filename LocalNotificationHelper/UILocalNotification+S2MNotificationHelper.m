@@ -8,19 +8,19 @@
 
 #import "UILocalNotification+S2MNotificationHelper.h"
 
-#define LOCALNOTIFICATION_HELPER_KEY @"S2M_LOCALNOTIFICATION_HELPER_KEY"
+static NSString* const kLocalNotificationHelperKey = @"S2M_LOCALNOTIFICATION_HELPER_KEY";
 
 @implementation UILocalNotification (S2MNotificationHelper)
 
 - (void)setS2mKey:(NSString *)key
 {
     NSMutableDictionary *newUserInfo = [NSMutableDictionary dictionaryWithDictionary:self.userInfo];
-    [newUserInfo setObject:key forKey:LOCALNOTIFICATION_HELPER_KEY];
+    [newUserInfo setObject:key forKey:kLocalNotificationHelperKey];
     self.userInfo = newUserInfo;
 }
 - (NSString *)s2mKey
 {
-    return [self.userInfo objectForKey:LOCALNOTIFICATION_HELPER_KEY];
+    return [self.userInfo objectForKey:kLocalNotificationHelperKey];
 }
 
 @end
