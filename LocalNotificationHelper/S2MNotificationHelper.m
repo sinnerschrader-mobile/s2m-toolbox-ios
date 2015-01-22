@@ -191,7 +191,7 @@
     localNotification.alertLaunchImage = launchImage;
     localNotification.applicationIconBadgeNumber = [badge integerValue];
     localNotification.userInfo = userInfo;
-    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:0.1];
+    localNotification.fireDate = [NSDate date];
 
     [localNotification setS2mKey:key];
     
