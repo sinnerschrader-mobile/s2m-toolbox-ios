@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="S2MNotificationViewController">
+            <connections>
+                <outlet property="tableView" destination="Ial-xG-Kqv" id="zj8-af-Chg"/>
+                <outlet property="view" destination="1CJ-WF-IjG" id="f7e-BI-mok"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1CJ-WF-IjG">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZJ-4e-fiP">
+                    <rect key="frame" x="15" y="121" width="101" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="EIn-cV-cr7"/>
+                        <constraint firstAttribute="width" constant="101" id="O6W-a1-00W"/>
+                        <constraint firstAttribute="height" constant="46" id="oUU-qb-MZj"/>
+                    </constraints>
+                    <state key="normal" title="Remove All"/>
+                    <connections>
+                        <action selector="removeAllNotifications:" destination="-1" eventType="touchUpInside" id="9rQ-3U-srC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LIk-Kq-1Wl">
+                    <rect key="frame" x="16" y="83" width="568" height="30"/>
+                    <state key="normal" title="Add Notification">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addLocalNotification:" destination="-1" eventType="touchUpInside" id="hgJ-Dj-Nfe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GOY-R4-z6c">
+                    <rect key="frame" x="515" y="121" width="69" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="69" id="0eh-Cj-FSM"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="bb9-dR-b4g"/>
+                    </constraints>
+                    <state key="normal" title="Refresh"/>
+                    <connections>
+                        <action selector="reloadTableView:" destination="-1" eventType="touchUpInside" id="Hul-TG-T4Y"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ial-xG-Kqv">
+                    <rect key="frame" x="16" y="169" width="568" height="423"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cE6-g1-NLL"/>
+                        <outlet property="delegate" destination="-1" id="vom-z0-AMh"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Ial-xG-Kqv" firstAttribute="top" secondItem="2ZJ-4e-fiP" secondAttribute="bottom" constant="2" id="3e5-tt-3kv"/>
+                <constraint firstItem="LIk-Kq-1Wl" firstAttribute="top" secondItem="1CJ-WF-IjG" secondAttribute="topMargin" constant="75" id="Hxa-l6-5Nl"/>
+                <constraint firstItem="Ial-xG-Kqv" firstAttribute="bottom" secondItem="1CJ-WF-IjG" secondAttribute="bottomMargin" id="OVx-rN-SFT"/>
+                <constraint firstItem="2ZJ-4e-fiP" firstAttribute="leading" secondItem="1CJ-WF-IjG" secondAttribute="leadingMargin" constant="7" id="PQP-Nx-ed9"/>
+                <constraint firstItem="LIk-Kq-1Wl" firstAttribute="leading" secondItem="1CJ-WF-IjG" secondAttribute="leadingMargin" constant="8" id="S86-Le-dPN"/>
+                <constraint firstAttribute="trailingMargin" secondItem="GOY-R4-z6c" secondAttribute="trailing" constant="8" id="Tkg-09-kQf"/>
+                <constraint firstItem="2ZJ-4e-fiP" firstAttribute="top" secondItem="LIk-Kq-1Wl" secondAttribute="bottom" constant="8" id="clp-sg-BIq"/>
+                <constraint firstItem="GOY-R4-z6c" firstAttribute="top" secondItem="LIk-Kq-1Wl" secondAttribute="bottom" constant="8" id="dld-SM-hWB"/>
+                <constraint firstAttribute="trailingMargin" secondItem="Ial-xG-Kqv" secondAttribute="trailing" constant="8" id="ezE-bK-Gqk"/>
+                <constraint firstAttribute="trailingMargin" secondItem="LIk-Kq-1Wl" secondAttribute="trailing" constant="8" id="iwQ-hV-l9S"/>
+                <constraint firstItem="Ial-xG-Kqv" firstAttribute="leading" secondItem="1CJ-WF-IjG" secondAttribute="leadingMargin" constant="8" id="mC7-uk-UOJ"/>
+                <constraint firstItem="GOY-R4-z6c" firstAttribute="top" secondItem="LIk-Kq-1Wl" secondAttribute="bottom" constant="8" id="slY-QP-H4o"/>
+                <constraint firstItem="Ial-xG-Kqv" firstAttribute="top" secondItem="GOY-R4-z6c" secondAttribute="bottom" constant="2" id="tsD-5G-azE"/>
+                <constraint firstItem="Ial-xG-Kqv" firstAttribute="top" secondItem="GOY-R4-z6c" secondAttribute="bottom" constant="2" id="yAD-Ic-kUg"/>
+            </constraints>
+            <point key="canvasLocation" x="76" y="-170"/>
+        </view>
+    </objects>
+</document>
