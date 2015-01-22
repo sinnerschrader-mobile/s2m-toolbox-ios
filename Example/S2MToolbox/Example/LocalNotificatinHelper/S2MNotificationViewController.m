@@ -91,12 +91,10 @@ static NSString *CellIdentifier = @"TableViewCell";
     }
 }
 
-#pragma mark - life cycle
+#pragma mark - request Notification Permission
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-    
+- (void)requestNotificationPermission
+{
     UIApplication *application = [UIApplication sharedApplication];
     BOOL authorized = YES;
     
@@ -112,11 +110,25 @@ static NSString *CellIdentifier = @"TableViewCell";
     }
 }
 
+#pragma mark - life cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.notifications = [S2MNotificationHelper allNotifications];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (animated) {
+        [self requestNotificationPermission];
+    }
+}
 
 @end
