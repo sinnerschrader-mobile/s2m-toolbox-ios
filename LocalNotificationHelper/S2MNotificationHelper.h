@@ -15,7 +15,7 @@
 
 + (UILocalNotification *)localNotificationForKey:(NSString *)key userInfo:(NSDictionary *)userInfo;
 
-/*
+/**
  * Present UILocalNotification on Notification Center
  *
  * @param notification it must have s2mKey value
@@ -25,7 +25,7 @@
  */
 + (BOOL)showNotification:(UILocalNotification *)notification;
 
-/*
+/**
  * Present UILocalNotification on Notification Center
  *
  * @param notification UILocalNotification object
@@ -35,14 +35,14 @@
  */
 + (BOOL)showNotification:(UILocalNotification *)notification withKey:(NSString *)key;
 
-+ (BOOL)removeNotification:(UILocalNotification *)notification; // returns NO if notification is nil or if notification doesn't have key.
++ (BOOL)removeNotification:(UILocalNotification *)notification; /// returns NO if notification is nil or if notification doesn't have key.
 
-+ (BOOL)removeNotificationForKey:(NSString *)key; // returns NO if key is zero length string or nil).
++ (BOOL)removeNotificationForKey:(NSString *)key; /// returns NO if key is zero length string or nil).
 
-+ (void)removeAllNotifications; // remove all notification from Notification Center and cache.
++ (void)removeAllNotifications; /// remove all notification from Notification Center and cache.
 
-+ (UILocalNotification *)notificationForKey:(NSString *)key; // returns UILocalNotification for given key.
++ (UILocalNotification *)notificationForKey:(NSString *)key; /// returns UILocalNotification for given key.
 
-+ (NSArray *)allNotifications; // returns array all cached Notifications
++ (NSArray *)allNotifications; /// returns array all cached Notifications
 
 @end
