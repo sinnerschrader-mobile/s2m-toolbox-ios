@@ -130,7 +130,7 @@
 
 #pragma mark - public API
 
-+ (UILocalNotification *)localNotificationForKey:(NSString *)key withRemoteNotification:(NSDictionary *)userInfo
++ (UILocalNotification *)localNotificationForKey:(NSString *)key userInfo:(NSDictionary *)userInfo
 {
     NSNumber *badge = nil;
     NSString *sound = nil;
@@ -198,25 +198,25 @@
     return localNotification;
 }
 
-+ (BOOL)showNotification:(UILocalNotification *)noti;
++ (BOOL)showNotification:(UILocalNotification *)notification;
 {
-    return [self showNotification:noti withKey:noti.s2mKey];
+    return [self showNotification:notification withKey:notification.s2mKey];
 }
 
-+ (BOOL)showNotification:(UILocalNotification *)noti withKey:(NSString *)key
++ (BOOL)showNotification:(UILocalNotification *)notification withKey:(NSString *)key
 {
-    if (key.length == 0 || noti == nil) {
+    if (key.length == 0 || notification == nil) {
         return NO;
     }
     
-    [self cacheObject:noti forKey:key];
-    [[UIApplication sharedApplication] scheduleLocalNotification:noti];
+    [self cacheObject:notification forKey:key];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     return YES;
 }
 
-+ (BOOL)removeNotification:(UILocalNotification *)noti
++ (BOOL)removeNotification:(UILocalNotification *)notification
 {
-    return [self removeNotificationForKey:noti.s2mKey];
+    return [self removeNotificationForKey:notification.s2mKey];
 }
 
 + (BOOL)removeNotificationForKey:(NSString *)key
