@@ -33,13 +33,11 @@
 {
     NSURL* url = [NSURL fileURLWithPath:path];
     return [self addSkipBackupAttributeToItemAtURL:url];
-    
 }
 
 + (NSString *)cacheFolderPath
 {
     static NSString *documentsPath;
-    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -51,7 +49,6 @@
         }
         [self addSkipBackupAttributeToItemAtFilePath:documentsPath];
     });
-    
     return documentsPath;
 }
 
@@ -80,21 +77,34 @@
 + (id<NSCoding>)cacheForKey:(NSString *)key
 {
     NSString *archivePath = [self cachePathWithKey:key];
-    
     return !archivePath ? nil : [NSKeyedUnarchiver unarchiveObjectWithFile:archivePath];
+}
+
++ (NSArray *)allCachePaths
+{
+    NSFileManager* fileManager = [[NSFileManager alloc] init];
+    NSMutableArray *paths = [NSMutableArray array];
+    NSString *folderPath = [self cacheFolderPath];
+    NSDirectoryEnumerator* enumerator = [fileManager enumeratorAtPath:folderPath];
+    NSError* err = nil;
+    BOOL res;
+    NSString* file;
+    
+    while (file = [enumerator nextObject]) {
+        [paths addObject:[folderPath stringByAppendingPathComponent:file]];
+    }
+    return paths;
 }
 
 + (void) removeAllCaches
 {
     NSFileManager* fileManager = [[NSFileManager alloc] init];
-    NSString *folderPath = [self cacheFolderPath];
-    NSDirectoryEnumerator* enumerator = [fileManager enumeratorAtPath:folderPath];
+    NSArray *cachePaths = [self allCachePaths];
     NSError* err = nil;
     BOOL res;
     
-    NSString* file;
-    while (file = [enumerator nextObject]) {
-        res = [fileManager removeItemAtPath:[folderPath stringByAppendingPathComponent:file] error:&err];
+    for (NSString *path in cachePaths) {
+        res = [fileManager removeItemAtPath:path error:&err];
         if (!res && err) {
             NSLog(@"Can't remove Notification: %@", err);
         }
@@ -104,18 +114,15 @@
 + (NSArray *)allCaches
 {
     NSMutableArray *caches = [NSMutableArray array];
-    NSFileManager* fileManager = [[NSFileManager alloc] init];
-    NSString *folderPath = [self cacheFolderPath];
-    NSDirectoryEnumerator* enumerator = [fileManager enumeratorAtPath:folderPath];
+    NSArray *cachePaths = [self allCachePaths];
     NSError* err = nil;
     
-    NSString* file;
-    while (file = [enumerator nextObject]) {
-        id cahceObject = [NSKeyedUnarchiver unarchiveObjectWithFile:[folderPath stringByAppendingPathComponent:file]];
-        if (!cahceObject) {
+    for (NSString *path in cachePaths) {
+        id cacheObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if (!cacheObject) {
             NSLog(@"Can't read cache object: %@", err);
         } else {
-            [caches addObject:cahceObject];
+            [caches addObject:cacheObject];
         }
     }
     return caches;
