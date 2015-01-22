@@ -86,8 +86,6 @@
     NSMutableArray *paths = [NSMutableArray array];
     NSString *folderPath = [self cacheFolderPath];
     NSDirectoryEnumerator* enumerator = [fileManager enumeratorAtPath:folderPath];
-    NSError* err = nil;
-    BOOL res;
     NSString* file;
     
     while (file = [enumerator nextObject]) {
