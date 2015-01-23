@@ -2,8 +2,8 @@ PODS:
   - HockeySDK (3.6.2)
   - Kiwi (2.3.1)
   - S2MToolbox (0.1.0):
-    - S2MToolbox/Foundation
-    - S2MToolbox/UIKit
+    - S2MToolbox/Foundation (= 0.1.0)
+    - S2MToolbox/UIKit (= 0.1.0)
   - S2MToolbox/Foundation (0.1.0)
   - S2MToolbox/HockeyApp (0.1.0):
     - HockeySDK
@@ -31,4 +31,4 @@ SPEC CHECKSUMS:
   Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
   S2MToolbox: e5870f017186e8ced48c12853578453b50161840
 
-COCOAPODS: 0.34.4
+COCOAPODS: 0.35.0

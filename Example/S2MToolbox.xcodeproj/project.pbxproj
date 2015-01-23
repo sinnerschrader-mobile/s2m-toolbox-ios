@@ -10,6 +10,8 @@
 		0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0165302A1A407463002A95E6 /* S2MHockeyViewController.m */; };
 		0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */; };
 		0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */; };
+		018E0E801A3B64AA00B339C7 /* S2MCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018E0E7D1A3B64AA00B339C7 /* S2MCollectionViewController.m */; };
+		018E0E811A3B64AA00B339C7 /* S2MTextLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 018E0E7F1A3B64AA00B339C7 /* S2MTextLoadingView.m */; };
 		01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9019FE5C65004B7999 /* Foundation.framework */; };
 		01C12E9319FE5C65004B7999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9219FE5C65004B7999 /* CoreGraphics.framework */; };
 		01C12E9519FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
@@ -22,7 +24,7 @@
 		01C12EB219FE5C65004B7999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C12E9419FE5C65004B7999 /* UIKit.framework */; };
 		01C12EBA19FE5C65004B7999 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01C12EB819FE5C65004B7999 /* InfoPlist.strings */; };
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
-		22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
+		129A5059D8FA56DE6C24CD68 /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
 		CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */; };
 		CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E51A3AF921000CD51C /* StartViewController.m */; };
@@ -46,6 +48,10 @@
 		0165302A1A407463002A95E6 /* S2MHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MHockeyViewController.m; sourceTree = "<group>"; };
 		0169E2961A39DEED0036D375 /* NSString_S2MMD5Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MMD5Spec.m; sourceTree = "<group>"; };
 		0169E2981A39E2260036D375 /* NSString_S2MRegExValidationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_S2MRegExValidationSpec.m; sourceTree = "<group>"; };
+		018E0E7C1A3B64AA00B339C7 /* S2MCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = S2MCollectionViewController.h; path = S2MToolbox/S2MCollectionViewController.h; sourceTree = SOURCE_ROOT; };
+		018E0E7D1A3B64AA00B339C7 /* S2MCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = S2MCollectionViewController.m; path = S2MToolbox/S2MCollectionViewController.m; sourceTree = SOURCE_ROOT; };
+		018E0E7E1A3B64AA00B339C7 /* S2MTextLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = S2MTextLoadingView.h; path = S2MToolbox/S2MTextLoadingView.h; sourceTree = SOURCE_ROOT; };
+		018E0E7F1A3B64AA00B339C7 /* S2MTextLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = S2MTextLoadingView.m; path = S2MToolbox/S2MTextLoadingView.m; sourceTree = SOURCE_ROOT; };
 		01C12E8D19FE5C65004B7999 /* S2MToolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = S2MToolbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C12E9019FE5C65004B7999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		01C12E9219FE5C65004B7999 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,8 +68,15 @@
 		01C12EB719FE5C65004B7999 /* S2MToolboxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "S2MToolboxTests-Info.plist"; sourceTree = "<group>"; };
 		01C12EB919FE5C65004B7999 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIView_S2MAdditionsSpec.m; sourceTree = "<group>"; };
+		01F061CE1A3A127A000EE282 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolbox.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23032E5B2B9FF2D4DBAAF93E /* Pods-RefreshControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RefreshControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-RefreshControl/Pods-RefreshControl.release.xcconfig"; sourceTree = "<group>"; };
+		290C74C3040ADBE62B471CA3 /* Pods-RefreshControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RefreshControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RefreshControl/Pods-RefreshControl.debug.xcconfig"; sourceTree = "<group>"; };
+		379B16138C54DA63B3D555BA /* libPods-RefreshControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RefreshControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9D9AF81FC94A90E8F53FD5E9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.release.xcconfig"; sourceTree = "<group>"; };
 		B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.release.xcconfig"; sourceTree = "<group>"; };
 		BE33BA9C04E7C88AFCB3C73A /* Pods-S2MToolbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.debug.xcconfig"; sourceTree = "<group>"; };
@@ -87,7 +100,7 @@
 				01C12E9319FE5C65004B7999 /* CoreGraphics.framework in Frameworks */,
 				01C12E9519FE5C65004B7999 /* UIKit.framework in Frameworks */,
 				01C12E9119FE5C65004B7999 /* Foundation.framework in Frameworks */,
-				22DC1549EEDE2DF0813B876D /* libPods-S2MToolbox.a in Frameworks */,
+				129A5059D8FA56DE6C24CD68 /* libPods-S2MToolbox.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +155,17 @@
 			name = ShopFinder;
 			sourceTree = "<group>";
 		};
+		018E0E7B1A3B645E00B339C7 /* RefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				018E0E7C1A3B64AA00B339C7 /* S2MCollectionViewController.h */,
+				018E0E7D1A3B64AA00B339C7 /* S2MCollectionViewController.m */,
+				018E0E7E1A3B64AA00B339C7 /* S2MTextLoadingView.h */,
+				018E0E7F1A3B64AA00B339C7 /* S2MTextLoadingView.m */,
+			);
+			name = RefreshControl;
+			sourceTree = "<group>";
+		};
 		01C12E8419FE5C64004B7999 = {
 			isa = PBXGroup;
 			children = (
@@ -165,12 +189,15 @@
 		01C12E8F19FE5C65004B7999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01F061CE1A3A127A000EE282 /* libPods.a */,
 				01C12E9019FE5C65004B7999 /* Foundation.framework */,
 				01C12E9219FE5C65004B7999 /* CoreGraphics.framework */,
 				01C12E9419FE5C65004B7999 /* UIKit.framework */,
 				01C12EAF19FE5C65004B7999 /* XCTest.framework */,
 				214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */,
 				D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */,
+				379B16138C54DA63B3D555BA /* libPods-RefreshControl.a */,
+				9D9AF81FC94A90E8F53FD5E9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -225,6 +252,10 @@
 				B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */,
 				420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */,
 				B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */,
+				290C74C3040ADBE62B471CA3 /* Pods-RefreshControl.debug.xcconfig */,
+				23032E5B2B9FF2D4DBAAF93E /* Pods-RefreshControl.release.xcconfig */,
+				3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */,
+				020964E8F6A4B4C0780776B8 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -232,6 +263,7 @@
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				018E0E7B1A3B645E00B339C7 /* RefreshControl */,
 				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
@@ -417,12 +449,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
+				018E0E801A3B64AA00B339C7 /* S2MCollectionViewController.m in Sources */,
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
 				E80E54B11A714A2100C9483F /* S2MNotificationViewController.m in Sources */,
 				0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
+				018E0E811A3B64AA00B339C7 /* S2MTextLoadingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
