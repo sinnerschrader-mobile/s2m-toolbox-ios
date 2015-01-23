@@ -27,6 +27,8 @@
 		CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */; };
 		CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E51A3AF921000CD51C /* StartViewController.m */; };
 		CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E81A3AF960000CD51C /* S2MViewController.m */; };
+		E80E54B11A714A2100C9483F /* S2MNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E80E54AF1A714A2100C9483F /* S2MNotificationViewController.m */; };
+		E80E54B21A714A2100C9483F /* S2MNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80E54B01A714A2100C9483F /* S2MNotificationViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,9 @@
 		CA4363E71A3AF960000CD51C /* S2MViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MViewController.h; sourceTree = "<group>"; };
 		CA4363E81A3AF960000CD51C /* S2MViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MViewController.m; sourceTree = "<group>"; };
 		D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-S2MToolboxTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E80E54AE1A714A2100C9483F /* S2MNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MNotificationViewController.h; sourceTree = "<group>"; };
+		E80E54AF1A714A2100C9483F /* S2MNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MNotificationViewController.m; sourceTree = "<group>"; };
+		E80E54B01A714A2100C9483F /* S2MNotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = S2MNotificationViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,8 +235,20 @@
 				016530281A40743B002A95E6 /* Hockey */,
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
+				E80E54AD1A714A2100C9483F /* LocalNotificationHelper */,
 			);
 			path = Example;
+			sourceTree = "<group>";
+		};
+		E80E54AD1A714A2100C9483F /* LocalNotificationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				E80E54AE1A714A2100C9483F /* S2MNotificationViewController.h */,
+				E80E54AF1A714A2100C9483F /* S2MNotificationViewController.m */,
+				E80E54B01A714A2100C9483F /* S2MNotificationViewController.xib */,
+			);
+			name = LocalNotificationHelper;
+			path = LocalNotificatinHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */,
+				E80E54B21A714A2100C9483F /* S2MNotificationViewController.xib in Resources */,
 				01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +420,7 @@
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
+				E80E54B11A714A2100C9483F /* S2MNotificationViewController.m in Sources */,
 				0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
 			);

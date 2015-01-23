@@ -39,4 +39,8 @@ Pod::Spec.new do |s|
     h.dependency 'HockeySDK'
     h.source_files = 'HockeyApp/*.{h,m}'
   end
+
+  s.subspec 'LocalNotificationHelper' do |ut|
+    ut.source_files  = 'LocalNotificationHelper/*.{h,m}'
+  end
 end
