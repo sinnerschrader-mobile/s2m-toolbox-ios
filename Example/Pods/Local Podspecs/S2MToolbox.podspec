@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name         = "S2MToolbox"
-  s.version      = "0.1.0"
+  s.version      = "0.2.0"
   s.summary      = "iOS Categories and more."
   s.homepage     = "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios"
 
   s.source       = { :git => 'https://github.com/sinnerschrader-mobile/s2m-toolbox-ios.git', :tag => s.version.to_s }
-  s.authors      = { "François Benaiteau" => "francois.benaiteau@sinnerschrader-mobile.com" }
+  s.authors      = { "François Benaiteau" => "francois.benaiteau@sinnerschrader-mobile.com", "Jörn Ehmann" => "jeh@sinnerschrader-mobile.com", "Sanggeon Park" => "spa@sinnerschrader-mobile.com" }
 
   s.ios.deployment_target = '7.0'
   s.requires_arc = true 
