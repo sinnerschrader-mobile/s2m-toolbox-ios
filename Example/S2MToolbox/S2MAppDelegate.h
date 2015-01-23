@@ -11,5 +11,5 @@
 @interface S2MAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+- (void)testCrash;
 @end
