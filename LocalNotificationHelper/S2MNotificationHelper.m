@@ -157,7 +157,7 @@ static NSString * const kS2MNotificationHelperFolder = @"S2M_NOTIFICATION_HELPER
             }
             
             if (arguments.count && localizedStringKey.length) {
-                alertString = [NSString s2m_stringWithFormat:NSLocalizedString(localizedStringKey, nil) array:arguments];
+                alertString = [NSString s2m_stringWithFormat:NSLocalizedString(localizedStringKey, nil) arguments:arguments];
             } else if (localizedStringKey.length) {
                 alertString = NSLocalizedString(localizedStringKey, nil);
             }

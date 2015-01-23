@@ -13,6 +13,14 @@
 
 @interface S2MNotificationHelper : NSObject
 
+/**
+ * Converts Remote push notification payload to UILocalNotification
+ *
+ * @param key key for given notification to handle internally
+ * @param userInfo given userInfo from remote notification.
+ *
+ * @return converted UILocalNotification object.
+ */
 + (UILocalNotification *)localNotificationForKey:(NSString *)key userInfo:(NSDictionary *)userInfo;
 
 /**

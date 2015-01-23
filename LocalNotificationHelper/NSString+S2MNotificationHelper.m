@@ -11,7 +11,7 @@
 
 @implementation NSString (S2MNotificationHelper)
 
-+ (instancetype)s2m_stringWithFormat:(NSString *)format array:(NSArray*)arguments;
++ (instancetype)s2m_stringWithFormat:(NSString *)format arguments:(NSArray*)arguments;
 {
     NSRange range = NSMakeRange(0, [arguments count]);
     NSMutableData* data = [NSMutableData dataWithLength:sizeof(id) * [arguments count]];
