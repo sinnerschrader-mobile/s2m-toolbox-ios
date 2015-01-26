@@ -30,7 +30,7 @@ static NSString *cellId = @"cellId2";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 7;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -48,9 +48,11 @@ static NSString *cellId = @"cellId2";
     }else if (indexPath.row == 5){
         cell.textLabel.text = @"Refresh Control";
     }else if (indexPath.row == 6){
-        cell.textLabel.text = @"Webview";
+        cell.textLabel.text = @"Local Webview";
+    }else if (indexPath.row == 7){
+        cell.textLabel.text = @"Remote Webview";
     }
-
+    
     return cell;
 }
 
@@ -85,11 +87,14 @@ static NSString *cellId = @"cellId2";
     }else if(indexPath.row == 6){
         S2MWebViewController *vc = [[S2MWebViewController alloc] initWithBundleFile:@"index.html"];
         vc.shouldOpenLinks = YES;
-        vc.title = @"Webview";
+        vc.title = @"Local Webview";
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if(indexPath.row == 7){
+        S2MWebViewController *vc = [[S2MWebViewController alloc] initWithURL:[NSURL URLWithString:@"http://www.google.com/"]];
+        vc.title = @" Remote Webview";
         [self.navigationController pushViewController:vc animated:YES];
     }
-
-
+    
 }
 
 

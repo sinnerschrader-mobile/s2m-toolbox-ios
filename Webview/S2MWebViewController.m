@@ -11,8 +11,10 @@
 @interface S2MWebViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, strong, readwrite) UIWebView* webView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) NSURL* url;
-
+@property (nonatomic, assign) int networkActivity;
+@property (nonatomic, assign) BOOL isURLRemote;
 @end
 
 @implementation S2MWebViewController
@@ -27,6 +29,9 @@
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    if (self.isURLRemote) {
+        return YES;
+    }
     NSURL *url = request.URL;
     if ([url isEqual:self.url]) {
         return YES;
@@ -38,6 +43,42 @@
     return NO;
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    self.networkActivity++;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    self.networkActivity--;
+    if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+        NSLog(@"didFailLoadWithError: ignoring NSURLErrorCancelled");
+        return;
+    }
+    NSLog(@"didFailLoadWithError: %@", error);
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.networkActivity--;
+    NSLog(@"webViewDidFinishLoad: %@", webView.request);
+}
+
+#pragma mark - getter/setter
+
+- (void)setNetworkActivity:(int)networkActivity
+{
+    _networkActivity = networkActivity;
+    if (networkActivity == 0) {
+        [self.activityIndicator stopAnimating];
+    } else {
+        [self.activityIndicator startAnimating];
+    }
+    if (self.isURLRemote) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = (networkActivity != 0);
+    }
+}
+
 #pragma mark -
 
 -(void)viewDidLoad
@@ -47,7 +88,13 @@
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.webView];
     self.webView.delegate = self;
-
+    
+    if (self.isURLRemote) {
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.activityIndicator.center = self.view.center;
+        [self.view addSubview:self.activityIndicator];
+    }
+    
     if (self.url) {
         [self loadURL:self.url];
     }
@@ -59,6 +106,7 @@
     if (self) {
         self.url = url;
         self.shouldOpenLinks = NO;
+        self.isURLRemote = YES;
     }
     return self;
 }
@@ -70,7 +118,7 @@
     NSURL* htmlURL = [[NSBundle mainBundle] URLForResource:resourceBasename withExtension:resourceExtension];
     self = [self initWithURL:htmlURL];
     if (self) {
-        
+        self.isURLRemote = NO;
     }
     return self;
 }
