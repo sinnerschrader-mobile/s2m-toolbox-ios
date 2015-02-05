@@ -168,7 +168,24 @@
 
 -(void)initCamera
 {
-    self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (self.device) {
+        return; // already initialized
+    }
+    
+    if (self.useFrontCamera) {
+        NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+        for (AVCaptureDevice *device in devices) {
+            if (device.position == AVCaptureDevicePositionFront) {
+                self.device = device;
+            }
+        }
+        //if not front is found -> take default device
+        if (!self.device) {
+            self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        }
+    }else{
+        self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    }
     
     NSError *error = nil;
     self.deviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:self.device error:&error];
@@ -281,21 +298,43 @@
 }
 
 
+-(void)commonInit
+{
+    self.knownCodes = [NSMutableSet set];
+    self.boundingImage = nil;
+    self.openURLsAutomatically = YES;
+    self.willLeadToSettingsIfNotAuthorized = YES;
+    
+    self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
+    self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
+    self.okButtonText = @"OK";
+    self.useFrontCamera = NO;
+}
+
 -(instancetype)initWithDelegate:(id<S2MQRViewControllerDelegate>)delegate
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [self initWithNibName:nil bundle:nil];
     if (self) {
         self.delegate = delegate;
-        self.knownCodes = [NSMutableSet set];
-        self.boundingImage = nil;
-        self.openURLsAutomatically = YES;
-        self.willLeadToSettingsIfNotAuthorized = YES;
-        
-        self.authorizationDeniedText = @"App cannot access camera. Please grant access in Settings";
-        self.noValidURLText = @"The scanned QR is not a valid URL and connot be opened";
-        self.okButtonText = @"OK";
     }
     return self;
 }
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
 
 @end

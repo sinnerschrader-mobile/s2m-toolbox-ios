@@ -27,7 +27,7 @@
  *
  *  @return instance of S2MQRViewController
  */
--(instancetype)initWithDelegate:(id<S2MQRViewControllerDelegate>)delegate __attribute__((objc_designated_initializer));
+-(instancetype)initWithDelegate:(id<S2MQRViewControllerDelegate>)delegate;
 
 /**
  *  designated delegate. Is called when QR is detected
@@ -43,6 +43,11 @@
  *  Default is NO. If YES detected URLs are automatically opened in Safari. If NO, only delegate will be called and you can handle the recognized String on your own.
  */
 @property (nonatomic, assign) BOOL openURLsAutomatically;
+
+/**
+ *  Default is NO. If YES will try to use front camera for QR scanning, else default device is taken.
+ */
+@property (nonatomic, assign) BOOL useFrontCamera;
 
 /**
  *  Default is YES. iOS8 and up only.
