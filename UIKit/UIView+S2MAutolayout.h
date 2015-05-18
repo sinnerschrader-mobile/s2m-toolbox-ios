@@ -32,6 +32,9 @@
 -(NSLayoutConstraint*)s2m_addRightConstraint:(CGFloat)constant;
 -(NSLayoutConstraint*)s2m_addLeftConstraint:(CGFloat)constant;
 
+-(NSLayoutConstraint*)s2m_addLeadingConstraint:(CGFloat)constant;
+-(NSLayoutConstraint*)s2m_addTrailingConstraint:(CGFloat)constant;
+
 -(NSArray*)s2m_addLeftRightConstraint:(CGFloat)constant;
 -(NSArray*)s2m_addTopBottomConstraint:(CGFloat)constant;
 
