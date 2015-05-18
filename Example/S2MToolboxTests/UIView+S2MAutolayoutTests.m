@@ -61,7 +61,13 @@
 - (void)testAddLeadingConstraint_addedConstraintIsActive {
 	NSLayoutConstraint *constraint = [self.sut s2m_addLeadingConstraint:10];
 	
-	XCTAssertEqual(constraint.active, YES);
+	if ([constraint respondsToSelector:@selector(isActive)]) {
+		XCTAssertEqual(constraint.active, YES);
+	} else {
+		// 'active' is available since iOS 8. On older systems all installed constraints are active.
+		XCTAssertTrue(YES);
+	}
+	
 }
 
 
@@ -101,7 +107,12 @@
 - (void)testAddTrailingConstraint_addedConstraintIsActive {
 	NSLayoutConstraint *constraint = [self.sut s2m_addTrailingConstraint:10];
 	
-	XCTAssertEqual(constraint.active, YES);
+	if ([constraint respondsToSelector:@selector(isActive)]) {
+		XCTAssertEqual(constraint.active, YES);
+	} else {
+		// 'active' is available since iOS 8. On older systems all installed constraints are active.
+		XCTAssertTrue(YES);
+	}
 }
 
 
