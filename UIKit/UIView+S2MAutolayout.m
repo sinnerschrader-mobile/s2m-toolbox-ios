@@ -235,40 +235,40 @@
 
 - (NSLayoutConstraint *)s2m_addLeadingConstraint:(CGFloat)constant
 {
-	if (!self.superview) {
-		return nil;
-	}
-	self.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
-																  attribute:NSLayoutAttributeLeading
-																  relatedBy:NSLayoutRelationEqual
-																	 toItem:self.superview
-																  attribute:NSLayoutAttributeLeading
-																 multiplier:1.0
-																   constant:constant];
-	
-	[self.superview addConstraint:constraint];
-	return constraint;
+    if (!self.superview) {
+        return nil;
+    }
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.superview
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1.0
+                                                                   constant:constant];
+    
+    [self.superview addConstraint:constraint];
+    return constraint;
 }
 
 - (NSLayoutConstraint *)s2m_addTrailingConstraint:(CGFloat)constant
 {
-	if (!self.superview) {
-		return nil;
-	}
-	self.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
-																  attribute:NSLayoutAttributeTrailing
-																  relatedBy:NSLayoutRelationEqual
-																	 toItem:self.superview
-																  attribute:NSLayoutAttributeTrailing
-																 multiplier:1.0
-																   constant:constant];
-	
-	[self.superview addConstraint:constraint];
-	return constraint;
+    if (!self.superview) {
+        return nil;
+    }
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    NSLayoutConstraint* constraint = [NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.superview
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:constant];
+    
+    [self.superview addConstraint:constraint];
+    return constraint;
 }
 
 
