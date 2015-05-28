@@ -43,4 +43,8 @@ Pod::Spec.new do |s|
   s.subspec 'LocalNotificationHelper' do |ut|
     ut.source_files  = 'LocalNotificationHelper/*.{h,m}'
   end
+
+  s.subspec 'DelegateDispatch' do |ut|
+    ut.source_files  = 'DelegateDispatch/*.{h,m}'
+  end
 end
