@@ -19,7 +19,7 @@
 - (void)setCount:(NSUInteger)count
 {
 	_count = count;
-	self.label.text = [NSString stringWithFormat:@"%lu", _count];
+	self.label.text = [NSString stringWithFormat:@"%lu", (unsigned long)_count];
 }
 
 - (void)viewController:(S2MDelegateDispatchSampleViewController *)viewController didUpdateTapCount:(NSUInteger)count
