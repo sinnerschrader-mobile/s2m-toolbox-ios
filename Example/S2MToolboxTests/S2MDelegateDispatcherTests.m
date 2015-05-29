@@ -118,6 +118,19 @@
 	XCTAssertEqual([sut delegateCount], 0);
 }
 
+- (void)testCanAttemptToUnregisterDelegateThatIsNotRegistered
+{
+	// given
+	Delegate *delegate = [[Delegate alloc] init];
+	
+	// when
+	[sut removeDelegate:delegate];
+	
+	// then
+	XCTAssertFalse([sut isRegisteredAsDelegate:delegate]);
+	XCTAssertEqual([sut delegateCount], 0);
+}
+
 - (void)testDoesNotRetainDelegate
 {
 	@autoreleasepool {
