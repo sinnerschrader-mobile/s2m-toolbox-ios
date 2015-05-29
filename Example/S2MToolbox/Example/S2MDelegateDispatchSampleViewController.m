@@ -28,7 +28,6 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	NSLog(@"PrepareForSegue");
 	if ([segue.destinationViewController conformsToProtocol:@protocol(S2MViewControllerDelegate) ]) {
 		[self.delegateDispatcher addDelegate:segue.destinationViewController];
 	}

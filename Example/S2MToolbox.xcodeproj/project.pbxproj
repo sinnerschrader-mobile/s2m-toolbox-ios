@@ -26,7 +26,13 @@
 		01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0619D1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m */; };
 		129A5059D8FA56DE6C24CD68 /* libPods-S2MToolbox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EEC8690751CED95D51973 /* libPods-S2MToolbox.a */; };
 		630E44400A0BD9072C48D213 /* libPods-S2MToolboxTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7A35DAE158208DEB0010B28 /* libPods-S2MToolboxTests.a */; };
+		893CFD731B1787FB00C735FC /* S2MDelegate1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893CFD721B1787FB00C735FC /* S2MDelegate1ViewController.m */; };
+		893CFD761B17881400C735FC /* S2MDelegate2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 893CFD751B17881400C735FC /* S2MDelegate2ViewController.m */; };
 		89E8C1931B0A3C4B00829FF0 /* UIView+S2MAutolayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E8C1921B0A3C4B00829FF0 /* UIView+S2MAutolayoutTests.m */; };
+		89F4550F1B177EE900F43A05 /* S2MDelegateDispatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F4550D1B177EE900F43A05 /* S2MDelegateDispatcherTests.m */; };
+		89F455101B177EE900F43A05 /* S2MProtocolInspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F4550E1B177EE900F43A05 /* S2MProtocolInspectorTests.m */; };
+		89F455141B17807200F43A05 /* S2MDelegateDispatchSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F455131B17807200F43A05 /* S2MDelegateDispatchSampleViewController.m */; };
+		89F455191B17855000F43A05 /* DelegateDispatch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F455181B17855000F43A05 /* DelegateDispatch.storyboard */; };
 		CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363DD1A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m */; };
 		CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E51A3AF921000CD51C /* StartViewController.m */; };
 		CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4363E81A3AF960000CD51C /* S2MViewController.m */; };
@@ -77,7 +83,16 @@
 		379B16138C54DA63B3D555BA /* libPods-RefreshControl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RefreshControl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACA180F9C8D9F3FCA7AEFDA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		420AF7947B11A286698A0A7C /* Pods-S2MToolboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.debug.xcconfig"; sourceTree = "<group>"; };
+		893CFD711B1787FB00C735FC /* S2MDelegate1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MDelegate1ViewController.h; sourceTree = "<group>"; };
+		893CFD721B1787FB00C735FC /* S2MDelegate1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MDelegate1ViewController.m; sourceTree = "<group>"; };
+		893CFD741B17881400C735FC /* S2MDelegate2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MDelegate2ViewController.h; sourceTree = "<group>"; };
+		893CFD751B17881400C735FC /* S2MDelegate2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MDelegate2ViewController.m; sourceTree = "<group>"; };
 		89E8C1921B0A3C4B00829FF0 /* UIView+S2MAutolayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+S2MAutolayoutTests.m"; sourceTree = "<group>"; };
+		89F4550D1B177EE900F43A05 /* S2MDelegateDispatcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MDelegateDispatcherTests.m; sourceTree = "<group>"; };
+		89F4550E1B177EE900F43A05 /* S2MProtocolInspectorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MProtocolInspectorTests.m; sourceTree = "<group>"; };
+		89F455121B17807200F43A05 /* S2MDelegateDispatchSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S2MDelegateDispatchSampleViewController.h; sourceTree = "<group>"; };
+		89F455131B17807200F43A05 /* S2MDelegateDispatchSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S2MDelegateDispatchSampleViewController.m; sourceTree = "<group>"; };
+		89F455181B17855000F43A05 /* DelegateDispatch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DelegateDispatch.storyboard; sourceTree = "<group>"; };
 		9D9AF81FC94A90E8F53FD5E9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FBA20F086BD9320FFB1F78 /* Pods-S2MToolboxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolboxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolboxTests/Pods-S2MToolboxTests.release.xcconfig"; sourceTree = "<group>"; };
 		B3A25DCBE12AC3283FC05B74 /* Pods-S2MToolbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-S2MToolbox.release.xcconfig"; path = "Pods/Target Support Files/Pods-S2MToolbox/Pods-S2MToolbox.release.xcconfig"; sourceTree = "<group>"; };
@@ -232,6 +247,7 @@
 		01C12EB519FE5C65004B7999 /* S2MToolboxTests */ = {
 			isa = PBXGroup;
 			children = (
+				89F4550C1B177EBF00F43A05 /* DelegateDispatch Tests */,
 				89E8C1911B0A3C1100829FF0 /* UIKit */,
 				0169E2951A39DE930036D375 /* Core */,
 				01C12EB619FE5C65004B7999 /* Supporting Files */,
@@ -271,6 +287,29 @@
 			name = UIKit;
 			sourceTree = "<group>";
 		};
+		89F4550C1B177EBF00F43A05 /* DelegateDispatch Tests */ = {
+			isa = PBXGroup;
+			children = (
+				89F4550D1B177EE900F43A05 /* S2MDelegateDispatcherTests.m */,
+				89F4550E1B177EE900F43A05 /* S2MProtocolInspectorTests.m */,
+			);
+			name = "DelegateDispatch Tests";
+			sourceTree = "<group>";
+		};
+		89F455111B17802500F43A05 /* DelegateDispatch */ = {
+			isa = PBXGroup;
+			children = (
+				89F455181B17855000F43A05 /* DelegateDispatch.storyboard */,
+				89F455121B17807200F43A05 /* S2MDelegateDispatchSampleViewController.h */,
+				89F455131B17807200F43A05 /* S2MDelegateDispatchSampleViewController.m */,
+				893CFD711B1787FB00C735FC /* S2MDelegate1ViewController.h */,
+				893CFD721B1787FB00C735FC /* S2MDelegate1ViewController.m */,
+				893CFD741B17881400C735FC /* S2MDelegate2ViewController.h */,
+				893CFD751B17881400C735FC /* S2MDelegate2ViewController.m */,
+			);
+			name = DelegateDispatch;
+			sourceTree = "<group>";
+		};
 		CA4363D71A3AF8EF000CD51C /* Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +318,7 @@
 				0180AF941A3B1A70008204EA /* Core */,
 				0180AF951A3B1A7D008204EA /* ShopFinder */,
 				E80E54AD1A714A2100C9483F /* LocalNotificationHelper */,
+				89F455111B17802500F43A05 /* DelegateDispatch */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -376,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C12EA919FE5C65004B7999 /* Images.xcassets in Resources */,
+				89F455191B17855000F43A05 /* DelegateDispatch.storyboard in Resources */,
 				E80E54B21A714A2100C9483F /* S2MNotificationViewController.xib in Resources */,
 				01C12E9B19FE5C65004B7999 /* InfoPlist.strings in Resources */,
 			);
@@ -461,11 +502,14 @@
 			files = (
 				01C12E9D19FE5C65004B7999 /* main.m in Sources */,
 				018E0E801A3B64AA00B339C7 /* S2MCollectionViewController.m in Sources */,
+				89F455141B17807200F43A05 /* S2MDelegateDispatchSampleViewController.m in Sources */,
 				CA4363E21A3AF8EF000CD51C /* S2MShopFinderSearchDelegate.m in Sources */,
 				01C12EA119FE5C65004B7999 /* S2MAppDelegate.m in Sources */,
 				CA4363E91A3AF960000CD51C /* S2MViewController.m in Sources */,
 				E80E54B11A714A2100C9483F /* S2MNotificationViewController.m in Sources */,
 				0165302B1A407463002A95E6 /* S2MHockeyViewController.m in Sources */,
+				893CFD731B1787FB00C735FC /* S2MDelegate1ViewController.m in Sources */,
+				893CFD761B17881400C735FC /* S2MDelegate2ViewController.m in Sources */,
 				CA4363E61A3AF921000CD51C /* StartViewController.m in Sources */,
 				018E0E811A3B64AA00B339C7 /* S2MTextLoadingView.m in Sources */,
 			);
@@ -475,10 +519,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F4550F1B177EE900F43A05 /* S2MDelegateDispatcherTests.m in Sources */,
 				0169E2971A39DEED0036D375 /* NSString_S2MMD5Spec.m in Sources */,
 				0169E2991A39E2260036D375 /* NSString_S2MRegExValidationSpec.m in Sources */,
 				89E8C1931B0A3C4B00829FF0 /* UIView+S2MAutolayoutTests.m in Sources */,
 				01F0619E1A3A0014000EE282 /* UIView_S2MAdditionsSpec.m in Sources */,
+				89F455101B177EE900F43A05 /* S2MProtocolInspectorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

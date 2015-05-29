@@ -1,21 +1,23 @@
 PODS:
-  - HockeySDK (3.6.2)
+  - HockeySDK (3.6.4)
   - Kiwi (2.3.1)
-  - S2MToolbox (0.2.0):
-    - S2MToolbox/Foundation (= 0.2.0)
-    - S2MToolbox/UIKit (= 0.2.0)
-  - S2MToolbox/Foundation (0.2.0)
-  - S2MToolbox/HockeyApp (0.2.0):
+  - S2MToolbox (0.2.1):
+    - S2MToolbox/Foundation (= 0.2.1)
+    - S2MToolbox/UIKit (= 0.2.1)
+  - S2MToolbox/DelegateDispatch (0.2.1)
+  - S2MToolbox/Foundation (0.2.1)
+  - S2MToolbox/HockeyApp (0.2.1):
     - HockeySDK
-  - S2MToolbox/Kiwi (0.2.0):
+  - S2MToolbox/Kiwi (0.2.1):
     - Kiwi (~> 2.3.0)
-  - S2MToolbox/LocalNotificationHelper (0.2.0)
-  - S2MToolbox/QRCode (0.2.0)
-  - S2MToolbox/ShopFinder (0.2.0)
-  - S2MToolbox/UIKit (0.2.0)
+  - S2MToolbox/LocalNotificationHelper (0.2.1)
+  - S2MToolbox/QRCode (0.2.1)
+  - S2MToolbox/ShopFinder (0.2.1)
+  - S2MToolbox/UIKit (0.2.1)
 
 DEPENDENCIES:
   - S2MToolbox (from `../`)
+  - S2MToolbox/DelegateDispatch (from `../`)
   - S2MToolbox/HockeyApp (from `../`)
   - S2MToolbox/Kiwi (from `../`)
   - S2MToolbox/LocalNotificationHelper (from `../`)
@@ -27,8 +29,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  HockeySDK: bfd1f5ac75938b07499c4ac12932244b72a2e70b
-  Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
-  S2MToolbox: d8460f4f9a8fa633283106f34b670bf19cfa834d
+  HockeySDK: c07cdd580296737edcd0963e292c19885a53f563
+  Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
+  S2MToolbox: da3947e01e254587ccdcef7138e4c4bab888227e
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.37.1

@@ -1,6 +1,6 @@
 //
-//  RFProtocolInspectorTests.m
-//  MessageTrampoline
+//  S2MProtocolInspectorTests.m
+//  DelegateDispatcher
 //
 //  Created by Nils Grabenhorst on 26/05/15.
 //  Copyright (c) 2015 SinnerSchrader-Mobile. All rights reserved.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import XCTest;
-#import "RFProtocolIntrospector.h"
+#import "S2MProtocolIntrospector.h"
 
 @protocol SuperTestProtocol <NSObject>
 - (void)inheritedMandatoryMethod;
@@ -23,15 +23,15 @@
 @end
 
 
-@interface RFProtocolInspectorTests : XCTestCase
-@property (nonatomic, strong) RFProtocolIntrospector *sut;
+@interface S2MProtocolInspectorTests : XCTestCase
+@property (nonatomic, strong) S2MProtocolIntrospector *sut;
 @end
 
-@implementation RFProtocolInspectorTests
+@implementation S2MProtocolInspectorTests
 
 - (void)setUp {
     [super setUp];
-	self.sut = [[RFProtocolIntrospector alloc] initWithProtocol:@protocol(TestProtocol)];
+	self.sut = [[S2MProtocolIntrospector alloc] initWithProtocol:@protocol(TestProtocol)];
 }
 
 - (void)tearDown {

@@ -1,6 +1,6 @@
 //
-//  RFDelegateDispatcherTests.m
-//  MessageTrampoline
+//  S2MDelegateDispatcherTests.m
+//  DelegateDispatch
 //
 //  Created by Nils Grabenhorst on 27/05/15.
 //  Copyright (c) 2015 SinnerSchrader-Mobile. All rights reserved.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 @import XCTest;
-#import "RFDelegateDispatcher.h"
+#import "S2MDelegateDispatcher.h"
 
 @protocol TestDelegateProtocol <NSObject>
 - (void)testMethodWithStringArgument:(NSString *)string;
@@ -56,17 +56,17 @@
 
 
 
-@interface RFDelegateDispatcherTests : XCTestCase {
-	id<RFDelegateDispatcher, TestDelegateProtocol> sut;
+@interface S2MDelegateDispatcherTests : XCTestCase {
+	id<S2MDelegateDispatcher, TestDelegateProtocol> sut;
 }
 
 @end
 
-@implementation RFDelegateDispatcherTests
+@implementation S2MDelegateDispatcherTests
 
 - (void)setUp {
     [super setUp];
-	sut = (id)[[RFDelegateDispatcher alloc] initWithDelegateProtocol:@protocol(TestDelegateProtocol)];
+	sut = (id)[[S2MDelegateDispatcher alloc] initWithDelegateProtocol:@protocol(TestDelegateProtocol)];
 }
 
 - (void)tearDown {
@@ -89,6 +89,19 @@
 	// then
 	XCTAssertTrue([sut isRegisteredAsDelegate:delegate]);
 	XCTAssertEqual([sut delegateCount], 1);
+}
+
+- (void)testCannotRegisterDelegateThatDoesNotConformToProtocol
+{
+	// given
+	NSObject *delegate = [[NSObject alloc] init];
+	
+	// when
+	XCTAssertThrows([sut addDelegate:delegate]);
+	
+	// then
+	XCTAssertFalse([sut isRegisteredAsDelegate:delegate]);
+	XCTAssertEqual([sut delegateCount], 0);
 }
 
 - (void)testCanUnregisterDelegate
