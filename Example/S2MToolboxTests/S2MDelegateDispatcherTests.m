@@ -236,5 +236,32 @@
 	XCTAssertEqualObjects(delegate.arguments, @[argument1]);
 }
 
+- (void)testCanEnumerateDelegatesWhileDelegateListIsMutated
+{
+	// given
+	NSMutableArray *originalDelegates = [[NSMutableArray alloc] init];
+	for (NSUInteger i = 0; i < 100; ++i) {
+		Delegate *delegate = [[Delegate alloc] init];
+		[sut addDelegate:delegate];
+		
+		// keep strong references:
+		[originalDelegates addObject:delegate];
+	}
+	
+	XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for background completion"];
+	
+	// when
+	dispatch_async(dispatch_get_global_queue(0, 0), ^{
+		for (id delegate in originalDelegates) {
+			[sut removeDelegate:delegate];
+		}
+		[expectation fulfill];
+	});
+	
+	// then
+	XCTAssertNoThrow([sut testMethodWithStringArgument:@"whatever"]);
+	[self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 
 @end

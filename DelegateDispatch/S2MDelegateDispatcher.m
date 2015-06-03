@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSHashTable *delegates;
 @property (nonatomic, strong) S2MProtocolIntrospector *protocolIntrospector;
 @property (nonatomic) Protocol *delegateProtocol;
+
+/// This queue is used to assure serial access to the delegates hashTable.
+@property (nonatomic, strong) dispatch_queue_t serialQueue;
 @end
 
 @implementation S2MDelegateDispatcher
@@ -23,7 +26,12 @@
 {
 	NSParameterAssert(protocol);
 	if (self) {
-		self.delegateProtocol = protocol;
+		_serialQueue = dispatch_queue_create("com.sinnerschrader-mobile.delegateDispatcher.accessSerializationQueue", DISPATCH_QUEUE_SERIAL);
+		
+		_delegateProtocol = protocol;
+		_protocolIntrospector = [[S2MProtocolIntrospector alloc] initWithProtocol:_delegateProtocol];
+		_delegates = [[NSHashTable alloc] initWithOptions:NSHashTableWeakMemory | NSHashTableObjectPointerPersonality
+												 capacity:1];
 	}
 	return self;
 }
@@ -34,48 +42,49 @@
 {
 	NSAssert([delegate conformsToProtocol:self.delegateProtocol], @"You can only add delegates conforming to %@.", self.delegateProtocol);
 	if ([delegate conformsToProtocol:self.delegateProtocol]) {
-		[self.delegates addObject:delegate];
+		dispatch_sync(self.serialQueue, ^{
+			[self.delegates addObject:delegate];
+		});
 	}
 }
 
 - (void)removeDelegate:(id)delegate
 {
-	[self.delegates removeObject:delegate];
+	dispatch_sync(self.serialQueue, ^{
+		[self.delegates removeObject:delegate];
+	});
 }
 
 - (BOOL)isRegisteredAsDelegate:(id)delegate
 {
-	return [self.delegates containsObject:delegate];
+	__block BOOL isRegistered = NO;
+	dispatch_sync(self.serialQueue, ^{
+		isRegistered = [self.delegates containsObject:delegate];
+	});
+	return isRegistered;
 }
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@<%@> (current delegates: %@)", NSStringFromClass(self.class), NSStringFromProtocol(self.delegateProtocol), self.delegates];
+	NSString *__block description;
+	dispatch_sync(self.serialQueue, ^{
+		description = [NSString stringWithFormat:@"%@<%@> (current delegates: %@)", NSStringFromClass(self.class), NSStringFromProtocol(self.delegateProtocol), self.delegates];
+	});
+	return description;
 }
 
 
 
 #pragma mark - Accessors
 
-- (void)setDelegateProtocol:(Protocol *)delegateProtocol {
-	_delegateProtocol = delegateProtocol;
-	self.protocolIntrospector = [[S2MProtocolIntrospector alloc] initWithProtocol:delegateProtocol];
-}
-
-- (NSHashTable *)delegates
-{
-	if (!_delegates) {
-		_delegates = [[NSHashTable alloc] initWithOptions:NSHashTableWeakMemory | NSHashTableObjectPointerPersonality
-												 capacity:1];
-		
-	}
-	return _delegates;
-}
-
 - (NSUInteger)delegateCount
 {
+	NSArray *__block allDelegates;
+	dispatch_sync(self.serialQueue, ^{
+		allDelegates = [self.delegates allObjects];
+	});
 	// the count of an NSHashTable does not update if a collection member has been deallocated and therefore zeroed out. Hence we need to count allObjects to get the correct number.
-	return [[self.delegates allObjects] count];
+	return [allDelegates count];
 }
 
 
@@ -96,7 +105,12 @@
 
 - (void)forwardInvocation:(NSInvocation *)anInvocation
 {
-	for (id delegate in self.delegates) {
+	NSArray *__block allDelegates;
+	dispatch_sync(self.serialQueue, ^{
+		allDelegates = [self.delegates allObjects];
+	});
+	
+	for (id delegate in allDelegates) {
 		if ([delegate respondsToSelector:anInvocation.selector]) {
 			[anInvocation invokeWithTarget:delegate];
 		}
