@@ -236,17 +236,10 @@
 	XCTAssertEqualObjects(delegate.arguments, @[argument1]);
 }
 
-- (void)testCanEnumerateDelegatesWhileDelegateListIsMutated
+- (void)testCanEnumerateDelegatesWhileDelegatesAreRemoved
 {
 	// given
-	NSMutableArray *originalDelegates = [[NSMutableArray alloc] init];
-	for (NSUInteger i = 0; i < 100; ++i) {
-		Delegate *delegate = [[Delegate alloc] init];
-		[sut addDelegate:delegate];
-		
-		// keep strong references:
-		[originalDelegates addObject:delegate];
-	}
+	NSArray *originalDelegates = [self addDelegatesWithCount:100];
 	
 	XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for background completion"];
 	
@@ -261,6 +254,40 @@
 	// then
 	XCTAssertNoThrow([sut testMethodWithStringArgument:@"whatever"]);
 	[self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+- (void)testCanEnumerateDelegatesWhileMoreDelegatesAreAdded
+{
+	// given
+	NSArray *originalDelegates = [self addDelegatesWithCount:100];
+	NSLog(@"Added %lu delegates!", (unsigned long)originalDelegates.count);
+	
+	XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for background completion"];
+	
+	// when
+	dispatch_async(dispatch_get_global_queue(0, 0), ^{
+		[self addDelegatesWithCount:100];
+		[expectation fulfill];
+	});
+	
+	// then
+	XCTAssertNoThrow([sut testMethodWithStringArgument:@"whatever"]);
+	[self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+
+
+#pragma mark - Helper methods
+
+- (NSArray *)addDelegatesWithCount:(NSUInteger)count
+{
+	NSMutableArray *delegates = [[NSMutableArray alloc] init];
+	for (NSUInteger i = 0; i < count; ++i) {
+		Delegate *delegate = [[Delegate alloc] init];
+		[sut addDelegate:delegate];
+		[delegates addObject:delegate];
+	}
+	return delegates;
 }
 
 
