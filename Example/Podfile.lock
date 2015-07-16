@@ -13,6 +13,7 @@ PODS:
   - S2MToolbox/QRCode (0.2.0)
   - S2MToolbox/ShopFinder (0.2.0)
   - S2MToolbox/UIKit (0.2.0)
+  - S2MToolbox/Webview (0.2.0)
 
 DEPENDENCIES:
   - S2MToolbox (from `../`)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - S2MToolbox/LocalNotificationHelper (from `../`)
   - S2MToolbox/QRCode (from `../`)
   - S2MToolbox/ShopFinder (from `../`)
+  - S2MToolbox/Webview (from `../`)
 
 EXTERNAL SOURCES:
   S2MToolbox:
@@ -29,6 +31,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   HockeySDK: bfd1f5ac75938b07499c4ac12932244b72a2e70b
   Kiwi: 73e1400209055ee9c8ba78c6012b6b642d0fb9f7
-  S2MToolbox: d8460f4f9a8fa633283106f34b670bf19cfa834d
+  S2MToolbox: 35cb2aa03e92d25551c8f38f19f39a86ced71404
 
 COCOAPODS: 0.35.0
