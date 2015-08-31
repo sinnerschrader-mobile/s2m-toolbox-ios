@@ -13,6 +13,7 @@
 #import "S2MHockeyViewController.h"
 #import "S2MNotificationViewController.h"
 #import "S2MCollectionViewController.h"
+#import "S2MDelegateDispatchSampleViewController.h"
 
 static NSString *cellId = @"cellId2";
 
@@ -28,7 +29,7 @@ static NSString *cellId = @"cellId2";
 #pragma mark TableView Datatsource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId forIndexPath:indexPath];
@@ -44,7 +45,9 @@ static NSString *cellId = @"cellId2";
         cell.textLabel.text = @"Local Notification";
     }else if (indexPath.row == 5){
         cell.textLabel.text = @"Refresh Control";
-    }
+	}else if (indexPath.row == 6){
+		cell.textLabel.text = @"Delegate Dispatch";
+	}
     return cell;
 }
 
@@ -76,7 +79,12 @@ static NSString *cellId = @"cellId2";
         S2MCollectionViewController *vc = [S2MCollectionViewController sampleCollectionViewController];
         vc.title = @"Refresh Control";
         [self.navigationController pushViewController:vc animated:YES];
-    }
+	}else if(indexPath.row == 6){
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"DelegateDispatch" bundle:[NSBundle bundleForClass:[self class]]];
+		S2MDelegateDispatchSampleViewController *vc = [storyboard instantiateInitialViewController];
+		vc.title = @"DelegateDispatch";
+		[self.navigationController pushViewController:vc animated:YES];
+	}
 
 }
 
