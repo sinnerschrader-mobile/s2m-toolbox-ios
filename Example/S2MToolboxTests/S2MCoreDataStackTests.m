@@ -299,7 +299,7 @@
                               @"next" : @{@"title":nextTitleValue},
                               @"others" : @[@{@"title":othersTitleValue}]};
     
-    Article *article = (Article *)[Article updateOrCreateManagedObjectWithDictionary:jsonDic context:context];
+    Article *article = (Article *)[Article updateOrCreateWithDictionary:jsonDic context:context];
     XCTAssertNotNil(article, @"cannot convert!!!");
     XCTAssertNil([article valueForKey:@"previous"], @"previous should be nil.");
     XCTAssertEqualObjects([[article valueForKey:@"next"] valueForKey:titleKey], nextTitleValue, @"have the same title");

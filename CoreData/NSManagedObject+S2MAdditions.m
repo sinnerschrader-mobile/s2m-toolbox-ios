@@ -10,64 +10,9 @@
 
 @implementation NSManagedObject (S2MAdditions)
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_
-{
-#warning use mogenerator
-    return nil;
-}
 
-- (NSMutableDictionary *)propertyDictionary
-{
-    NSMutableDictionary *propertyDict = [[NSMutableDictionary alloc] init];
-    NSDictionary *userInfo = self.entity.userInfo;
-    NSDictionary *objectAttributes = [self.entity attributesByName];
-    for (NSString *propKey in objectAttributes) {
-        NSString *jsonPropKey = [userInfo valueForKey:propKey];
-        id val = [self valueForKey:propKey];
-        if (val && [val isKindOfClass:[NSObject class]]) {
-            [propertyDict setValue:val forKey:jsonPropKey?:propKey];
-#warning handle this property.
-        } else if (val) {
-            // show message to handle this property.
-        } else {
-            // show message no value for key
-        }
-    }
-    
-    return propertyDict;
-}
 
-- (NSMutableDictionary *)relationshipWithPropertyDictionary:(NSMutableDictionary *)managedObjectJSONCache
-{
-    NSDictionary *userInfo = self.entity.userInfo;
-    NSMutableDictionary *relationshipDict = [[NSMutableDictionary alloc] init];
-    NSDictionary *objectRelationships = self.entity.relationshipsByName;
-    
-    for (NSString *relationshipKey in objectRelationships) {
-        NSRelationshipDescription *relationshipDescription = objectRelationships[relationshipKey];
-        NSString *jsonPropKey = [userInfo valueForKey:relationshipKey];
-        if ([relationshipDescription isToMany]) {
-            NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
-            [relationshipDict setValue:tmpArray forKey:jsonPropKey?:relationshipKey];// if jsonPropKey nil use relationshipKey else jsonPropKey
-            NSSet *relationshipSet = [self valueForKey:relationshipKey];
-            for (NSManagedObject *mngObj in relationshipSet) {
-                NSDictionary *relationObjDict = [mngObj dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
-                if (relationObjDict) {
-                    [tmpArray addObject:relationObjDict];
-                }
-            }
-            
-        } else {
-            NSManagedObject *relationObj = [self valueForKey:relationshipKey];
-            NSDictionary *relationObjDict = [relationObj dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
-            if (relationObjDict) {
-                [relationshipDict setObject:relationObjDict forKey:jsonPropKey?:relationshipKey];
-            }
-        }
-    }
-    return relationshipDict;
-}
-
+#pragma mark - Public
 
 - (NSMutableDictionary *)jsonDictionary
 {
@@ -76,54 +21,16 @@
     return [self dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
 }
 
-- (NSMutableDictionary *)dictionaryWithManagedObjectDictionary:(NSMutableDictionary *)managedObjectJSONCache
-{
-    NSString *uriKey = [[[self objectID] URIRepresentation] absoluteString];
-    NSDictionary* resultDictionary = [managedObjectJSONCache valueForKey:uriKey];
-    if (resultDictionary) {
-        NSLog(@"WARNING - CoreData Entity (%@) has recursive relationship", self.entity.name);
-        return [resultDictionary mutableCopy];
-    }
-    
-    NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
-    [managedObjectJSONCache setObject:jsonDict forKey:uriKey];
-    NSMutableDictionary *propDict = [self propertyDictionary];
-    if (propDict) {
-        [jsonDict setValuesForKeysWithDictionary:propDict];
-    }
-    
-    NSMutableDictionary *relationshipDict = [self relationshipWithPropertyDictionary:managedObjectJSONCache];
-    if (relationshipDict) {
-        [jsonDict setValuesForKeysWithDictionary:relationshipDict];
-    }
-    
-    return jsonDict;
-}
-
-
-#pragma mark internal operation
-
-// to call this method, please make it sure that you've already called this method in "saveOnWritingQueueWithBlock" !!!
-+ (BOOL)updateOrCreateManagedObjectWithDictionaryArray:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
-{
-    if (jsonDicArray.count == 0)
-        return NO;
-    
-    for (NSDictionary *jsonDic in jsonDicArray) {
-        [self updateOrCreateManagedObjectWithDictionary:jsonDic context:context];
-    }
-    
-    return YES;
-}
-
-+ (NSManagedObject *)updateOrCreateManagedObjectWithDictionary:(NSDictionary *)jsonDic entity:(NSEntityDescription *)entity context:(NSManagedObjectContext *)context
++ (NSManagedObject *)updateOrCreateWithDictionary: (NSDictionary *)jsonDic
+                                           entity: (NSEntityDescription *)entity
+                                          context: (NSManagedObjectContext *)context
 {
     
     NSDictionary *userInfo = entity.userInfo;
     
     NSDictionary *objectRelationships = [entity relationshipsByName];
     NSMutableDictionary *relationshipObjectsDic = [[NSMutableDictionary alloc] init];
-
+    
     // check relationship property & get relationship objects
     for (NSString *relationKey in objectRelationships) {
         NSString *jsonRelationKey = [userInfo valueForKey:relationKey];
@@ -141,7 +48,7 @@
             NSArray *jsonObjects = [jsonDic objectForKey:theKey];
             
             for (NSDictionary *objectDic in jsonObjects) {
-                id returnObject = [self updateOrCreateManagedObjectWithDictionary:objectDic context:context];
+                id returnObject = [self updateOrCreateWithDictionary:objectDic context:context];
                 if (returnObject) {
                     [newRelationshipObjectIDs addObject:[returnObject objectID]];
                 }
@@ -149,7 +56,7 @@
             
         } else if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *objDic = [jsonDic objectForKey:theKey];
-            id returnObject = [self updateOrCreateManagedObjectWithDictionary:objDic entity:relationShipEntity context:context];
+            id returnObject = [self updateOrCreateWithDictionary:objDic entity:relationShipEntity context:context];
             [newRelationshipObjectIDs addObject:[returnObject objectID]];
         } else {
             NSLog(@"WOW it should not be called");
@@ -162,7 +69,7 @@
     
     NSManagedObjectContext* writeContext = context;
     
-	__block id fetchedObject = nil;
+    __block id fetchedObject = nil;
     
     
     NSString *lookupKey = [userInfo valueForKey:@"uniqueKey"];
@@ -240,26 +147,40 @@
     return fetchedObject;
 }
 
-+ (NSManagedObject *)updateOrCreateManagedObjectWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
+// to call this method, please make it sure that you've already called this method in "saveOnWritingQueueWithBlock" !!!
+// ???: What does the comment above mean?
++ (BOOL)updateOrCreateWithDictionaries: (NSArray *)jsonDicArray
+                                entity: (NSEntityDescription *)entity
+                               context: (NSManagedObjectContext *)context
 {
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
-    return [self updateOrCreateManagedObjectWithDictionary:jsonDic entity:entity context:context];
+    if (jsonDicArray.count == 0) {
+        return NO;
+    }
     
+    for (NSDictionary *jsonDic in jsonDicArray) {
+        [self updateOrCreateWithDictionary:jsonDic entity:entity context:context];
+    }
+    
+    return YES;
 }
 
-+ (BOOL)deleteManagedObjectWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
++ (BOOL)deleteWithDictionary: (NSDictionary *)jsonDic
+                      entity: (NSEntityDescription *)entity
+                     context: (NSManagedObjectContext *)context
 {
-    if (jsonDic == nil)
+    if (jsonDic == nil) {
         return NO;
-    return [self deleteManagedObjectWithDictionaryArray:@[jsonDic] context:context];
+    }
+    return [self deleteWithDictionaries:@[jsonDic] entity:entity context:context];
 }
 
-+ (BOOL)deleteManagedObjectWithDictionaryArray:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
++ (BOOL)deleteWithDictionaries: (NSArray *)jsonDicArray
+                        entity: (NSEntityDescription *)entity
+                       context: (NSManagedObjectContext *)context
 {
-    if (jsonDicArray.count == 0)
+    if (jsonDicArray.count == 0) {
         return NO;
-    
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
+    }
     
     NSDictionary *userInfo = entity.userInfo;
     
@@ -302,5 +223,135 @@
     return YES;
 }
 
+
+
+#pragma mark - Private
+
+- (NSMutableDictionary *)propertyDictionary
+{
+    NSMutableDictionary *propertyDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *userInfo = self.entity.userInfo;
+    NSDictionary *objectAttributes = [self.entity attributesByName];
+    for (NSString *propKey in objectAttributes) {
+        NSString *jsonPropKey = [userInfo valueForKey:propKey];
+        id val = [self valueForKey:propKey];
+        if (val && [val isKindOfClass:[NSObject class]]) {
+            [propertyDict setValue:val forKey:jsonPropKey?:propKey];
+#warning handle this property.
+        } else if (val) {
+            // show message to handle this property.
+        } else {
+            // show message no value for key
+        }
+    }
+    
+    return propertyDict;
+}
+
+- (NSMutableDictionary *)relationshipWithPropertyDictionary:(NSMutableDictionary *)managedObjectJSONCache
+{
+    NSDictionary *userInfo = self.entity.userInfo;
+    NSMutableDictionary *relationshipDict = [[NSMutableDictionary alloc] init];
+    NSDictionary *objectRelationships = self.entity.relationshipsByName;
+    
+    for (NSString *relationshipKey in objectRelationships) {
+        NSRelationshipDescription *relationshipDescription = objectRelationships[relationshipKey];
+        NSString *jsonPropKey = [userInfo valueForKey:relationshipKey];
+        if ([relationshipDescription isToMany]) {
+            NSMutableArray *tmpArray = [[NSMutableArray alloc] init];
+            [relationshipDict setValue:tmpArray forKey:jsonPropKey?:relationshipKey];// if jsonPropKey nil use relationshipKey else jsonPropKey
+            NSSet *relationshipSet = [self valueForKey:relationshipKey];
+            for (NSManagedObject *mngObj in relationshipSet) {
+                NSDictionary *relationObjDict = [mngObj dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
+                if (relationObjDict) {
+                    [tmpArray addObject:relationObjDict];
+                }
+            }
+            
+        } else {
+            NSManagedObject *relationObj = [self valueForKey:relationshipKey];
+            NSDictionary *relationObjDict = [relationObj dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
+            if (relationObjDict) {
+                [relationshipDict setObject:relationObjDict forKey:jsonPropKey?:relationshipKey];
+            }
+        }
+    }
+    return relationshipDict;
+}
+
+- (NSMutableDictionary *)dictionaryWithManagedObjectDictionary:(NSMutableDictionary *)managedObjectJSONCache
+{
+    NSString *uriKey = [[[self objectID] URIRepresentation] absoluteString];
+    NSDictionary* resultDictionary = [managedObjectJSONCache valueForKey:uriKey];
+    if (resultDictionary) {
+        NSLog(@"WARNING - CoreData Entity (%@) has recursive relationship", self.entity.name);
+        return [resultDictionary mutableCopy];
+    }
+    
+    NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
+    [managedObjectJSONCache setObject:jsonDict forKey:uriKey];
+    NSMutableDictionary *propDict = [self propertyDictionary];
+    if (propDict) {
+        [jsonDict setValuesForKeysWithDictionary:propDict];
+    }
+    
+    NSMutableDictionary *relationshipDict = [self relationshipWithPropertyDictionary:managedObjectJSONCache];
+    if (relationshipDict) {
+        [jsonDict setValuesForKeysWithDictionary:relationshipDict];
+    }
+    
+    return jsonDict;
+}
+
+@end
+
+
+
+
+
+#pragma mark - We should move this into the MOGenerator template.
+
+/**
+ These methods all depend on the presence of the +entityInManagedObjectContext: method which
+ is usually code-generated by MOGenerator (given the right template).
+ 
+ We should probably ged rid of this category and move all methods into our MOGenerator template file.
+ */
+@implementation NSManagedObject (S2MAdditions_toBeMovedToMOGeneratorTemplate)
+
+// TODO: Remove this method. It should be available via the MOGenerator template.
++ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_
+{
+#warning use mogenerator
+    return nil;
+}
+
+// TODO: Remove this method. Put it into the MOGenerator template.
++ (NSManagedObject *)updateOrCreateWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
+    return [self updateOrCreateWithDictionary:jsonDic entity:entity context:context];
+}
+
+// TODO: Remove this method. Put it into the MOGenerator template.
++ (BOOL)updateOrCreateWithDictionaries:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
+    return [self updateOrCreateWithDictionaries:jsonDicArray entity:entity context:context];
+}
+
+// TODO: Remove this method. Put it into the MOGenerator template.
++ (BOOL)deleteWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
+    return [self deleteWithDictionary:jsonDic entity:entity context:context];
+}
+
+// TODO: Remove this method. Put it into the MOGenerator template.
++ (BOOL)deleteWithDictionaries:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
+    return [self deleteWithDictionaries:jsonDicArray entity:entity context:context];
+}
 
 @end

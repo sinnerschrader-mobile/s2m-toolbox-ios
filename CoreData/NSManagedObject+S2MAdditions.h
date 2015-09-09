@@ -12,10 +12,38 @@
 
 - (NSMutableDictionary *)jsonDictionary;
 
-+ (NSManagedObject *)updateOrCreateManagedObjectWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context;
-+ (BOOL)updateOrCreateManagedObjectWithDictionaryArray:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context;
++ (NSManagedObject *)updateOrCreateWithDictionary: (NSDictionary *)jsonDic
+                                           entity: (NSEntityDescription *)entity
+                                          context: (NSManagedObjectContext *)context;
 
-+ (BOOL)deleteManagedObjectWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context;
-+ (BOOL)deleteManagedObjectWithDictionaryArray:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context;
++ (BOOL)updateOrCreateWithDictionaries: (NSArray *)jsonDicArray
+                                entity: (NSEntityDescription *)entity
+                               context: (NSManagedObjectContext *)context;
 
++ (BOOL)deleteWithDictionary: (NSDictionary *)jsonDic
+                      entity: (NSEntityDescription *)entity
+                     context: (NSManagedObjectContext *)context;
+
++ (BOOL)deleteWithDictionaries: (NSArray *)jsonDicArray
+                        entity: (NSEntityDescription *)entity
+                       context: (NSManagedObjectContext *)context;
+
+@end
+
+
+
+
+@interface NSManagedObject (S2MAdditions_toBeMovedToMOGeneratorTemplate)
+
++ (NSManagedObject *)updateOrCreateWithDictionary: (NSDictionary *)jsonDic
+                                          context: (NSManagedObjectContext *)context;
+
++ (BOOL)updateOrCreateWithDictionaries: (NSArray *)jsonDicArray
+                               context: (NSManagedObjectContext *)context;
+
++ (BOOL)deleteWithDictionary: (NSDictionary *)jsonDic
+                     context: (NSManagedObjectContext *)context;
+
++ (BOOL)deleteWithDictionaries: (NSArray *)jsonDicArray
+                       context: (NSManagedObjectContext *)context;
 @end
