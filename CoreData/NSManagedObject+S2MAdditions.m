@@ -227,16 +227,16 @@
 
 #pragma mark - Private
 
-- (NSMutableDictionary *)propertyDictionary
+- (NSMutableDictionary *)attributesDictionary
 {
-    NSMutableDictionary *propertyDict = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *attributeDict = [[NSMutableDictionary alloc] init];
     NSDictionary *userInfo = self.entity.userInfo;
     NSDictionary *objectAttributes = [self.entity attributesByName];
-    for (NSString *propKey in objectAttributes) {
-        NSString *jsonPropKey = [userInfo valueForKey:propKey];
-        id val = [self valueForKey:propKey];
+    for (NSString *attributeKey in objectAttributes) {
+        NSString *jsonPropKey = [userInfo valueForKey:attributeKey];
+        id val = [self valueForKey:attributeKey];
         if (val && [val isKindOfClass:[NSObject class]]) {
-            [propertyDict setValue:val forKey:jsonPropKey?:propKey];
+            [attributeDict setValue:val forKey:jsonPropKey?:attributeKey];
 #warning handle this property.
         } else if (val) {
             // show message to handle this property.
@@ -245,7 +245,7 @@
         }
     }
     
-    return propertyDict;
+    return attributeDict;
 }
 
 - (NSMutableDictionary *)relationshipWithPropertyDictionary:(NSMutableDictionary *)managedObjectJSONCache
@@ -290,9 +290,9 @@
     
     NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
     [managedObjectJSONCache setObject:jsonDict forKey:uriKey];
-    NSMutableDictionary *propDict = [self propertyDictionary];
-    if (propDict) {
-        [jsonDict setValuesForKeysWithDictionary:propDict];
+    NSMutableDictionary *attributesDict = [self attributesDictionary];
+    if (attributesDict) {
+        [jsonDict setValuesForKeysWithDictionary:attributesDict];
     }
     
     NSMutableDictionary *relationshipDict = [self relationshipWithPropertyDictionary:managedObjectJSONCache];
