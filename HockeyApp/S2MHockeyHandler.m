@@ -10,14 +10,12 @@
 
 NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
 
-// macro definition from cocoapods xcconfig
-#ifdef BITHOCKEY_VERSION
 #import "HockeySDK.h"
 
 @interface S2MHockeyHandler ()<BITHockeyManagerDelegate,BITCrashManagerDelegate,UIAlertViewDelegate>
 
 @end
-#endif
+
 @implementation S2MHockeyHandler
 
 - (void)makeApplicationCrash
@@ -32,24 +30,18 @@ NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
 
 -(void)configureHockeyWithAppId:(NSString*)hockeyAppId
 {
-#ifdef BITHOCKEY_VERSION
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:hockeyAppId delegate:self];
     [[BITHockeyManager sharedHockeyManager].crashManager setCrashManagerStatus:BITCrashManagerStatusAutoSend];
 	[[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 	[[BITHockeyManager sharedHockeyManager] setDisableUpdateManager:[BITHockeyManager sharedHockeyManager].isAppStoreEnvironment];
-#endif
 }
 
 
 - (BOOL)didCrashInLastSessionOnStartup
 {
-#ifdef BITHOCKEY_VERSION
     return ([[BITHockeyManager sharedHockeyManager].crashManager didCrashInLastSession] &&
-            [[BITHockeyManager sharedHockeyManager].crashManager timeintervalCrashInLastSessionOccured] < S2M_DEFAULT_CRASH_TIME_INTERVAL);
-#else
-    return NO;
-#endif
+            [[BITHockeyManager sharedHockeyManager].crashManager timeIntervalCrashInLastSessionOccurred] < S2M_DEFAULT_CRASH_TIME_INTERVAL);
 }
 
 #pragma mark - BITCrashManagerDelegate
@@ -77,7 +69,7 @@ NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
     NSLog(@"crashManagerDidFinishSendingCrashReport");
     if ([self didCrashInLastSessionOnStartup]) {
         UIAlertView* view = [[UIAlertView alloc] initWithTitle:self.appCrashAlertTitle
-                                                       message:appCrashAlertMessage
+                                                       message:self.appCrashAlertMessage
                                                       delegate:self
                                              cancelButtonTitle:self.appCrashAlertCancelButton
                                              otherButtonTitles:nil];
