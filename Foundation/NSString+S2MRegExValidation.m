@@ -8,7 +8,20 @@
 
 #import "NSString+S2MRegExValidation.h"
 
+static NSString *_s2mEmailFormat = nil;
+
 @implementation NSString (S2MRegExValidation)
+
++ (NSString *)s2m_emailFormat {
+    if (_s2mEmailFormat == nil) {
+        return @"^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
+    }
+    return _s2mEmailFormat;
+}
+
++ (void)s2m_setEmailFormat:(NSString *)emailFormat {
+    _s2mEmailFormat = emailFormat;
+}
 
 - (NSUInteger)s2m_numberOfMatchesWithRegExString:(NSString *)regExString
 {
@@ -31,7 +44,7 @@
 
 - (BOOL)s2m_isValidEmailFormatString 
 {
-    return [self s2m_matchesRegExString:s2m_emailRegex];
+    return [self s2m_matchesRegExString:[self.class s2m_emailFormat]];
 }
 
 @end

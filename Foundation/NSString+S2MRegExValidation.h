@@ -10,9 +10,9 @@
 
 @interface NSString (S2MRegExValidation)
 
-#ifndef s2m_emailRegex
-#define s2m_emailRegex @"^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"
-#endif
++ (NSString *)s2m_emailFormat;
+
++ (void)s2m_setEmailFormat:(NSString *)emailFormat;
 
 - (NSUInteger)s2m_numberOfMatchesWithRegExString:(NSString *)regExString;
 

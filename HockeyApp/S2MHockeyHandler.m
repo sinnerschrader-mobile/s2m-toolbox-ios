@@ -41,11 +41,11 @@ NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
 - (BOOL)didCrashInLastSessionOnStartup
 {
     return ([[BITHockeyManager sharedHockeyManager].crashManager didCrashInLastSession] &&
-            [[BITHockeyManager sharedHockeyManager].crashManager timeIntervalCrashInLastSessionOccurred] < S2M_DEFAULT_CRASH_TIME_INTERVAL);
+            [[BITHockeyManager sharedHockeyManager].crashManager timeIntervalCrashInLastSessionOccurred] < self.crashTimeInterval);
 }
 
 #pragma mark - BITCrashManagerDelegate
-#ifdef BITHOCKEY_VERSION
+
 - (void)crashManagerWillCancelSendingCrashReport:(BITCrashManager *)crashManager {
 	if ([self didCrashInLastSessionOnStartup]) {
 		if (self.crashManagerdDidFinishBlock) {
@@ -76,7 +76,6 @@ NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
         [view show];
     }
 }
-#endif
 
 #pragma mark - UIAlertViewDelegate
 
@@ -94,12 +93,12 @@ NSString *const S2MHockeyHandlerInfoPlistKey = @"HOCKEY_APP_ID";
     self = [super init];
     if (self) {
         [self configureHockeyWithAppId:hockeyAppId];
+        self.crashTimeInterval = 5;
         self.appCrashAlertTitle = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
         self.appCrashAlertMessage = @"Application crashed on last Session. Crash Report sent.";
         self.appCrashAlertCancelButton = @"OK";
     }
     return self;
-
 }
 
 - (id)init
