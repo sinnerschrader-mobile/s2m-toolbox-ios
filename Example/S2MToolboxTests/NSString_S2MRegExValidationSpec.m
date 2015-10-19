@@ -27,7 +27,7 @@ describe(@"s2m_isValidEmailFormatString", ^{
 
         afterAll(^{
             // reset to default value
-            [NSString s2m_setEmailFormat:@"^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"];
+            [NSString s2m_setEmailFormat:nil];
         });
     });
     context(@"Given an empty string", ^{

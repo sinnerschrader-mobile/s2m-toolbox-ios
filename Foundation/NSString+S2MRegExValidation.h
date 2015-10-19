@@ -10,6 +10,8 @@
 
 @interface NSString (S2MRegExValidation)
 
++ (NSString *)s2m_emailFormat;
+
 + (void)s2m_setEmailFormat:(NSString *)emailFormat;
 
 - (NSUInteger)s2m_numberOfMatchesWithRegExString:(NSString *)regExString;
