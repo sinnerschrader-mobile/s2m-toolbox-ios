@@ -1,7 +1,6 @@
-FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/HockeySDK/Vendor"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 $(inherited) BITHOCKEY_VERSION="@\"3.6.4\"" BITHOCKEY_C_VERSION="\"3.6.4\"" BITHOCKEY_BUILD="@\"38\"" BITHOCKEY_C_BUILD="\"38\""
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/S2MToolbox"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK" -isystem "${PODS_ROOT}/Headers/Public/Kiwi" -isystem "${PODS_ROOT}/Headers/Public/S2MToolbox"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-S2MToolbox-HockeySDK" -l"Pods-S2MToolbox-S2MToolbox" -framework "AssetsLibrary" -framework "CoreGraphics" -framework "CoreText" -framework "CrashReporter" -framework "MobileCoreServices" -framework "QuartzCore" -framework "QuickLook" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HockeySDK" "${PODS_ROOT}/Headers/Public/HockeySDK/HockeySDK" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/S2MToolbox"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK" -isystem "${PODS_ROOT}/Headers/Public/HockeySDK/HockeySDK" -isystem "${PODS_ROOT}/Headers/Public/Kiwi" -isystem "${PODS_ROOT}/Headers/Public/S2MToolbox"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-S2MToolbox-S2MToolbox" -l"c++" -framework "AssetsLibrary" -framework "CoreGraphics" -framework "CoreText" -framework "HockeySDK" -framework "MobileCoreServices" -framework "QuartzCore" -framework "QuickLook" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
 PODS_ROOT = ${SRCROOT}/Pods

@@ -1,11 +1,11 @@
 {
   "name": "S2MToolbox",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "summary": "iOS Categories and more.",
   "homepage": "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios",
   "source": {
     "git": "https://github.com/sinnerschrader-mobile/s2m-toolbox-ios.git",
-    "tag": "0.2.2"
+    "tag": "0.2.3"
   },
   "authors": {
     "François Benaiteau": "francois.benaiteau@sinnerschrader-mobile.com",
@@ -38,7 +38,7 @@
       "name": "Kiwi",
       "dependencies": {
         "Kiwi": [
-          "~>2.3.0"
+          "~> 2.3.0"
         ]
       },
       "frameworks": "XCTest",
@@ -56,7 +56,7 @@
       "name": "HockeyApp",
       "dependencies": {
         "HockeySDK": [
-
+          ">= 3.6.4"
         ]
       },
       "source_files": "HockeyApp/*.{h,m}"
