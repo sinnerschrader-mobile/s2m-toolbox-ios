@@ -8,14 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#ifndef S2M_DEFAULT_CRASH_TIME_INTERVAL
-#define S2M_DEFAULT_CRASH_TIME_INTERVAL 5 // seconds in userSession (hockey) while the crash happened
-#endif
-
 extern NSString *const S2MHockeyHandlerInfoPlistKey;
 
 @interface S2MHockeyHandler : NSObject
-
+@property(nonatomic, assign)NSTimeInterval crashTimeInterval;
 @property(nonatomic, copy)NSString* appCrashAlertTitle;
 @property(nonatomic, copy)NSString* appCrashAlertMessage;
 @property(nonatomic, copy)NSString* appCrashAlertCancelButton;
