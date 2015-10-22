@@ -25,12 +25,12 @@
                                            entity: (NSEntityDescription *)entity
                                           context: (NSManagedObjectContext *)context
 {
-    
+
     NSDictionary *userInfo = entity.userInfo;
-    
+
     NSDictionary *objectRelationships = [entity relationshipsByName];
     NSMutableDictionary *relationshipObjectsDic = [[NSMutableDictionary alloc] init];
-    
+
     // check relationship property & get relationship objects
     for (NSString *relationKey in objectRelationships) {
         NSString *jsonRelationKey = [userInfo valueForKey:relationKey];
@@ -39,21 +39,21 @@
         if (!object) {
             continue;
         }
-        
+
         NSMutableArray *newRelationshipObjectIDs = [[NSMutableArray alloc] init];
         NSRelationshipDescription *relationshipDescription = objectRelationships[relationKey];
         NSEntityDescription *relationShipEntity = relationshipDescription.entity;
-        
+
         if ([object isKindOfClass:[NSArray class]]) {
             NSArray *jsonObjects = [jsonDic objectForKey:theKey];
-            
+
             for (NSDictionary *objectDic in jsonObjects) {
                 id returnObject = [self updateOrCreateWithDictionary:objectDic context:context];
                 if (returnObject) {
                     [newRelationshipObjectIDs addObject:[returnObject objectID]];
                 }
             }
-            
+
         } else if ([object isKindOfClass:[NSDictionary class]]) {
             NSDictionary *objDic = [jsonDic objectForKey:theKey];
             id returnObject = [self updateOrCreateWithDictionary:objDic entity:relationShipEntity context:context];
@@ -66,14 +66,14 @@
             [relationshipObjectsDic setObject:newRelationshipObjectIDs forKey:relationKey];
         }
     }
-    
+
     NSManagedObjectContext* writeContext = context;
-    
+
     __block id fetchedObject = nil;
-    
-    
+
+
     NSString *lookupKey = [userInfo valueForKey:@"uniqueKey"];
-    
+
     // find existing object.
     if (lookupKey) {
         NSError *error;
@@ -82,15 +82,15 @@
         NSFetchRequest* request  = [[NSFetchRequest alloc] init];
         [request setEntity:entity];
         [request setPredicate:[NSPredicate predicateWithFormat:@"%K == %@", lookupKey, [jsonDic objectForKey:jsonLookupKey]]];
-        
+
         NSArray* results = [writeContext executeFetchRequest:request error:&error];
-        
-        
+
+
         if (results && results.count) {
             fetchedObject = [results objectAtIndex:0];
         }
     }
-    
+
     BOOL localIsNew = NO;
     // if it does not exist
     if (!fetchedObject) {
@@ -98,8 +98,8 @@
         fetchedObject = [NSEntityDescription insertNewObjectForEntityForName:entity.name inManagedObjectContext:writeContext];
         localIsNew = YES;
     }
-    
-    
+
+
     if (fetchedObject) {
         NSDictionary *objectAttributes = [entity attributesByName];
         for (NSString *propKey in objectAttributes) {
@@ -109,17 +109,17 @@
                 [fetchedObject setValue:val forKey:propKey];
             }
         }
-        
+
         for (NSString *relationshipKey in relationshipObjectsDic) {
             NSArray *newRelationshipObjectIDs = [relationshipObjectsDic objectForKey:relationshipKey];
             NSMutableSet *relationSet = [[NSMutableSet alloc] init];
             NSRelationshipDescription *relationshipDescription = objectRelationships[relationshipKey];
-            
+
             for (NSManagedObjectID *mngObjID in newRelationshipObjectIDs){
                 NSManagedObject *relationObject = [writeContext objectWithID:mngObjID];
                 [relationSet addObject:relationObject];
             }
-            
+
             if ([relationshipDescription isToMany]) {
                 [fetchedObject setValue:relationSet forKey:relationshipKey];
             } else {
@@ -132,7 +132,7 @@
             }
         }
     }
-    
+
     NSError* error = nil;
     if (fetchedObject && localIsNew) {
         // Occasionally the parent context tries to increment the ref count of this
@@ -143,7 +143,7 @@
             return nil;
         }
     }
-    
+
     return fetchedObject;
 }
 
@@ -156,11 +156,11 @@
     if (jsonDicArray.count == 0) {
         return NO;
     }
-    
+
     for (NSDictionary *jsonDic in jsonDicArray) {
         [self updateOrCreateWithDictionary:jsonDic entity:entity context:context];
     }
-    
+
     return YES;
 }
 
@@ -181,22 +181,22 @@
     if (jsonDicArray.count == 0) {
         return NO;
     }
-    
+
     NSDictionary *userInfo = entity.userInfo;
-    
+
     NSString *lookupKey = [userInfo valueForKey:@"uniqueKey"];
-    
+
     if (!lookupKey) {
         return NO;
     }
-    
+
     NSManagedObjectContext* writeContext = context;
     NSFetchRequest* request = [[NSFetchRequest alloc] init];
     NSMutableString *predicateString = [[NSMutableString alloc] init];
-    
+
     NSString *jsonLookupKey = [userInfo valueForKey:lookupKey];
     jsonLookupKey = jsonLookupKey? : lookupKey;
-    
+
     NSUInteger index = 0;
     for (NSDictionary *jsonPropDic in jsonDicArray) {
         [predicateString appendFormat:@"%@ = %@", lookupKey, [jsonPropDic objectForKey:jsonLookupKey]];
@@ -207,19 +207,19 @@
     }
     request.entity = entity;
     request.predicate = [NSPredicate predicateWithFormat:predicateString];
-    
-    
+
+
     NSError *error;
     NSArray* results = [writeContext executeFetchRequest:request error:&error];
     if (!error) {
-        
+
         for (NSManagedObject *object in results) {
             [writeContext deleteObject:object];
-            
+
         }
         return YES;
     }
-    
+
     return YES;
 }
 
@@ -244,7 +244,7 @@
             // show message no value for key
         }
     }
-    
+
     return attributeDict;
 }
 
@@ -253,7 +253,7 @@
     NSDictionary *userInfo = self.entity.userInfo;
     NSMutableDictionary *relationshipDict = [[NSMutableDictionary alloc] init];
     NSDictionary *objectRelationships = self.entity.relationshipsByName;
-    
+
     for (NSString *relationshipKey in objectRelationships) {
         NSRelationshipDescription *relationshipDescription = objectRelationships[relationshipKey];
         NSString *jsonPropKey = [userInfo valueForKey:relationshipKey];
@@ -267,7 +267,7 @@
                     [tmpArray addObject:relationObjDict];
                 }
             }
-            
+
         } else {
             NSManagedObject *relationObj = [self valueForKey:relationshipKey];
             NSDictionary *relationObjDict = [relationObj dictionaryWithManagedObjectDictionary:managedObjectJSONCache];
@@ -287,71 +287,20 @@
         NSLog(@"WARNING - CoreData Entity (%@) has recursive relationship", self.entity.name);
         return [resultDictionary mutableCopy];
     }
-    
+
     NSMutableDictionary *jsonDict = [[NSMutableDictionary alloc] init];
     [managedObjectJSONCache setObject:jsonDict forKey:uriKey];
     NSMutableDictionary *attributesDict = [self attributesDictionary];
     if (attributesDict) {
         [jsonDict setValuesForKeysWithDictionary:attributesDict];
     }
-    
+
     NSMutableDictionary *relationshipDict = [self relationshipWithPropertyDictionary:managedObjectJSONCache];
     if (relationshipDict) {
         [jsonDict setValuesForKeysWithDictionary:relationshipDict];
     }
-    
+
     return jsonDict;
-}
-
-@end
-
-
-
-
-
-#pragma mark - We should move this into the MOGenerator template.
-
-/**
- These methods all depend on the presence of the +entityInManagedObjectContext: method which
- is usually code-generated by MOGenerator (given the right template).
- 
- We should probably ged rid of this category and move all methods into our MOGenerator template file.
- */
-@implementation NSManagedObject (S2MAdditions_toBeMovedToMOGeneratorTemplate)
-
-// TODO: Remove this method. It should be available via the MOGenerator template.
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_
-{
-#warning use mogenerator
-    return nil;
-}
-
-// TODO: Remove this method. Put it into the MOGenerator template.
-+ (NSManagedObject *)updateOrCreateWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
-{
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
-    return [self updateOrCreateWithDictionary:jsonDic entity:entity context:context];
-}
-
-// TODO: Remove this method. Put it into the MOGenerator template.
-+ (BOOL)updateOrCreateWithDictionaries:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
-{
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
-    return [self updateOrCreateWithDictionaries:jsonDicArray entity:entity context:context];
-}
-
-// TODO: Remove this method. Put it into the MOGenerator template.
-+ (BOOL)deleteWithDictionary:(NSDictionary *)jsonDic context:(NSManagedObjectContext *)context
-{
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
-    return [self deleteWithDictionary:jsonDic entity:entity context:context];
-}
-
-// TODO: Remove this method. Put it into the MOGenerator template.
-+ (BOOL)deleteWithDictionaries:(NSArray *)jsonDicArray context:(NSManagedObjectContext *)context
-{
-    NSEntityDescription *entity = [[self class] entityInManagedObjectContext:context];
-    return [self deleteWithDictionaries:jsonDicArray entity:entity context:context];
 }
 
 @end

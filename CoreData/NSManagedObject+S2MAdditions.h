@@ -29,21 +29,3 @@
                        context: (NSManagedObjectContext *)context;
 
 @end
-
-
-
-
-@interface NSManagedObject (S2MAdditions_toBeMovedToMOGeneratorTemplate)
-
-+ (NSManagedObject *)updateOrCreateWithDictionary: (NSDictionary *)jsonDic
-                                          context: (NSManagedObjectContext *)context;
-
-+ (BOOL)updateOrCreateWithDictionaries: (NSArray *)jsonDicArray
-                               context: (NSManagedObjectContext *)context;
-
-+ (BOOL)deleteWithDictionary: (NSDictionary *)jsonDic
-                     context: (NSManagedObjectContext *)context;
-
-+ (BOOL)deleteWithDictionaries: (NSArray *)jsonDicArray
-                       context: (NSManagedObjectContext *)context;
-@end
