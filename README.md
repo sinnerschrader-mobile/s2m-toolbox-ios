@@ -1,7 +1,7 @@
 S2M Toolbox for iOS
 ===================
 
-[![Build Status](https://travis-ci.org/sinnerschrader-mobile/s2m-toolbox-ios.svg)](https://travis-ci.org/sinnerschrader-mobile/s2m-toolbox-ios)
+[![Build Status](https://travis-ci.org/sinnerschrader-mobile/s2m-toolbox-ios.svg?branch=master)](https://travis-ci.org/sinnerschrader-mobile/s2m-toolbox-ios)
 
 Here is a collection of useful code that can be used through iOS projects.
 
