@@ -50,8 +50,17 @@
 
 - (void)removeDelegate:(id)delegate
 {
+    [self removeDelegate:delegate noDelegatesLeftCallback:nil];
+}
+
+- (void)removeDelegate:(id)delegate noDelegatesLeftCallback:(DelegateDispatcherCallback) callback
+{
 	dispatch_sync(self.serialQueue, ^{
 		[self.delegates removeObject:delegate];
+		if (0 == [self unsafeDelegatesCount] && callback)
+		{
+			callback();
+		}
 	});
 }
 
@@ -79,15 +88,19 @@
 
 - (NSUInteger)delegateCount
 {
-	NSArray *__block allDelegates;
+	__block NSUInteger count;
 	dispatch_sync(self.serialQueue, ^{
-		allDelegates = [self.delegates allObjects];
+		count = [self unsafeDelegatesCount];
 	});
-	// the count of an NSHashTable does not update if a collection member has been deallocated and therefore zeroed out. Hence we need to count allObjects to get the correct number.
-	return [allDelegates count];
+	return count;
 }
 
-
+/** MUST be used from inside self.serialQueue only! */
+- (NSUInteger)unsafeDelegatesCount
+{
+	// the count of an NSHashTable does not update if a collection member has been deallocated and therefore zeroed out. Hence we need to count allObjects to get the correct number.
+	return [self.delegates allObjects].count;
+}
 
 #pragma mark - HOM
 
