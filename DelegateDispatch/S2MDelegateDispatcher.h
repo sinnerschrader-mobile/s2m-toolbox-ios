@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+typedef void (^DelegateDispatcherCallback)();
+
 @protocol S2MDelegateDispatcher
 @property (nonatomic, readonly) NSUInteger delegateCount;
 
@@ -21,6 +24,10 @@
  Removes a delegate from the internal list of delegates.
  */
 - (void)removeDelegate:(id)delegate;
+/**
+ Removes a delegate from the internal list of delegates, calls callback in case the last delegate was removed.
+ */
+- (void)removeDelegate:(id)delegate noDelegatesLeftCallback:(DelegateDispatcherCallback) callback;
 
 - (BOOL)isRegisteredAsDelegate:(id)delegate;
 @end
